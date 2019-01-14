@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="inspecaoModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ANEISMETALICOSTATIL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="int" Nullable="false" />
+          <Property Name="CORROSAO" Type="varchar" MaxLength="50" />
+          <Property Name="SULCOS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ANEISMETALICOSVISUAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="int" Nullable="false" />
+          <Property Name="CORROCAO" Type="varchar" MaxLength="50" />
+          <Property Name="OXIDACAO" Type="varchar" MaxLength="50" />
+          <Property Name="SULCOS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="COSTURAVISUAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="int" Nullable="false" />
+          <Property Name="CORTADOS" Type="varchar" MaxLength="50" />
+          <Property Name="DESGATADOS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FITASTATIL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="int" Nullable="false" />
+          <Property Name="PARTES_RIGIDAS" Type="varchar" MaxLength="50" />
+          <Property Name="PARTES_DESGASTADAS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FITASVISUAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="int" Nullable="false" />
+          <Property Name="CORTES" Type="varchar" MaxLength="50" />
+          <Property Name="DESCOLORACAO" Type="varchar" MaxLength="50" />
+          <Property Name="DESGASTES" Type="varchar" MaxLength="50" />
+          <Property Name="FERRUGEM" Type="varchar" MaxLength="50" />
+          <Property Name="MANCHA" Type="varchar" MaxLength="50" />
+          <Property Name="PARTES_RIGIDAS" Type="varchar" MaxLength="50" />
+          <Property Name="QUEIMADURAS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FIVELASVISUAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="int" Nullable="false" />
+          <Property Name="CORROSAO" Type="varchar" MaxLength="50" />
+          <Property Name="DEFORMACAO" Type="varchar" MaxLength="50" />
+          <Property Name="SULCOS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FUNCIONALIDADETATIL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="int" Nullable="false" />
+          <Property Name="MOLAS_DURAS" Type="varchar" MaxLength="50" />
+          <Property Name="TRAVAS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LINSPECAOMATERIAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMPRESA" Type="varchar" MaxLength="50" />
+          <Property Name="FK_USUARIO" Type="int" Nullable="false" />
+          <Property Name="DATA" Type="datetime" />
+          <Property Name="EPC" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="inspecaoModel1StoreContainer">
+          <EntitySet Name="ANEISMETALICOSTATIL" EntityType="Self.ANEISMETALICOSTATIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ANEISMETALICOSVISUAL" EntityType="Self.ANEISMETALICOSVISUAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COSTURAVISUAL" EntityType="Self.COSTURAVISUAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FITASTATIL" EntityType="Self.FITASTATIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FITASVISUAL" EntityType="Self.FITASVISUAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FIVELASVISUAL" EntityType="Self.FIVELASVISUAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FUNCIONALIDADETATIL" EntityType="Self.FUNCIONALIDADETATIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LINSPECAOMATERIAL" EntityType="Self.LINSPECAOMATERIAL" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="inspecaoModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ANEISMETALICOSTATIL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="Int32" Nullable="false" />
+          <Property Name="CORROSAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SULCOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ANEISMETALICOSVISUAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="Int32" Nullable="false" />
+          <Property Name="CORROCAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OXIDACAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SULCOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="COSTURAVISUAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="Int32" Nullable="false" />
+          <Property Name="CORTADOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESGATADOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FITASTATIL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="Int32" Nullable="false" />
+          <Property Name="PARTES_RIGIDAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PARTES_DESGASTADAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FITASVISUAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="Int32" Nullable="false" />
+          <Property Name="CORTES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESCOLORACAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESGASTES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FERRUGEM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MANCHA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PARTES_RIGIDAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QUEIMADURAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FIVELASVISUAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="Int32" Nullable="false" />
+          <Property Name="CORROSAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DEFORMACAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SULCOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FUNCIONALIDADETATIL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_INSPECAOMATERIAL" Type="Int32" Nullable="false" />
+          <Property Name="MOLAS_DURAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TRAVAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LINSPECAOMATERIAL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMPRESA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_USUARIO" Type="Int32" Nullable="false" />
+          <Property Name="DATA" Type="DateTime" Precision="3" />
+          <Property Name="EPC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="inspecaoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ANEISMETALICOSTATIL" EntityType="Self.ANEISMETALICOSTATIL" />
+          <EntitySet Name="ANEISMETALICOSVISUAL" EntityType="Self.ANEISMETALICOSVISUAL" />
+          <EntitySet Name="COSTURAVISUAL" EntityType="Self.COSTURAVISUAL" />
+          <EntitySet Name="FITASTATIL" EntityType="Self.FITASTATIL" />
+          <EntitySet Name="FITASVISUAL" EntityType="Self.FITASVISUAL" />
+          <EntitySet Name="FIVELASVISUAL" EntityType="Self.FIVELASVISUAL" />
+          <EntitySet Name="FUNCIONALIDADETATIL" EntityType="Self.FUNCIONALIDADETATIL" />
+          <EntitySet Name="LINSPECAOMATERIAL" EntityType="Self.LINSPECAOMATERIAL" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="inspecaoModel1StoreContainer" CdmEntityContainer="inspecaoEntities">
+          <EntitySetMapping Name="ANEISMETALICOSTATIL">
+            <EntityTypeMapping TypeName="inspecaoModel1.ANEISMETALICOSTATIL">
+              <MappingFragment StoreEntitySet="ANEISMETALICOSTATIL">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FK_INSPECAOMATERIAL" ColumnName="FK_INSPECAOMATERIAL" />
+                <ScalarProperty Name="CORROSAO" ColumnName="CORROSAO" />
+                <ScalarProperty Name="SULCOS" ColumnName="SULCOS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ANEISMETALICOSVISUAL">
+            <EntityTypeMapping TypeName="inspecaoModel1.ANEISMETALICOSVISUAL">
+              <MappingFragment StoreEntitySet="ANEISMETALICOSVISUAL">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FK_INSPECAOMATERIAL" ColumnName="FK_INSPECAOMATERIAL" />
+                <ScalarProperty Name="CORROCAO" ColumnName="CORROCAO" />
+                <ScalarProperty Name="OXIDACAO" ColumnName="OXIDACAO" />
+                <ScalarProperty Name="SULCOS" ColumnName="SULCOS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COSTURAVISUAL">
+            <EntityTypeMapping TypeName="inspecaoModel1.COSTURAVISUAL">
+              <MappingFragment StoreEntitySet="COSTURAVISUAL">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FK_INSPECAOMATERIAL" ColumnName="FK_INSPECAOMATERIAL" />
+                <ScalarProperty Name="CORTADOS" ColumnName="CORTADOS" />
+                <ScalarProperty Name="DESGATADOS" ColumnName="DESGATADOS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FITASTATIL">
+            <EntityTypeMapping TypeName="inspecaoModel1.FITASTATIL">
+              <MappingFragment StoreEntitySet="FITASTATIL">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FK_INSPECAOMATERIAL" ColumnName="FK_INSPECAOMATERIAL" />
+                <ScalarProperty Name="PARTES_RIGIDAS" ColumnName="PARTES_RIGIDAS" />
+                <ScalarProperty Name="PARTES_DESGASTADAS" ColumnName="PARTES_DESGASTADAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FITASVISUAL">
+            <EntityTypeMapping TypeName="inspecaoModel1.FITASVISUAL">
+              <MappingFragment StoreEntitySet="FITASVISUAL">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FK_INSPECAOMATERIAL" ColumnName="FK_INSPECAOMATERIAL" />
+                <ScalarProperty Name="CORTES" ColumnName="CORTES" />
+                <ScalarProperty Name="DESCOLORACAO" ColumnName="DESCOLORACAO" />
+                <ScalarProperty Name="DESGASTES" ColumnName="DESGASTES" />
+                <ScalarProperty Name="FERRUGEM" ColumnName="FERRUGEM" />
+                <ScalarProperty Name="MANCHA" ColumnName="MANCHA" />
+                <ScalarProperty Name="PARTES_RIGIDAS" ColumnName="PARTES_RIGIDAS" />
+                <ScalarProperty Name="QUEIMADURAS" ColumnName="QUEIMADURAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FIVELASVISUAL">
+            <EntityTypeMapping TypeName="inspecaoModel1.FIVELASVISUAL">
+              <MappingFragment StoreEntitySet="FIVELASVISUAL">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FK_INSPECAOMATERIAL" ColumnName="FK_INSPECAOMATERIAL" />
+                <ScalarProperty Name="CORROSAO" ColumnName="CORROSAO" />
+                <ScalarProperty Name="DEFORMACAO" ColumnName="DEFORMACAO" />
+                <ScalarProperty Name="SULCOS" ColumnName="SULCOS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FUNCIONALIDADETATIL">
+            <EntityTypeMapping TypeName="inspecaoModel1.FUNCIONALIDADETATIL">
+              <MappingFragment StoreEntitySet="FUNCIONALIDADETATIL">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FK_INSPECAOMATERIAL" ColumnName="FK_INSPECAOMATERIAL" />
+                <ScalarProperty Name="MOLAS_DURAS" ColumnName="MOLAS_DURAS" />
+                <ScalarProperty Name="TRAVAS" ColumnName="TRAVAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LINSPECAOMATERIAL">
+            <EntityTypeMapping TypeName="inspecaoModel1.LINSPECAOMATERIAL">
+              <MappingFragment StoreEntitySet="LINSPECAOMATERIAL">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EMPRESA" ColumnName="EMPRESA" />
+                <ScalarProperty Name="FK_USUARIO" ColumnName="FK_USUARIO" />
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
+                <ScalarProperty Name="EPC" ColumnName="EPC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

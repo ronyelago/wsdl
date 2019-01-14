@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3c0ce8b8db2e4b6e88d72cb8b9bf6d1b" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="webservicetwos3Model.AGENDA_PAC" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.ALUNOS_APP" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.AVALIACAO_ALUNOS_APP" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.CEPBRASIL" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.CIDADAO" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.CONFIGURACOES" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.CONVERSACAO" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DadosEtiquetasPedidoSet" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DadosEtiquetasPedidoSet_copy" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.EXAME_PAC" Width="1.5" PointX="4.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.FAVORITOS" Width="1.5" PointX="6.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_ATRIBUICAOCRACHA" Width="1.5" PointX="11.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_DESCARTE" Width="1.5" PointX="8.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_ENVIO_PARA_TESTE" Width="1.5" PointX="10.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_EPCPERDIDOS" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_ESTOQUE" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_FICHACADASTRAL" Width="1.5" PointX="13.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_FUNCAO_PRODUTOS" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_FUNCIONARIOS" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_FUNCOES" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_INSPECAOFUNCIONARIO" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_INSPITEM" Width="1.5" PointX="6.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_LOCALESTOQUE" Width="1.5" PointX="8.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_LOGIN" Width="1.5" PointX="10.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_LOGIN_FUNCIONARIO" Width="1.5" PointX="16.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_MANUTENCAOEPI" Width="1.5" PointX="16.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_MENSAGEM_OCORRENCIA" Width="1.5" PointX="12.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_MOVIMENTACAO_ESTOQUE" Width="1.5" PointX="16.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_NAOCONFORMIDADE" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_PERFIL" Width="1.5" PointX="17.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_STATUSOCORRENCIA" Width="1.5" PointX="8.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_TELAS" Width="1.5" PointX="10.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_TELAS_PERFIL" Width="1.5" PointX="12.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_USUARIO_COALBORADOR" Width="1.5" PointX="18.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_USUARIOS" Width="1.5" PointX="20.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.LOGIN" Width="1.5" PointX="4.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_FUNCIONARIOS" Width="1.5" PointX="20.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_HISTORICOATENDIMENTO" Width="1.5" PointX="20.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_LOGIN" Width="1.5" PointX="14.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_OCORRENCIA" Width="1.5" PointX="20.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_PRODUTOS" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_SUPERVISORUSUARIO" Width="1.5" PointX="22.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_TIPOOCORRENCIA" Width="1.5" PointX="6.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_TIPOUSUARIO" Width="1.5" PointX="22.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_USUARIO" Width="1.5" PointX="8.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_USUARIO_COALBORADOR" Width="1.5" PointX="10.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.PACIENTES" Width="1.5" PointX="22.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.PANICO" Width="1.5" PointX="20.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.RECLAME" Width="1.5" PointX="22.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.Tab_Login" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.TRANSPORTE_PAC" Width="1.5" PointX="24.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.USUARIO" Width="1.5" PointX="12.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.USUARIOS_LOGADO" Width="1.5" PointX="24.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.VACINA_PAC" Width="1.5" PointX="14.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.AggregatedCounter" Width="1.5" PointX="24.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.Counter" Width="1.5" PointX="16.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.Hash" Width="1.5" PointX="24.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.Job" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.JobParameter" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.JobQueue" Width="1.5" PointX="24.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.List" Width="1.5" PointX="0.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.Schema" Width="1.5" PointX="2.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.Server" Width="1.5" PointX="4.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.Set" Width="1.5" PointX="6.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.State" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.AGENDA" Width="1.5" PointX="24.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.AGENDAEXA" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.AGENDAV" Width="1.5" PointX="26.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.ALUNOS" Width="1.5" PointX="26.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.AVALIACAO_TURMA" Width="1.5" PointX="18.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.CARGO_SECUNDARIO" Width="1.5" PointX="26.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.CARGOS" Width="1.5" PointX="8.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.CARTEIRA_VACINA" Width="1.5" PointX="10.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.CARTEIRINHA" Width="1.5" PointX="20.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.CIDADES" Width="1.5" PointX="26.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DISCIPLINAS" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.LABEXA" Width="1.5" PointX="0.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.P_STATUSOCORRENCIA" Width="1.5" PointX="2.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.PROFISSIONAIS" Width="1.5" PointX="28.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.REL_CARGO_CARGSEC" Width="1.5" PointX="4.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.RELACAO_NUMERICA" Width="1.5" PointX="28.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.TURMAS" Width="1.5" PointX="28.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.VACINA" Width="1.5" PointX="28.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.VEICULO_HORA" Width="1.5" PointX="30.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.VEICULOS" Width="1.5" PointX="30.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_1" Width="1.5" PointX="6.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_1_TESTE" Width="1.5" PointX="30.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_15" Width="1.5" PointX="12.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_15_TESTE" Width="1.5" PointX="14.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_2" Width="1.5" PointX="30.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_3" Width="1.5" PointX="30.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_30DIAS" Width="1.5" PointX="20.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_30DIAS_TESTE" Width="1.5" PointX="30.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_4" Width="1.5" PointX="30.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_5" Width="1.5" PointX="2.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_6" Width="1.5" PointX="32.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_7" Width="1.5" PointX="32.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_7_TESTE" Width="1.5" PointX="32.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_VENCIDA" Width="1.5" PointX="32.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_VENCIDA_TESTE" Width="1.5" PointX="16.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.ITENS_COM_VALIDADE_A_VENCER" Width="1.5" PointX="32.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.ITENS_COM_VALIDADE_DE_TESTE_A_VENCER" Width="1.5" PointX="32.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.QTD_INCONFORMIDADE_EMAIL" Width="1.5" PointX="26.75" PointY="32.75" IsExpanded="true" />
+        <AssociationConnector Association="webservicetwos3Model.FK_HangFire_JobParameter_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="webservicetwos3Model.FK_HangFire_State_Job" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_CLIENTE" Width="1.5" PointX="9.375" PointY="33.75" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_PRODUTOS" Width="1.5" PointX="33.375" PointY="30.75" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_PRODUTOS_ITENS" Width="1.5" PointX="23.375" PointY="34.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

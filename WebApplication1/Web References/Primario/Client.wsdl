@@ -1,0 +1,2323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retornaLocalEstoque">
+        <s:complexType />
+      </s:element>
+      <s:element name="retornaLocalEstoqueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="retornaLocalEstoqueResult" type="tns:ArrayOfL_LOCALESTOQUE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfL_LOCALESTOQUE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="L_LOCALESTOQUE" nillable="true" type="tns:L_LOCALESTOQUE" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="L_LOCALESTOQUE">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CODIGO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NOME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESCRICAO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DATA_CADASTRO" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="movimentacaoEstoque">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="estoque" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="entSaida" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="movimentacaoEstoqueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="movimentacaoEstoqueResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRESULTADOMOV">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RESULTADOMOV" nillable="true" type="tns:RESULTADOMOV" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RESULTADOMOV">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DataMovimentacao" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EPC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Produto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Resultado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="corAviso" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="recebimentoEstoque">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="recebimentoEstoqueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="recebimentoEstoqueResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="atribuicaoCracha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="matricula" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cracha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="atribuicaoCrachaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="atribuicaoCrachaResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="distribuicaoEPI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="matricula" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="distribuicaoEPIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="distribuicaoEPIResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="envioParaTeste">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="estoque" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="envioParaTesteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="envioParaTesteResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="recebimentoTeste">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataTeste" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="art" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="recebimentoTesteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="recebimentoTesteResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="inspecaoEPIFuncionario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="latitude" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="longitude" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="inspecaoEPIFuncionarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inspecaoEPIFuncionarioResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="itemNaoConforme">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="motivo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="itemNaoConformeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="itemNaoConformeResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="manutencaoEPI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="estoque" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="manutencaoEPIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="manutencaoEPIResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="funcionarioCracha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cracha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="funcionarioCrachaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="funcionarioCrachaResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FuncionarioTemSenha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FuncionarioTemSenhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FuncionarioTemSenhaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="cadastrarSenha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="senha" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="matricula" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="cadastrarSenhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cadastrarSenhaResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="loginFuncionario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="matricula" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="loginFuncionarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="loginFuncionarioResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="devolucaoEPI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="estoque" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="devolucaoEPIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="devolucaoEPIResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="descartarItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="motivo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="descartarItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="descartarItemResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="consultaEPI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="consultaEPIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="consultaEPIResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retornarDadosEpi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retornarDadosEpiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="retornarDadosEpiResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dateDiffTeste">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dateDiffTesteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="dateDiffTesteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="importacaoDeDados">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lp" type="tns:L_PRODUTOS_ITENS" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="L_PRODUTOS_ITENS">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="COD_PRODUTO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PRODUTO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DT_VALIDADE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="COD_FORNECEDOR" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DT_FABRICACAO" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CA" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NUMERO_LOTE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="VALIDADE_TESTE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EPC" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DATA_ENTRADA" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="importacaoDeDadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="importacaoDeDadosResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retornarDadosEpiValidar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retornarDadosEpiValidarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="retornarDadosEpiValidarResult" type="tns:ArrayOfDADOSEPI" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDADOSEPI">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DADOSEPI" nillable="true" type="tns:DADOSEPI" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DADOSEPI">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CodFornecedor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CodProduto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EPC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Produto" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Qtd" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="salvarMensagemOcorrencia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mensagem" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="salvarMensagemOcorrenciaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="salvarMensagemOcorrenciaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retornarListaMensagem">
+        <s:complexType />
+      </s:element>
+      <s:element name="retornarListaMensagemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="retornarListaMensagemResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retornarListaMensagemSupervisor">
+        <s:complexType />
+      </s:element>
+      <s:element name="retornarListaMensagemSupervisorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="retornarListaMensagemSupervisorResult" type="tns:ArrayOfRESULTADOMOV" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alterarStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ocorrencia" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alterarStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="alterarStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dataDif">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt1" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dataDifResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dataDifResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retornarDadosEpiValidarRecebimento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="listaEPCS" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="retornarDadosEpiValidarRecebimentoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="retornarDadosEpiValidarRecebimentoResult" type="tns:ArrayOfDADOSEPI" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfL_LOCALESTOQUE" nillable="true" type="tns:ArrayOfL_LOCALESTOQUE" />
+      <s:element name="ArrayOfRESULTADOMOV" nillable="true" type="tns:ArrayOfRESULTADOMOV" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfDADOSEPI" nillable="true" type="tns:ArrayOfDADOSEPI" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="retornaLocalEstoqueSoapIn">
+    <wsdl:part name="parameters" element="tns:retornaLocalEstoque" />
+  </wsdl:message>
+  <wsdl:message name="retornaLocalEstoqueSoapOut">
+    <wsdl:part name="parameters" element="tns:retornaLocalEstoqueResponse" />
+  </wsdl:message>
+  <wsdl:message name="movimentacaoEstoqueSoapIn">
+    <wsdl:part name="parameters" element="tns:movimentacaoEstoque" />
+  </wsdl:message>
+  <wsdl:message name="movimentacaoEstoqueSoapOut">
+    <wsdl:part name="parameters" element="tns:movimentacaoEstoqueResponse" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoEstoqueSoapIn">
+    <wsdl:part name="parameters" element="tns:recebimentoEstoque" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoEstoqueSoapOut">
+    <wsdl:part name="parameters" element="tns:recebimentoEstoqueResponse" />
+  </wsdl:message>
+  <wsdl:message name="atribuicaoCrachaSoapIn">
+    <wsdl:part name="parameters" element="tns:atribuicaoCracha" />
+  </wsdl:message>
+  <wsdl:message name="atribuicaoCrachaSoapOut">
+    <wsdl:part name="parameters" element="tns:atribuicaoCrachaResponse" />
+  </wsdl:message>
+  <wsdl:message name="distribuicaoEPISoapIn">
+    <wsdl:part name="parameters" element="tns:distribuicaoEPI" />
+  </wsdl:message>
+  <wsdl:message name="distribuicaoEPISoapOut">
+    <wsdl:part name="parameters" element="tns:distribuicaoEPIResponse" />
+  </wsdl:message>
+  <wsdl:message name="envioParaTesteSoapIn">
+    <wsdl:part name="parameters" element="tns:envioParaTeste" />
+  </wsdl:message>
+  <wsdl:message name="envioParaTesteSoapOut">
+    <wsdl:part name="parameters" element="tns:envioParaTesteResponse" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoTesteSoapIn">
+    <wsdl:part name="parameters" element="tns:recebimentoTeste" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoTesteSoapOut">
+    <wsdl:part name="parameters" element="tns:recebimentoTesteResponse" />
+  </wsdl:message>
+  <wsdl:message name="inspecaoEPIFuncionarioSoapIn">
+    <wsdl:part name="parameters" element="tns:inspecaoEPIFuncionario" />
+  </wsdl:message>
+  <wsdl:message name="inspecaoEPIFuncionarioSoapOut">
+    <wsdl:part name="parameters" element="tns:inspecaoEPIFuncionarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="itemNaoConformeSoapIn">
+    <wsdl:part name="parameters" element="tns:itemNaoConforme" />
+  </wsdl:message>
+  <wsdl:message name="itemNaoConformeSoapOut">
+    <wsdl:part name="parameters" element="tns:itemNaoConformeResponse" />
+  </wsdl:message>
+  <wsdl:message name="manutencaoEPISoapIn">
+    <wsdl:part name="parameters" element="tns:manutencaoEPI" />
+  </wsdl:message>
+  <wsdl:message name="manutencaoEPISoapOut">
+    <wsdl:part name="parameters" element="tns:manutencaoEPIResponse" />
+  </wsdl:message>
+  <wsdl:message name="funcionarioCrachaSoapIn">
+    <wsdl:part name="parameters" element="tns:funcionarioCracha" />
+  </wsdl:message>
+  <wsdl:message name="funcionarioCrachaSoapOut">
+    <wsdl:part name="parameters" element="tns:funcionarioCrachaResponse" />
+  </wsdl:message>
+  <wsdl:message name="FuncionarioTemSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:FuncionarioTemSenha" />
+  </wsdl:message>
+  <wsdl:message name="FuncionarioTemSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:FuncionarioTemSenhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="cadastrarSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:cadastrarSenha" />
+  </wsdl:message>
+  <wsdl:message name="cadastrarSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:cadastrarSenhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="loginFuncionarioSoapIn">
+    <wsdl:part name="parameters" element="tns:loginFuncionario" />
+  </wsdl:message>
+  <wsdl:message name="loginFuncionarioSoapOut">
+    <wsdl:part name="parameters" element="tns:loginFuncionarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="devolucaoEPISoapIn">
+    <wsdl:part name="parameters" element="tns:devolucaoEPI" />
+  </wsdl:message>
+  <wsdl:message name="devolucaoEPISoapOut">
+    <wsdl:part name="parameters" element="tns:devolucaoEPIResponse" />
+  </wsdl:message>
+  <wsdl:message name="descartarItemSoapIn">
+    <wsdl:part name="parameters" element="tns:descartarItem" />
+  </wsdl:message>
+  <wsdl:message name="descartarItemSoapOut">
+    <wsdl:part name="parameters" element="tns:descartarItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultaEPISoapIn">
+    <wsdl:part name="parameters" element="tns:consultaEPI" />
+  </wsdl:message>
+  <wsdl:message name="consultaEPISoapOut">
+    <wsdl:part name="parameters" element="tns:consultaEPIResponse" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiSoapIn">
+    <wsdl:part name="parameters" element="tns:retornarDadosEpi" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiSoapOut">
+    <wsdl:part name="parameters" element="tns:retornarDadosEpiResponse" />
+  </wsdl:message>
+  <wsdl:message name="dateDiffTesteSoapIn">
+    <wsdl:part name="parameters" element="tns:dateDiffTeste" />
+  </wsdl:message>
+  <wsdl:message name="dateDiffTesteSoapOut">
+    <wsdl:part name="parameters" element="tns:dateDiffTesteResponse" />
+  </wsdl:message>
+  <wsdl:message name="importacaoDeDadosSoapIn">
+    <wsdl:part name="parameters" element="tns:importacaoDeDados" />
+  </wsdl:message>
+  <wsdl:message name="importacaoDeDadosSoapOut">
+    <wsdl:part name="parameters" element="tns:importacaoDeDadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarSoapIn">
+    <wsdl:part name="parameters" element="tns:retornarDadosEpiValidar" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarSoapOut">
+    <wsdl:part name="parameters" element="tns:retornarDadosEpiValidarResponse" />
+  </wsdl:message>
+  <wsdl:message name="salvarMensagemOcorrenciaSoapIn">
+    <wsdl:part name="parameters" element="tns:salvarMensagemOcorrencia" />
+  </wsdl:message>
+  <wsdl:message name="salvarMensagemOcorrenciaSoapOut">
+    <wsdl:part name="parameters" element="tns:salvarMensagemOcorrenciaResponse" />
+  </wsdl:message>
+  <wsdl:message name="retornarListaMensagemSoapIn">
+    <wsdl:part name="parameters" element="tns:retornarListaMensagem" />
+  </wsdl:message>
+  <wsdl:message name="retornarListaMensagemSoapOut">
+    <wsdl:part name="parameters" element="tns:retornarListaMensagemResponse" />
+  </wsdl:message>
+  <wsdl:message name="retornarListaMensagemSupervisorSoapIn">
+    <wsdl:part name="parameters" element="tns:retornarListaMensagemSupervisor" />
+  </wsdl:message>
+  <wsdl:message name="retornarListaMensagemSupervisorSoapOut">
+    <wsdl:part name="parameters" element="tns:retornarListaMensagemSupervisorResponse" />
+  </wsdl:message>
+  <wsdl:message name="alterarStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:alterarStatus" />
+  </wsdl:message>
+  <wsdl:message name="alterarStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:alterarStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="dataDifSoapIn">
+    <wsdl:part name="parameters" element="tns:dataDif" />
+  </wsdl:message>
+  <wsdl:message name="dataDifSoapOut">
+    <wsdl:part name="parameters" element="tns:dataDifResponse" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarRecebimentoSoapIn">
+    <wsdl:part name="parameters" element="tns:retornarDadosEpiValidarRecebimento" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarRecebimentoSoapOut">
+    <wsdl:part name="parameters" element="tns:retornarDadosEpiValidarRecebimentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="retornaLocalEstoqueHttpGetIn" />
+  <wsdl:message name="retornaLocalEstoqueHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfL_LOCALESTOQUE" />
+  </wsdl:message>
+  <wsdl:message name="movimentacaoEstoqueHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="estoque" type="s:string" />
+    <wsdl:part name="entSaida" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="movimentacaoEstoqueHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoEstoqueHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoEstoqueHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="atribuicaoCrachaHttpGetIn">
+    <wsdl:part name="matricula" type="s:string" />
+    <wsdl:part name="cracha" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="atribuicaoCrachaHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="distribuicaoEPIHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="matricula" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="distribuicaoEPIHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="envioParaTesteHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="estoque" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="envioParaTesteHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoTesteHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="dataTeste" type="s:string" />
+    <wsdl:part name="art" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoTesteHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="inspecaoEPIFuncionarioHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="latitude" type="s:string" />
+    <wsdl:part name="longitude" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="inspecaoEPIFuncionarioHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="itemNaoConformeHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="motivo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="itemNaoConformeHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="manutencaoEPIHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="estoque" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="manutencaoEPIHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="funcionarioCrachaHttpGetIn">
+    <wsdl:part name="cracha" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="funcionarioCrachaHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="FuncionarioTemSenhaHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FuncionarioTemSenhaHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="cadastrarSenhaHttpGetIn">
+    <wsdl:part name="senha" type="s:string" />
+    <wsdl:part name="matricula" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="cadastrarSenhaHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="loginFuncionarioHttpGetIn">
+    <wsdl:part name="matricula" type="s:string" />
+    <wsdl:part name="senha" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="loginFuncionarioHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="devolucaoEPIHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="estoque" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="devolucaoEPIHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="descartarItemHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="motivo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="descartarItemHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="consultaEPIHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="consultaEPIHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="dateDiffTesteHttpGetIn">
+    <wsdl:part name="data" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dateDiffTesteHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDADOSEPI" />
+  </wsdl:message>
+  <wsdl:message name="salvarMensagemOcorrenciaHttpGetIn">
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="mensagem" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="salvarMensagemOcorrenciaHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="retornarListaMensagemHttpGetIn" />
+  <wsdl:message name="retornarListaMensagemHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="retornarListaMensagemSupervisorHttpGetIn" />
+  <wsdl:message name="retornarListaMensagemSupervisorHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="alterarStatusHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="ocorrencia" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="alterarStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="dataDifHttpGetIn">
+    <wsdl:part name="dt1" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dataDifHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarRecebimentoHttpGetIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarRecebimentoHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDADOSEPI" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="retornaLocalEstoqueHttpPostIn" />
+  <wsdl:message name="retornaLocalEstoqueHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfL_LOCALESTOQUE" />
+  </wsdl:message>
+  <wsdl:message name="movimentacaoEstoqueHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="estoque" type="s:string" />
+    <wsdl:part name="entSaida" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="movimentacaoEstoqueHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoEstoqueHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoEstoqueHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="atribuicaoCrachaHttpPostIn">
+    <wsdl:part name="matricula" type="s:string" />
+    <wsdl:part name="cracha" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="atribuicaoCrachaHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="distribuicaoEPIHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="matricula" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="distribuicaoEPIHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="envioParaTesteHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="estoque" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="envioParaTesteHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoTesteHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="dataTeste" type="s:string" />
+    <wsdl:part name="art" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="recebimentoTesteHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="inspecaoEPIFuncionarioHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="latitude" type="s:string" />
+    <wsdl:part name="longitude" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="inspecaoEPIFuncionarioHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="itemNaoConformeHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="motivo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="itemNaoConformeHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="manutencaoEPIHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="estoque" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="manutencaoEPIHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="funcionarioCrachaHttpPostIn">
+    <wsdl:part name="cracha" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="funcionarioCrachaHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="FuncionarioTemSenhaHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FuncionarioTemSenhaHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="cadastrarSenhaHttpPostIn">
+    <wsdl:part name="senha" type="s:string" />
+    <wsdl:part name="matricula" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="cadastrarSenhaHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="loginFuncionarioHttpPostIn">
+    <wsdl:part name="matricula" type="s:string" />
+    <wsdl:part name="senha" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="loginFuncionarioHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="devolucaoEPIHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="estoque" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="devolucaoEPIHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="descartarItemHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+    <wsdl:part name="motivo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="descartarItemHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="consultaEPIHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="consultaEPIHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="dateDiffTesteHttpPostIn">
+    <wsdl:part name="data" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dateDiffTesteHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDADOSEPI" />
+  </wsdl:message>
+  <wsdl:message name="salvarMensagemOcorrenciaHttpPostIn">
+    <wsdl:part name="number" type="s:string" />
+    <wsdl:part name="mensagem" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="salvarMensagemOcorrenciaHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="retornarListaMensagemHttpPostIn" />
+  <wsdl:message name="retornarListaMensagemHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="retornarListaMensagemSupervisorHttpPostIn" />
+  <wsdl:message name="retornarListaMensagemSupervisorHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRESULTADOMOV" />
+  </wsdl:message>
+  <wsdl:message name="alterarStatusHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="ocorrencia" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="alterarStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="dataDifHttpPostIn">
+    <wsdl:part name="dt1" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dataDifHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarRecebimentoHttpPostIn">
+    <wsdl:part name="listaEPCS" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="retornarDadosEpiValidarRecebimentoHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDADOSEPI" />
+  </wsdl:message>
+  <wsdl:portType name="ClientSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornaLocalEstoque">
+      <wsdl:input message="tns:retornaLocalEstoqueSoapIn" />
+      <wsdl:output message="tns:retornaLocalEstoqueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="movimentacaoEstoque">
+      <wsdl:input message="tns:movimentacaoEstoqueSoapIn" />
+      <wsdl:output message="tns:movimentacaoEstoqueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoEstoque">
+      <wsdl:input message="tns:recebimentoEstoqueSoapIn" />
+      <wsdl:output message="tns:recebimentoEstoqueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="atribuicaoCracha">
+      <wsdl:input message="tns:atribuicaoCrachaSoapIn" />
+      <wsdl:output message="tns:atribuicaoCrachaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="distribuicaoEPI">
+      <wsdl:input message="tns:distribuicaoEPISoapIn" />
+      <wsdl:output message="tns:distribuicaoEPISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="envioParaTeste">
+      <wsdl:input message="tns:envioParaTesteSoapIn" />
+      <wsdl:output message="tns:envioParaTesteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoTeste">
+      <wsdl:input message="tns:recebimentoTesteSoapIn" />
+      <wsdl:output message="tns:recebimentoTesteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="inspecaoEPIFuncionario">
+      <wsdl:input message="tns:inspecaoEPIFuncionarioSoapIn" />
+      <wsdl:output message="tns:inspecaoEPIFuncionarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="itemNaoConforme">
+      <wsdl:input message="tns:itemNaoConformeSoapIn" />
+      <wsdl:output message="tns:itemNaoConformeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="manutencaoEPI">
+      <wsdl:input message="tns:manutencaoEPISoapIn" />
+      <wsdl:output message="tns:manutencaoEPISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="funcionarioCracha">
+      <wsdl:input message="tns:funcionarioCrachaSoapIn" />
+      <wsdl:output message="tns:funcionarioCrachaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FuncionarioTemSenha">
+      <wsdl:input message="tns:FuncionarioTemSenhaSoapIn" />
+      <wsdl:output message="tns:FuncionarioTemSenhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarSenha">
+      <wsdl:input message="tns:cadastrarSenhaSoapIn" />
+      <wsdl:output message="tns:cadastrarSenhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="loginFuncionario">
+      <wsdl:input message="tns:loginFuncionarioSoapIn" />
+      <wsdl:output message="tns:loginFuncionarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="devolucaoEPI">
+      <wsdl:input message="tns:devolucaoEPISoapIn" />
+      <wsdl:output message="tns:devolucaoEPISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="descartarItem">
+      <wsdl:input message="tns:descartarItemSoapIn" />
+      <wsdl:output message="tns:descartarItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="consultaEPI">
+      <wsdl:input message="tns:consultaEPISoapIn" />
+      <wsdl:output message="tns:consultaEPISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpi">
+      <wsdl:input message="tns:retornarDadosEpiSoapIn" />
+      <wsdl:output message="tns:retornarDadosEpiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dateDiffTeste">
+      <wsdl:input message="tns:dateDiffTesteSoapIn" />
+      <wsdl:output message="tns:dateDiffTesteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="importacaoDeDados">
+      <wsdl:input message="tns:importacaoDeDadosSoapIn" />
+      <wsdl:output message="tns:importacaoDeDadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidar">
+      <wsdl:input message="tns:retornarDadosEpiValidarSoapIn" />
+      <wsdl:output message="tns:retornarDadosEpiValidarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="salvarMensagemOcorrencia">
+      <wsdl:input message="tns:salvarMensagemOcorrenciaSoapIn" />
+      <wsdl:output message="tns:salvarMensagemOcorrenciaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagem">
+      <wsdl:input message="tns:retornarListaMensagemSoapIn" />
+      <wsdl:output message="tns:retornarListaMensagemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagemSupervisor">
+      <wsdl:input message="tns:retornarListaMensagemSupervisorSoapIn" />
+      <wsdl:output message="tns:retornarListaMensagemSupervisorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="alterarStatus">
+      <wsdl:input message="tns:alterarStatusSoapIn" />
+      <wsdl:output message="tns:alterarStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dataDif">
+      <wsdl:input message="tns:dataDifSoapIn" />
+      <wsdl:output message="tns:dataDifSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidarRecebimento">
+      <wsdl:input message="tns:retornarDadosEpiValidarRecebimentoSoapIn" />
+      <wsdl:output message="tns:retornarDadosEpiValidarRecebimentoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ClientHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornaLocalEstoque">
+      <wsdl:input message="tns:retornaLocalEstoqueHttpGetIn" />
+      <wsdl:output message="tns:retornaLocalEstoqueHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="movimentacaoEstoque">
+      <wsdl:input message="tns:movimentacaoEstoqueHttpGetIn" />
+      <wsdl:output message="tns:movimentacaoEstoqueHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoEstoque">
+      <wsdl:input message="tns:recebimentoEstoqueHttpGetIn" />
+      <wsdl:output message="tns:recebimentoEstoqueHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="atribuicaoCracha">
+      <wsdl:input message="tns:atribuicaoCrachaHttpGetIn" />
+      <wsdl:output message="tns:atribuicaoCrachaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="distribuicaoEPI">
+      <wsdl:input message="tns:distribuicaoEPIHttpGetIn" />
+      <wsdl:output message="tns:distribuicaoEPIHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="envioParaTeste">
+      <wsdl:input message="tns:envioParaTesteHttpGetIn" />
+      <wsdl:output message="tns:envioParaTesteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoTeste">
+      <wsdl:input message="tns:recebimentoTesteHttpGetIn" />
+      <wsdl:output message="tns:recebimentoTesteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="inspecaoEPIFuncionario">
+      <wsdl:input message="tns:inspecaoEPIFuncionarioHttpGetIn" />
+      <wsdl:output message="tns:inspecaoEPIFuncionarioHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="itemNaoConforme">
+      <wsdl:input message="tns:itemNaoConformeHttpGetIn" />
+      <wsdl:output message="tns:itemNaoConformeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="manutencaoEPI">
+      <wsdl:input message="tns:manutencaoEPIHttpGetIn" />
+      <wsdl:output message="tns:manutencaoEPIHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="funcionarioCracha">
+      <wsdl:input message="tns:funcionarioCrachaHttpGetIn" />
+      <wsdl:output message="tns:funcionarioCrachaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FuncionarioTemSenha">
+      <wsdl:input message="tns:FuncionarioTemSenhaHttpGetIn" />
+      <wsdl:output message="tns:FuncionarioTemSenhaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarSenha">
+      <wsdl:input message="tns:cadastrarSenhaHttpGetIn" />
+      <wsdl:output message="tns:cadastrarSenhaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="loginFuncionario">
+      <wsdl:input message="tns:loginFuncionarioHttpGetIn" />
+      <wsdl:output message="tns:loginFuncionarioHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="devolucaoEPI">
+      <wsdl:input message="tns:devolucaoEPIHttpGetIn" />
+      <wsdl:output message="tns:devolucaoEPIHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="descartarItem">
+      <wsdl:input message="tns:descartarItemHttpGetIn" />
+      <wsdl:output message="tns:descartarItemHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="consultaEPI">
+      <wsdl:input message="tns:consultaEPIHttpGetIn" />
+      <wsdl:output message="tns:consultaEPIHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpi">
+      <wsdl:input message="tns:retornarDadosEpiHttpGetIn" />
+      <wsdl:output message="tns:retornarDadosEpiHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dateDiffTeste">
+      <wsdl:input message="tns:dateDiffTesteHttpGetIn" />
+      <wsdl:output message="tns:dateDiffTesteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidar">
+      <wsdl:input message="tns:retornarDadosEpiValidarHttpGetIn" />
+      <wsdl:output message="tns:retornarDadosEpiValidarHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="salvarMensagemOcorrencia">
+      <wsdl:input message="tns:salvarMensagemOcorrenciaHttpGetIn" />
+      <wsdl:output message="tns:salvarMensagemOcorrenciaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagem">
+      <wsdl:input message="tns:retornarListaMensagemHttpGetIn" />
+      <wsdl:output message="tns:retornarListaMensagemHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagemSupervisor">
+      <wsdl:input message="tns:retornarListaMensagemSupervisorHttpGetIn" />
+      <wsdl:output message="tns:retornarListaMensagemSupervisorHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="alterarStatus">
+      <wsdl:input message="tns:alterarStatusHttpGetIn" />
+      <wsdl:output message="tns:alterarStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dataDif">
+      <wsdl:input message="tns:dataDifHttpGetIn" />
+      <wsdl:output message="tns:dataDifHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidarRecebimento">
+      <wsdl:input message="tns:retornarDadosEpiValidarRecebimentoHttpGetIn" />
+      <wsdl:output message="tns:retornarDadosEpiValidarRecebimentoHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ClientHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornaLocalEstoque">
+      <wsdl:input message="tns:retornaLocalEstoqueHttpPostIn" />
+      <wsdl:output message="tns:retornaLocalEstoqueHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="movimentacaoEstoque">
+      <wsdl:input message="tns:movimentacaoEstoqueHttpPostIn" />
+      <wsdl:output message="tns:movimentacaoEstoqueHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoEstoque">
+      <wsdl:input message="tns:recebimentoEstoqueHttpPostIn" />
+      <wsdl:output message="tns:recebimentoEstoqueHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="atribuicaoCracha">
+      <wsdl:input message="tns:atribuicaoCrachaHttpPostIn" />
+      <wsdl:output message="tns:atribuicaoCrachaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="distribuicaoEPI">
+      <wsdl:input message="tns:distribuicaoEPIHttpPostIn" />
+      <wsdl:output message="tns:distribuicaoEPIHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="envioParaTeste">
+      <wsdl:input message="tns:envioParaTesteHttpPostIn" />
+      <wsdl:output message="tns:envioParaTesteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoTeste">
+      <wsdl:input message="tns:recebimentoTesteHttpPostIn" />
+      <wsdl:output message="tns:recebimentoTesteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="inspecaoEPIFuncionario">
+      <wsdl:input message="tns:inspecaoEPIFuncionarioHttpPostIn" />
+      <wsdl:output message="tns:inspecaoEPIFuncionarioHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="itemNaoConforme">
+      <wsdl:input message="tns:itemNaoConformeHttpPostIn" />
+      <wsdl:output message="tns:itemNaoConformeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="manutencaoEPI">
+      <wsdl:input message="tns:manutencaoEPIHttpPostIn" />
+      <wsdl:output message="tns:manutencaoEPIHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="funcionarioCracha">
+      <wsdl:input message="tns:funcionarioCrachaHttpPostIn" />
+      <wsdl:output message="tns:funcionarioCrachaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FuncionarioTemSenha">
+      <wsdl:input message="tns:FuncionarioTemSenhaHttpPostIn" />
+      <wsdl:output message="tns:FuncionarioTemSenhaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarSenha">
+      <wsdl:input message="tns:cadastrarSenhaHttpPostIn" />
+      <wsdl:output message="tns:cadastrarSenhaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="loginFuncionario">
+      <wsdl:input message="tns:loginFuncionarioHttpPostIn" />
+      <wsdl:output message="tns:loginFuncionarioHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="devolucaoEPI">
+      <wsdl:input message="tns:devolucaoEPIHttpPostIn" />
+      <wsdl:output message="tns:devolucaoEPIHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="descartarItem">
+      <wsdl:input message="tns:descartarItemHttpPostIn" />
+      <wsdl:output message="tns:descartarItemHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="consultaEPI">
+      <wsdl:input message="tns:consultaEPIHttpPostIn" />
+      <wsdl:output message="tns:consultaEPIHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpi">
+      <wsdl:input message="tns:retornarDadosEpiHttpPostIn" />
+      <wsdl:output message="tns:retornarDadosEpiHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dateDiffTeste">
+      <wsdl:input message="tns:dateDiffTesteHttpPostIn" />
+      <wsdl:output message="tns:dateDiffTesteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidar">
+      <wsdl:input message="tns:retornarDadosEpiValidarHttpPostIn" />
+      <wsdl:output message="tns:retornarDadosEpiValidarHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="salvarMensagemOcorrencia">
+      <wsdl:input message="tns:salvarMensagemOcorrenciaHttpPostIn" />
+      <wsdl:output message="tns:salvarMensagemOcorrenciaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagem">
+      <wsdl:input message="tns:retornarListaMensagemHttpPostIn" />
+      <wsdl:output message="tns:retornarListaMensagemHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagemSupervisor">
+      <wsdl:input message="tns:retornarListaMensagemSupervisorHttpPostIn" />
+      <wsdl:output message="tns:retornarListaMensagemSupervisorHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="alterarStatus">
+      <wsdl:input message="tns:alterarStatusHttpPostIn" />
+      <wsdl:output message="tns:alterarStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="dataDif">
+      <wsdl:input message="tns:dataDifHttpPostIn" />
+      <wsdl:output message="tns:dataDifHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidarRecebimento">
+      <wsdl:input message="tns:retornarDadosEpiValidarRecebimentoHttpPostIn" />
+      <wsdl:output message="tns:retornarDadosEpiValidarRecebimentoHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClientSoap" type="tns:ClientSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornaLocalEstoque">
+      <soap:operation soapAction="http://tempuri.org/retornaLocalEstoque" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="movimentacaoEstoque">
+      <soap:operation soapAction="http://tempuri.org/movimentacaoEstoque" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoEstoque">
+      <soap:operation soapAction="http://tempuri.org/recebimentoEstoque" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="atribuicaoCracha">
+      <soap:operation soapAction="http://tempuri.org/atribuicaoCracha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="distribuicaoEPI">
+      <soap:operation soapAction="http://tempuri.org/distribuicaoEPI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="envioParaTeste">
+      <soap:operation soapAction="http://tempuri.org/envioParaTeste" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoTeste">
+      <soap:operation soapAction="http://tempuri.org/recebimentoTeste" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inspecaoEPIFuncionario">
+      <soap:operation soapAction="http://tempuri.org/inspecaoEPIFuncionario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itemNaoConforme">
+      <soap:operation soapAction="http://tempuri.org/itemNaoConforme" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="manutencaoEPI">
+      <soap:operation soapAction="http://tempuri.org/manutencaoEPI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="funcionarioCracha">
+      <soap:operation soapAction="http://tempuri.org/funcionarioCracha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FuncionarioTemSenha">
+      <soap:operation soapAction="http://tempuri.org/FuncionarioTemSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarSenha">
+      <soap:operation soapAction="http://tempuri.org/cadastrarSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loginFuncionario">
+      <soap:operation soapAction="http://tempuri.org/loginFuncionario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="devolucaoEPI">
+      <soap:operation soapAction="http://tempuri.org/devolucaoEPI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="descartarItem">
+      <soap:operation soapAction="http://tempuri.org/descartarItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaEPI">
+      <soap:operation soapAction="http://tempuri.org/consultaEPI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpi">
+      <soap:operation soapAction="http://tempuri.org/retornarDadosEpi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dateDiffTeste">
+      <soap:operation soapAction="http://tempuri.org/dateDiffTeste" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="importacaoDeDados">
+      <soap:operation soapAction="http://tempuri.org/importacaoDeDados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidar">
+      <soap:operation soapAction="http://tempuri.org/retornarDadosEpiValidar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="salvarMensagemOcorrencia">
+      <soap:operation soapAction="http://tempuri.org/salvarMensagemOcorrencia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagem">
+      <soap:operation soapAction="http://tempuri.org/retornarListaMensagem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagemSupervisor">
+      <soap:operation soapAction="http://tempuri.org/retornarListaMensagemSupervisor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alterarStatus">
+      <soap:operation soapAction="http://tempuri.org/alterarStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dataDif">
+      <soap:operation soapAction="http://tempuri.org/dataDif" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidarRecebimento">
+      <soap:operation soapAction="http://tempuri.org/retornarDadosEpiValidarRecebimento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ClientSoap12" type="tns:ClientSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornaLocalEstoque">
+      <soap12:operation soapAction="http://tempuri.org/retornaLocalEstoque" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="movimentacaoEstoque">
+      <soap12:operation soapAction="http://tempuri.org/movimentacaoEstoque" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoEstoque">
+      <soap12:operation soapAction="http://tempuri.org/recebimentoEstoque" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="atribuicaoCracha">
+      <soap12:operation soapAction="http://tempuri.org/atribuicaoCracha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="distribuicaoEPI">
+      <soap12:operation soapAction="http://tempuri.org/distribuicaoEPI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="envioParaTeste">
+      <soap12:operation soapAction="http://tempuri.org/envioParaTeste" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoTeste">
+      <soap12:operation soapAction="http://tempuri.org/recebimentoTeste" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inspecaoEPIFuncionario">
+      <soap12:operation soapAction="http://tempuri.org/inspecaoEPIFuncionario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itemNaoConforme">
+      <soap12:operation soapAction="http://tempuri.org/itemNaoConforme" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="manutencaoEPI">
+      <soap12:operation soapAction="http://tempuri.org/manutencaoEPI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="funcionarioCracha">
+      <soap12:operation soapAction="http://tempuri.org/funcionarioCracha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FuncionarioTemSenha">
+      <soap12:operation soapAction="http://tempuri.org/FuncionarioTemSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarSenha">
+      <soap12:operation soapAction="http://tempuri.org/cadastrarSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loginFuncionario">
+      <soap12:operation soapAction="http://tempuri.org/loginFuncionario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="devolucaoEPI">
+      <soap12:operation soapAction="http://tempuri.org/devolucaoEPI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="descartarItem">
+      <soap12:operation soapAction="http://tempuri.org/descartarItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaEPI">
+      <soap12:operation soapAction="http://tempuri.org/consultaEPI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpi">
+      <soap12:operation soapAction="http://tempuri.org/retornarDadosEpi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dateDiffTeste">
+      <soap12:operation soapAction="http://tempuri.org/dateDiffTeste" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="importacaoDeDados">
+      <soap12:operation soapAction="http://tempuri.org/importacaoDeDados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidar">
+      <soap12:operation soapAction="http://tempuri.org/retornarDadosEpiValidar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="salvarMensagemOcorrencia">
+      <soap12:operation soapAction="http://tempuri.org/salvarMensagemOcorrencia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagem">
+      <soap12:operation soapAction="http://tempuri.org/retornarListaMensagem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagemSupervisor">
+      <soap12:operation soapAction="http://tempuri.org/retornarListaMensagemSupervisor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alterarStatus">
+      <soap12:operation soapAction="http://tempuri.org/alterarStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dataDif">
+      <soap12:operation soapAction="http://tempuri.org/dataDif" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidarRecebimento">
+      <soap12:operation soapAction="http://tempuri.org/retornarDadosEpiValidarRecebimento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ClientHttpGet" type="tns:ClientHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornaLocalEstoque">
+      <http:operation location="/retornaLocalEstoque" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="movimentacaoEstoque">
+      <http:operation location="/movimentacaoEstoque" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoEstoque">
+      <http:operation location="/recebimentoEstoque" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="atribuicaoCracha">
+      <http:operation location="/atribuicaoCracha" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="distribuicaoEPI">
+      <http:operation location="/distribuicaoEPI" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="envioParaTeste">
+      <http:operation location="/envioParaTeste" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoTeste">
+      <http:operation location="/recebimentoTeste" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inspecaoEPIFuncionario">
+      <http:operation location="/inspecaoEPIFuncionario" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itemNaoConforme">
+      <http:operation location="/itemNaoConforme" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="manutencaoEPI">
+      <http:operation location="/manutencaoEPI" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="funcionarioCracha">
+      <http:operation location="/funcionarioCracha" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FuncionarioTemSenha">
+      <http:operation location="/FuncionarioTemSenha" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarSenha">
+      <http:operation location="/cadastrarSenha" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loginFuncionario">
+      <http:operation location="/loginFuncionario" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="devolucaoEPI">
+      <http:operation location="/devolucaoEPI" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="descartarItem">
+      <http:operation location="/descartarItem" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaEPI">
+      <http:operation location="/consultaEPI" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpi">
+      <http:operation location="/retornarDadosEpi" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dateDiffTeste">
+      <http:operation location="/dateDiffTeste" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidar">
+      <http:operation location="/retornarDadosEpiValidar" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="salvarMensagemOcorrencia">
+      <http:operation location="/salvarMensagemOcorrencia" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagem">
+      <http:operation location="/retornarListaMensagem" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagemSupervisor">
+      <http:operation location="/retornarListaMensagemSupervisor" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alterarStatus">
+      <http:operation location="/alterarStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dataDif">
+      <http:operation location="/dataDif" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidarRecebimento">
+      <http:operation location="/retornarDadosEpiValidarRecebimento" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ClientHttpPost" type="tns:ClientHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornaLocalEstoque">
+      <http:operation location="/retornaLocalEstoque" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="movimentacaoEstoque">
+      <http:operation location="/movimentacaoEstoque" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoEstoque">
+      <http:operation location="/recebimentoEstoque" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="atribuicaoCracha">
+      <http:operation location="/atribuicaoCracha" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="distribuicaoEPI">
+      <http:operation location="/distribuicaoEPI" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="envioParaTeste">
+      <http:operation location="/envioParaTeste" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recebimentoTeste">
+      <http:operation location="/recebimentoTeste" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inspecaoEPIFuncionario">
+      <http:operation location="/inspecaoEPIFuncionario" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="itemNaoConforme">
+      <http:operation location="/itemNaoConforme" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="manutencaoEPI">
+      <http:operation location="/manutencaoEPI" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="funcionarioCracha">
+      <http:operation location="/funcionarioCracha" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FuncionarioTemSenha">
+      <http:operation location="/FuncionarioTemSenha" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarSenha">
+      <http:operation location="/cadastrarSenha" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loginFuncionario">
+      <http:operation location="/loginFuncionario" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="devolucaoEPI">
+      <http:operation location="/devolucaoEPI" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="descartarItem">
+      <http:operation location="/descartarItem" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaEPI">
+      <http:operation location="/consultaEPI" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpi">
+      <http:operation location="/retornarDadosEpi" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dateDiffTeste">
+      <http:operation location="/dateDiffTeste" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidar">
+      <http:operation location="/retornarDadosEpiValidar" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="salvarMensagemOcorrencia">
+      <http:operation location="/salvarMensagemOcorrencia" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagem">
+      <http:operation location="/retornarListaMensagem" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarListaMensagemSupervisor">
+      <http:operation location="/retornarListaMensagemSupervisor" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alterarStatus">
+      <http:operation location="/alterarStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dataDif">
+      <http:operation location="/dataDif" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retornarDadosEpiValidarRecebimento">
+      <http:operation location="/retornarDadosEpiValidarRecebimento" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Client">
+    <wsdl:port name="ClientSoap" binding="tns:ClientSoap">
+      <soap:address location="http://easyepi.com.br/WBSClient/Client.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ClientSoap12" binding="tns:ClientSoap12">
+      <soap12:address location="http://easyepi.com.br/WBSClient/Client.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ClientHttpGet" binding="tns:ClientHttpGet">
+      <http:address location="http://easyepi.com.br/WBSClient/Client.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ClientHttpPost" binding="tns:ClientHttpPost">
+      <http:address location="http://easyepi.com.br/WBSClient/Client.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
