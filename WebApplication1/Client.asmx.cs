@@ -23,13 +23,6 @@ namespace WebApplication1
     {
         webservicetwos3Entities dbo = new webservicetwos3Entities();
         HttpClient client;
-        Uri usuarioUri;
-
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
 
         [WebMethod]
         public List<L_LOCALESTOQUE> retornaLocalEstoque()
@@ -54,8 +47,7 @@ namespace WebApplication1
             string[] lines = listaEPCS.Split('|');
             L_ESTOQUE le = new L_ESTOQUE();
             L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
-
-            int count = 0;
+            
             string mensagem = "";
             foreach(var epc in lines)
             {
@@ -1342,7 +1334,6 @@ namespace WebApplication1
             L_ESTOQUE le = new L_ESTOQUE();
             L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
             L_NAOCONFORMIDADE lnc = new L_NAOCONFORMIDADE();
-            int count = 0;
             string mensagem = "";
             foreach (var epc in lines)
             {
@@ -1423,7 +1414,6 @@ namespace WebApplication1
             L_ESTOQUE le = new L_ESTOQUE();
             L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
             L_MANUTENCAOEPI lm = new L_MANUTENCAOEPI();
-            int count = 0;
             string mensagem = "";
             foreach (var epc in lines)
             {
@@ -1717,7 +1707,6 @@ namespace WebApplication1
             L_ESTOQUE le = new L_ESTOQUE();
             L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
             L_MANUTENCAOEPI lm = new L_MANUTENCAOEPI();
-            int count = 0;
             string mensagem = "";
             foreach (var epc in lines)
             {
