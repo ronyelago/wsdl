@@ -25,17 +25,7 @@ namespace WebServiceIntegracao
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AGENDA_PAC> AGENDA_PAC { get; set; }
-        public virtual DbSet<ALUNOS_APP> ALUNOS_APP { get; set; }
-        public virtual DbSet<AVALIACAO_ALUNOS_APP> AVALIACAO_ALUNOS_APP { get; set; }
-        public virtual DbSet<CEPBRASIL> CEPBRASIL { get; set; }
-        public virtual DbSet<CIDADAO> CIDADAO { get; set; }
         public virtual DbSet<CONFIGURACOES> CONFIGURACOES { get; set; }
-        public virtual DbSet<CONVERSACAO> CONVERSACAO { get; set; }
-        public virtual DbSet<DadosEtiquetasPedidoSet> DadosEtiquetasPedidoSet { get; set; }
-        public virtual DbSet<DadosEtiquetasPedidoSet_copy> DadosEtiquetasPedidoSet_copy { get; set; }
-        public virtual DbSet<EXAME_PAC> EXAME_PAC { get; set; }
-        public virtual DbSet<FAVORITOS> FAVORITOS { get; set; }
         public virtual DbSet<L_ATRIBUICAOCRACHA> L_ATRIBUICAOCRACHA { get; set; }
         public virtual DbSet<L_DESCARTE> L_DESCARTE { get; set; }
         public virtual DbSet<L_ENVIO_PARA_TESTE> L_ENVIO_PARA_TESTE { get; set; }
@@ -62,7 +52,6 @@ namespace WebServiceIntegracao
         public virtual DbSet<L_USUARIOS> L_USUARIOS { get; set; }
         public virtual DbSet<LOGIN> LOGIN { get; set; }
         public virtual DbSet<P_FUNCIONARIOS> P_FUNCIONARIOS { get; set; }
-        public virtual DbSet<P_HISTORICOATENDIMENTO> P_HISTORICOATENDIMENTO { get; set; }
         public virtual DbSet<P_LOGIN> P_LOGIN { get; set; }
         public virtual DbSet<P_OCORRENCIA> P_OCORRENCIA { get; set; }
         public virtual DbSet<P_PRODUTOS> P_PRODUTOS { get; set; }
@@ -71,14 +60,9 @@ namespace WebServiceIntegracao
         public virtual DbSet<P_TIPOUSUARIO> P_TIPOUSUARIO { get; set; }
         public virtual DbSet<P_USUARIO> P_USUARIO { get; set; }
         public virtual DbSet<P_USUARIO_COALBORADOR> P_USUARIO_COALBORADOR { get; set; }
-        public virtual DbSet<PACIENTES> PACIENTES { get; set; }
-        public virtual DbSet<PANICO> PANICO { get; set; }
-        public virtual DbSet<RECLAME> RECLAME { get; set; }
         public virtual DbSet<Tab_Login> Tab_Login { get; set; }
-        public virtual DbSet<TRANSPORTE_PAC> TRANSPORTE_PAC { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<USUARIOS_LOGADO> USUARIOS_LOGADO { get; set; }
-        public virtual DbSet<VACINA_PAC> VACINA_PAC { get; set; }
         public virtual DbSet<AggregatedCounter> AggregatedCounter { get; set; }
         public virtual DbSet<Counter> Counter { get; set; }
         public virtual DbSet<Hash> Hash { get; set; }
@@ -90,26 +74,10 @@ namespace WebServiceIntegracao
         public virtual DbSet<Server> Server { get; set; }
         public virtual DbSet<Set> Set { get; set; }
         public virtual DbSet<State> State { get; set; }
-        public virtual DbSet<AGENDA> AGENDA { get; set; }
-        public virtual DbSet<AGENDAEXA> AGENDAEXA { get; set; }
-        public virtual DbSet<AGENDAV> AGENDAV { get; set; }
-        public virtual DbSet<ALUNOS> ALUNOS { get; set; }
-        public virtual DbSet<AVALIACAO_TURMA> AVALIACAO_TURMA { get; set; }
         public virtual DbSet<CARGO_SECUNDARIO> CARGO_SECUNDARIO { get; set; }
         public virtual DbSet<CARGOS> CARGOS { get; set; }
-        public virtual DbSet<CARTEIRA_VACINA> CARTEIRA_VACINA { get; set; }
-        public virtual DbSet<CARTEIRINHA> CARTEIRINHA { get; set; }
-        public virtual DbSet<CIDADES> CIDADES { get; set; }
-        public virtual DbSet<DISCIPLINAS> DISCIPLINAS { get; set; }
-        public virtual DbSet<LABEXA> LABEXA { get; set; }
         public virtual DbSet<P_STATUSOCORRENCIA> P_STATUSOCORRENCIA { get; set; }
-        public virtual DbSet<PROFISSIONAIS> PROFISSIONAIS { get; set; }
         public virtual DbSet<REL_CARGO_CARGSEC> REL_CARGO_CARGSEC { get; set; }
-        public virtual DbSet<RELACAO_NUMERICA> RELACAO_NUMERICA { get; set; }
-        public virtual DbSet<TURMAS> TURMAS { get; set; }
-        public virtual DbSet<VACINA> VACINA { get; set; }
-        public virtual DbSet<VEICULO_HORA> VEICULO_HORA { get; set; }
-        public virtual DbSet<VEICULOS> VEICULOS { get; set; }
         public virtual DbSet<DATA_VALIDADE_1> DATA_VALIDADE_1 { get; set; }
         public virtual DbSet<DATA_VALIDADE_1_TESTE> DATA_VALIDADE_1_TESTE { get; set; }
         public virtual DbSet<DATA_VALIDADE_15> DATA_VALIDADE_15 { get; set; }

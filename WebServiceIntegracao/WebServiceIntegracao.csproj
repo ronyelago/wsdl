@@ -146,52 +146,13 @@
     <Content Include="Client.asmx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AGENDA.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AGENDAEXA.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AGENDAV.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AGENDA_PAC.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="AggregatedCounter.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ALUNOS.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ALUNOS_APP.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AVALIACAO_ALUNOS_APP.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AVALIACAO_TURMA.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="CARGOS.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="CARGO_SECUNDARIO.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CARTEIRA_VACINA.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CARTEIRINHA.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CEPBRASIL.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CIDADAO.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CIDADES.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Client.asmx.cs">
@@ -201,16 +162,7 @@
     <Compile Include="CONFIGURACOES.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="CONVERSACAO.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Counter.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DadosEtiquetasPedidoSet.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DadosEtiquetasPedidoSet_copy.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="DATA_VALIDADE_1.cs">
@@ -258,15 +210,6 @@
     <Compile Include="DATA_VALIDADE_VENCIDA_TESTE.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="DISCIPLINAS.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EXAME_PAC.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FAVORITOS.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Hash.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
@@ -284,9 +227,6 @@
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="JobQueue.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LABEXA.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="List.cs">
@@ -391,20 +331,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model2.edmx</DependentUpon>
     </Compile>
-    <Compile Include="PACIENTES.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PANICO.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PROFISSIONAIS.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="P_FUNCIONARIOS.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="P_HISTORICOATENDIMENTO.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="P_LOGIN.cs">
@@ -437,12 +365,6 @@
     <Compile Include="QTD_INCONFORMIDADE_EMAIL.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="RECLAME.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RELACAO_NUMERICA.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="REL_CARGO_CARGSEC.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
@@ -461,28 +383,10 @@
     <Compile Include="Tab_Login.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="TRANSPORTE_PAC.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TURMAS.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="USUARIO.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="USUARIOS_LOGADO.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VACINA.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VACINA_PAC.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VEICULOS.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VEICULO_HORA.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
   </ItemGroup>
