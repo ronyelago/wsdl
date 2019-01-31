@@ -1958,7 +1958,7 @@ namespace WebApplication1
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                 string[] lines = listaEPCS.Split('|');
                 string resultado = "";
-                List<L_FUNCIONARIOS> dadorFuncionario = new List<L_FUNCIONARIOS>();
+                List<L_FUNCIONARIOS> dadosFuncionario = new List<L_FUNCIONARIOS>();
                 bool erro = false;
                 foreach (var epc in lines)
                 {
@@ -1985,8 +1985,8 @@ namespace WebApplication1
                                             var matricula = pti[0].MATRICULA;
                                             if (matricula != null)
                                             {
-                                                dadorFuncionario = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
-                                                resultado = resultado + "\nFuncionario Atribuido=" + dadorFuncionario[0].MATRICULA + " - " + dadorFuncionario[0].NOME + " " + dadorFuncionario[0].SOBRENOME;
+                                                dadosFuncionario = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
+                                                resultado = resultado + "\nFuncionario Atribuido=" + dadosFuncionario[0].MATRICULA + " - " + dadosFuncionario[0].NOME + " " + dadosFuncionario[0].SOBRENOME;
 
                                             }
                                             else
