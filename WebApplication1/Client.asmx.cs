@@ -311,7 +311,7 @@ namespace WebApplication1
             try
             {
                 RESULTADOMOV mv = new RESULTADOMOV();
-                var mat = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
+                var listaFuncionarios = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
                 L_ATRIBUICAOCRACHA lac = new L_ATRIBUICAOCRACHA();
                 var crac = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == cracha).ToList();
                 if (crac.Count > 0)
@@ -325,12 +325,26 @@ namespace WebApplication1
                     return mov;
                 }
 
-                if (mat.Count > 0)
+                if (listaFuncionarios.Count > 0)
                 {
                     lac.ATIVO = "S";
                     lac.CODIGO_CRACHA = cracha;
-                    lac.FK_FUNCIONARIO = mat[0].ID;
-                    lac.MATRICULA = mat[0].MATRICULA;
+                    if (listaFuncionarios.Count > 1)
+                    {
+                        // BUG FIX PLACEHOLDER
+                        // (Crachá Multiempresas: 2 funcionarios com mesma matricula em empresas diferentes, aqui refere-se sempre ao primeiro, independentemente da empresa)
+                        // precisa-se que seja atualizado o cracha apenas do Funcionário da empresa atualmente logada
+                        // como o método de login foi alterado desde essa versão extremamente desatualizada do código, é melhor não tentar fazer grandes alterações nessa parte
+                        // esse if-else é de minha autoria
+                        // (Rodolfo Cortese)
+                        lac.FK_FUNCIONARIO = listaFuncionarios[0].ID;
+                        lac.MATRICULA = listaFuncionarios[0].MATRICULA;
+                    }
+                    else
+                    {
+                        lac.FK_FUNCIONARIO = listaFuncionarios[0].ID;
+                        lac.MATRICULA = listaFuncionarios[0].MATRICULA;
+                    }
                     lac.DATA_ATRIBUICAO = DateTime.Now;
                     dbo.L_ATRIBUICAOCRACHA.Add(lac);
                     dbo.SaveChanges();
@@ -338,7 +352,7 @@ namespace WebApplication1
                     List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                     mv.DataMovimentacao = DateTime.Now;
                     mv.EPC = cracha;
-                    mv.Produto = mat[0].MATRICULA + " - " + mat[0].NOME;
+                    mv.Produto = listaFuncionarios[0].MATRICULA + " - " + listaFuncionarios[0].NOME;
                     mv.Resultado = "Atribuido com Sucesso!";
                     mv.corAviso = "#ffffff";
                     mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
