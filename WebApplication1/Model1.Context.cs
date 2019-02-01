@@ -58,5 +58,6 @@ namespace WebApplication1
         public virtual DbSet<L_PACOTES_ASSINATURA> L_PACOTES_ASSINATURA { get; set; }
         public virtual DbSet<L_ENVIO_PARA_HIGIENIZACAO> L_ENVIO_PARA_HIGIENIZACAO { get; set; }
         public virtual DbSet<L_PACOTE_ASSINATURA> L_PACOTE_ASSINATURA { get; set; }
+        public virtual DbSet<SessaoUsuario> SessaoUsuario { get; set; }
     }
 }

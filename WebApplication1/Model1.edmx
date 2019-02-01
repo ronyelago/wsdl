@@ -464,6 +464,22 @@
           <Property Name="RECEBE_EMAIL" Type="varchar(max)" />
           <Property Name="LOCAL_ESTOQUE" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="SessaoUsuario">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionId" Type="varchar(max)" Nullable="false" />
+          <Property Name="nomeFuncionario" Type="varchar(max)" />
+          <Property Name="senhaFuncionario" Type="varchar(max)" />
+          <Property Name="pAcesso" Type="varchar(max)" />
+          <Property Name="fkCnpj" Type="varchar(max)" />
+          <Property Name="Cnpj" Type="varchar(max)" />
+          <Property Name="NomeEmpresa" Type="varchar(max)" />
+          <Property Name="autenticado" Type="varchar(max)" />
+          <Property Name="codigoFuncionario" Type="varchar(max)" />
+          <Property Name="DATA" Type="datetime" />
+        </EntityType>
         <EntityContainer Name="webservicetwos3ModelStoreContainer">
           <EntitySet Name="L_ATRIBUICAOCRACHA" EntityType="Self.L_ATRIBUICAOCRACHA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_CLIENTE" EntityType="Self.L_CLIENTE" Schema="dbo" store:Type="Tables" />
@@ -498,6 +514,7 @@
           <EntitySet Name="L_TELAS_PERFIL" EntityType="Self.L_TELAS_PERFIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_USUARIO_COALBORADOR" EntityType="Self.L_USUARIO_COALBORADOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_USUARIOS" EntityType="Self.L_USUARIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SessaoUsuario" EntityType="Self.SessaoUsuario" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -827,6 +844,7 @@
           <EntitySet Name="L_PACOTES_ASSINATURA" EntityType="webservicetwos3Model.L_PACOTES_ASSINATURA" />
           <EntitySet Name="L_ENVIO_PARA_HIGIENIZACAO" EntityType="webservicetwos3Model.L_ENVIO_PARA_HIGIENIZACAO" />
           <EntitySet Name="L_PACOTE_ASSINATURA" EntityType="webservicetwos3Model.L_PACOTE_ASSINATURA" />
+          <EntitySet Name="SessaoUsuario" EntityType="webservicetwos3Model.SessaoUsuario" />
         </EntityContainer>
         <EntityType Name="L_ENVIO_PARA_TESTE">
           <Key>
@@ -996,6 +1014,22 @@
           <Property Name="EXPIRA" Type="DateTime" Precision="3" />
           <Property Name="QTD_ASSINADOS" Type="Int32" />
           <Property Name="QTD_FALTA_ASSINAR" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SessaoUsuario">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="nomeFuncionario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="senhaFuncionario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pAcesso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fkCnpj" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Cnpj" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NomeEmpresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="autenticado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="codigoFuncionario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DATA" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1491,6 +1525,23 @@
                 <ScalarProperty Name="DATA" ColumnName="DATA" />
                 <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
                 <ScalarProperty Name="QTD_ASSINATURA" ColumnName="QTD_ASSINATURA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SessaoUsuario">
+            <EntityTypeMapping TypeName="webservicetwos3Model.SessaoUsuario">
+              <MappingFragment StoreEntitySet="SessaoUsuario">
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
+                <ScalarProperty Name="codigoFuncionario" ColumnName="codigoFuncionario" />
+                <ScalarProperty Name="autenticado" ColumnName="autenticado" />
+                <ScalarProperty Name="NomeEmpresa" ColumnName="NomeEmpresa" />
+                <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+                <ScalarProperty Name="fkCnpj" ColumnName="fkCnpj" />
+                <ScalarProperty Name="pAcesso" ColumnName="pAcesso" />
+                <ScalarProperty Name="senhaFuncionario" ColumnName="senhaFuncionario" />
+                <ScalarProperty Name="nomeFuncionario" ColumnName="nomeFuncionario" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

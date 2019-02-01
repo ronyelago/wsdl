@@ -202,6 +202,7 @@
       <DependentUpon>Client.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ControleSessao.cs" />
     <Compile Include="COSTURAVISUAL.cs">
       <DependentUpon>Inspecao.tt</DependentUpon>
     </Compile>
@@ -358,6 +359,9 @@
     <Compile Include="RESULTADO.cs" />
     <Compile Include="RESULTADOMOV.cs" />
     <Compile Include="RESULTADO_IMPORTACAO.cs" />
+    <Compile Include="SessaoUsuario.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

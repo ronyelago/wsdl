@@ -38,6 +38,7 @@
         <EntityTypeShape EntityType="webservicetwos3Model.L_PACOTES_ASSINATURA" Width="1.5" PointX="4.75" PointY="16.75" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_ENVIO_PARA_HIGIENIZACAO" Width="1.5" PointX="16.75" PointY="5.75" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_PACOTE_ASSINATURA" Width="1.5" PointX="6.75" PointY="16.75" />
+        <EntityTypeShape EntityType="webservicetwos3Model.SessaoUsuario" Width="1.5" PointX="16.75" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
