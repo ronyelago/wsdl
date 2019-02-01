@@ -22,5 +22,6 @@ namespace WebApplication1
         public string DOWNLOAD { get; set; }
         public string CHAVE { get; set; }
         public string STATUS { get; set; }
+        public Nullable<System.Guid> COD_DISTRIBUICAO { get; set; }
     }
 }

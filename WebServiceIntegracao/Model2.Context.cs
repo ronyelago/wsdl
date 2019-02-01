@@ -25,7 +25,6 @@ namespace WebServiceIntegracao
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CONFIGURACOES> CONFIGURACOES { get; set; }
         public virtual DbSet<L_ATRIBUICAOCRACHA> L_ATRIBUICAOCRACHA { get; set; }
         public virtual DbSet<L_DESCARTE> L_DESCARTE { get; set; }
         public virtual DbSet<L_ENVIO_PARA_TESTE> L_ENVIO_PARA_TESTE { get; set; }
@@ -50,19 +49,6 @@ namespace WebServiceIntegracao
         public virtual DbSet<L_TELAS_PERFIL> L_TELAS_PERFIL { get; set; }
         public virtual DbSet<L_USUARIO_COALBORADOR> L_USUARIO_COALBORADOR { get; set; }
         public virtual DbSet<L_USUARIOS> L_USUARIOS { get; set; }
-        public virtual DbSet<LOGIN> LOGIN { get; set; }
-        public virtual DbSet<P_FUNCIONARIOS> P_FUNCIONARIOS { get; set; }
-        public virtual DbSet<P_LOGIN> P_LOGIN { get; set; }
-        public virtual DbSet<P_OCORRENCIA> P_OCORRENCIA { get; set; }
-        public virtual DbSet<P_PRODUTOS> P_PRODUTOS { get; set; }
-        public virtual DbSet<P_SUPERVISORUSUARIO> P_SUPERVISORUSUARIO { get; set; }
-        public virtual DbSet<P_TIPOOCORRENCIA> P_TIPOOCORRENCIA { get; set; }
-        public virtual DbSet<P_TIPOUSUARIO> P_TIPOUSUARIO { get; set; }
-        public virtual DbSet<P_USUARIO> P_USUARIO { get; set; }
-        public virtual DbSet<P_USUARIO_COALBORADOR> P_USUARIO_COALBORADOR { get; set; }
-        public virtual DbSet<Tab_Login> Tab_Login { get; set; }
-        public virtual DbSet<USUARIO> USUARIO { get; set; }
-        public virtual DbSet<USUARIOS_LOGADO> USUARIOS_LOGADO { get; set; }
         public virtual DbSet<AggregatedCounter> AggregatedCounter { get; set; }
         public virtual DbSet<Counter> Counter { get; set; }
         public virtual DbSet<Hash> Hash { get; set; }
@@ -74,10 +60,6 @@ namespace WebServiceIntegracao
         public virtual DbSet<Server> Server { get; set; }
         public virtual DbSet<Set> Set { get; set; }
         public virtual DbSet<State> State { get; set; }
-        public virtual DbSet<CARGO_SECUNDARIO> CARGO_SECUNDARIO { get; set; }
-        public virtual DbSet<CARGOS> CARGOS { get; set; }
-        public virtual DbSet<P_STATUSOCORRENCIA> P_STATUSOCORRENCIA { get; set; }
-        public virtual DbSet<REL_CARGO_CARGSEC> REL_CARGO_CARGSEC { get; set; }
         public virtual DbSet<DATA_VALIDADE_1> DATA_VALIDADE_1 { get; set; }
         public virtual DbSet<DATA_VALIDADE_1_TESTE> DATA_VALIDADE_1_TESTE { get; set; }
         public virtual DbSet<DATA_VALIDADE_15> DATA_VALIDADE_15 { get; set; }
@@ -95,7 +77,6 @@ namespace WebServiceIntegracao
         public virtual DbSet<DATA_VALIDADE_VENCIDA_TESTE> DATA_VALIDADE_VENCIDA_TESTE { get; set; }
         public virtual DbSet<ITENS_COM_VALIDADE_A_VENCER> ITENS_COM_VALIDADE_A_VENCER { get; set; }
         public virtual DbSet<ITENS_COM_VALIDADE_DE_TESTE_A_VENCER> ITENS_COM_VALIDADE_DE_TESTE_A_VENCER { get; set; }
-        public virtual DbSet<QTD_INCONFORMIDADE_EMAIL> QTD_INCONFORMIDADE_EMAIL { get; set; }
         public virtual DbSet<L_CLIENTE> L_CLIENTE { get; set; }
         public virtual DbSet<L_PRODUTOS> L_PRODUTOS { get; set; }
         public virtual DbSet<L_PRODUTOS_ITENS> L_PRODUTOS_ITENS { get; set; }

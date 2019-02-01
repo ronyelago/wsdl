@@ -254,6 +254,8 @@
           <Property Name="DESC_STATUS" Type="varchar(max)" />
           <Property Name="LAT" Type="varchar(max)" />
           <Property Name="LONG" Type="varchar(max)" />
+          <Property Name="FK_CLIENTE" Type="int" />
+          <Property Name="CNPJ" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="L_NAOCONFORMIDADE">
           <Key>
@@ -274,6 +276,7 @@
           <Property Name="CADASTRO_ESTOQUE" Type="int" Nullable="false" />
           <Property Name="C ADASTRO_FUNCIONARIOS" Type="int" Nullable="false" />
           <Property Name="FK_CLIENTE" Type="int" />
+          <Property Name="ATIVO" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="L_PRODUTOS">
           <Key>
@@ -296,6 +299,7 @@
           <Property Name="CNPJ_DESTINATARIO" Type="varchar(max)" />
           <Property Name="GRUPO_CLIENTE" Type="varchar(max)" />
           <Property Name="NORMA" Type="varchar(max)" />
+          <Property Name="ATIVO" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="L_PRODUTOS_ITENS">
           <Key>
@@ -318,6 +322,10 @@
           <Property Name="COD_CLIENTE" Type="int" />
           <Property Name="GRUPO_CLIENTE" Type="varchar(max)" />
           <Property Name="NORMA" Type="varchar(max)" />
+          <Property Name="ATIVO" Type="varchar" MaxLength="1" />
+          <Property Name="CNV_DT_FABRICACAO" Type="varchar(max)" />
+          <Property Name="CNV_DT_VALIDADE" Type="varchar(max)" />
+          <Property Name="CNV_VALIDADE_TESTE" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="L_STATUSOCORRENCIA">
           <Key>
@@ -483,7 +491,7 @@
           <Property Name="Data" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_1">
           <Key>
             <PropertyRef Name="ID" />
@@ -503,7 +511,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_1' does not have
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_1_TESTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_1_TESTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_1_TESTE">
           <Key>
             <PropertyRef Name="ID" />
@@ -523,7 +531,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_1_TESTE' does no
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_15' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_15' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_15">
           <Key>
             <PropertyRef Name="ID" />
@@ -543,7 +551,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_15' does not hav
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_15_TESTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_15_TESTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_15_TESTE">
           <Key>
             <PropertyRef Name="ID" />
@@ -563,7 +571,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_15_TESTE' does n
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_2">
           <Key>
             <PropertyRef Name="ID" />
@@ -583,7 +591,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_2' does not have
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_3' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_3' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_3">
           <Key>
             <PropertyRef Name="ID" />
@@ -603,7 +611,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_3' does not have
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_30DIAS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_30DIAS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_30DIAS">
           <Key>
             <PropertyRef Name="ID" />
@@ -623,7 +631,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_30DIAS' does not
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_30DIAS_TESTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_30DIAS_TESTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_30DIAS_TESTE">
           <Key>
             <PropertyRef Name="ID" />
@@ -643,7 +651,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_30DIAS_TESTE' do
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_4' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_4' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_4">
           <Key>
             <PropertyRef Name="ID" />
@@ -663,7 +671,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_4' does not have
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_5' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_5' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_5">
           <Key>
             <PropertyRef Name="ID" />
@@ -683,7 +691,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_5' does not have
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_6' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_6' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_6">
           <Key>
             <PropertyRef Name="ID" />
@@ -703,7 +711,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_6' does not have
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_7' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_7' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_7">
           <Key>
             <PropertyRef Name="ID" />
@@ -723,7 +731,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_7' does not have
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_7_TESTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_7_TESTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_7_TESTE">
           <Key>
             <PropertyRef Name="ID" />
@@ -743,7 +751,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_7_TESTE' does no
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_VENCIDA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_VENCIDA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_VENCIDA">
           <Key>
             <PropertyRef Name="ID" />
@@ -763,7 +771,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_VENCIDA' does no
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_VENCIDA_TESTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.DATA_VALIDADE_VENCIDA_TESTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DATA_VALIDADE_VENCIDA_TESTE">
           <Key>
             <PropertyRef Name="ID" />
@@ -783,7 +791,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DATA_VALIDADE_VENCIDA_TESTE' d
           <Property Name="LOCAL" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.ITENS_COM_VALIDADE_A_VENCER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.ITENS_COM_VALIDADE_A_VENCER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ITENS_COM_VALIDADE_A_VENCER">
           <Key>
             <PropertyRef Name="Vencer" />
@@ -809,7 +817,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.ITENS_COM_VALIDADE_A_VENCER' d
           <Property Name="QTD_30" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.ITENS_COM_VALIDADE_DE_TESTE_A_VENCER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EasyEPI.dbo.ITENS_COM_VALIDADE_DE_TESTE_A_VENCER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ITENS_COM_VALIDADE_DE_TESTE_A_VENCER">
           <Key>
             <PropertyRef Name="Vencer" />
@@ -833,62 +841,6 @@ warning 6002: The table/view 'webservicetwos3.dbo.ITENS_COM_VALIDADE_DE_TESTE_A_
           <Property Name="Vencer30" Type="varchar" MaxLength="7" Nullable="false" />
           <Property Name="DATA_VENCIMENTO_30" Type="datetime" />
           <Property Name="QTD_30" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="QTD_INCONFORMIDADE_EMAIL">
-          <Key>
-            <PropertyRef Name="DIA0LINK" />
-            <PropertyRef Name="DIA0TEXT" />
-            <PropertyRef Name="DIA1LINK" />
-            <PropertyRef Name="DIA1TEXT" />
-            <PropertyRef Name="DIA2LINK" />
-            <PropertyRef Name="DIA2TEXT" />
-            <PropertyRef Name="DIA3LINK" />
-            <PropertyRef Name="DIA3TEXT" />
-            <PropertyRef Name="DIA4LINK" />
-            <PropertyRef Name="DIA4TEXT" />
-            <PropertyRef Name="DIA5LINK" />
-            <PropertyRef Name="DIA5TEXT" />
-            <PropertyRef Name="DIA6LINK" />
-            <PropertyRef Name="DIA6TEXT" />
-            <PropertyRef Name="DIA7LINK" />
-            <PropertyRef Name="DIA7TEXT" />
-            <PropertyRef Name="DIA15LINK" />
-            <PropertyRef Name="DIA15TEXT" />
-            <PropertyRef Name="DIA30LINK" />
-            <PropertyRef Name="DIA30TEXT" />
-          </Key>
-          <Property Name="DIA0" Type="int" />
-          <Property Name="DIA0LINK" Type="varchar" MaxLength="55" Nullable="false" />
-          <Property Name="DIA0TEXT" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="DIA1" Type="int" />
-          <Property Name="DIA1LINK" Type="varchar" MaxLength="56" Nullable="false" />
-          <Property Name="DIA1TEXT" Type="varchar" MaxLength="33" Nullable="false" />
-          <Property Name="DIA2" Type="int" />
-          <Property Name="DIA2LINK" Type="varchar" MaxLength="62" Nullable="false" />
-          <Property Name="DIA2TEXT" Type="varchar" MaxLength="34" Nullable="false" />
-          <Property Name="DIA3" Type="int" />
-          <Property Name="DIA3LINK" Type="varchar" MaxLength="62" Nullable="false" />
-          <Property Name="DIA3TEXT" Type="varchar" MaxLength="34" Nullable="false" />
-          <Property Name="DIA4" Type="int" />
-          <Property Name="DIA4LINK" Type="varchar" MaxLength="62" Nullable="false" />
-          <Property Name="DIA4TEXT" Type="varchar" MaxLength="34" Nullable="false" />
-          <Property Name="DIA5" Type="int" />
-          <Property Name="DIA5LINK" Type="varchar" MaxLength="62" Nullable="false" />
-          <Property Name="DIA5TEXT" Type="varchar" MaxLength="34" Nullable="false" />
-          <Property Name="DIA6" Type="int" />
-          <Property Name="DIA6LINK" Type="varchar" MaxLength="62" Nullable="false" />
-          <Property Name="DIA6TEXT" Type="varchar" MaxLength="34" Nullable="false" />
-          <Property Name="DIA7" Type="int" />
-          <Property Name="DIA7LINK" Type="varchar" MaxLength="62" Nullable="false" />
-          <Property Name="DIA7TEXT" Type="varchar" MaxLength="34" Nullable="false" />
-          <Property Name="DIA15" Type="int" />
-          <Property Name="DIA15LINK" Type="varchar" MaxLength="63" Nullable="false" />
-          <Property Name="DIA15TEXT" Type="varchar" MaxLength="35" Nullable="false" />
-          <Property Name="DIA30" Type="int" />
-          <Property Name="DIA30LINK" Type="varchar" MaxLength="62" Nullable="false" />
-          <Property Name="DIA30TEXT" Type="varchar" MaxLength="35" Nullable="false" />
         </EntityType>
         <Association Name="FK_HangFire_JobParameter_Job">
           <End Role="Job" Type="Self.Job" Multiplicity="1">
@@ -1250,40 +1202,6 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
     [ITENS_COM_VALIDADE_DE_TESTE_A_VENCER].[QTD_30] AS [QTD_30]
     FROM [dbo].[ITENS_COM_VALIDADE_DE_TESTE_A_VENCER] AS [ITENS_COM_VALIDADE_DE_TESTE_A_VENCER]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="QTD_INCONFORMIDADE_EMAIL" EntityType="Self.QTD_INCONFORMIDADE_EMAIL" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA0] AS [DIA0], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA0LINK] AS [DIA0LINK], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA0TEXT] AS [DIA0TEXT], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA1] AS [DIA1], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA1LINK] AS [DIA1LINK], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA1TEXT] AS [DIA1TEXT], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA2] AS [DIA2], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA2LINK] AS [DIA2LINK], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA2TEXT] AS [DIA2TEXT], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA3] AS [DIA3], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA3LINK] AS [DIA3LINK], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA3TEXT] AS [DIA3TEXT], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA4] AS [DIA4], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA4LINK] AS [DIA4LINK], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA4TEXT] AS [DIA4TEXT], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA5] AS [DIA5], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA5LINK] AS [DIA5LINK], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA5TEXT] AS [DIA5TEXT], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA6] AS [DIA6], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA6LINK] AS [DIA6LINK], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA6TEXT] AS [DIA6TEXT], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA7] AS [DIA7], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA7LINK] AS [DIA7LINK], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA7TEXT] AS [DIA7TEXT], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA15] AS [DIA15], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA15LINK] AS [DIA15LINK], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA15TEXT] AS [DIA15TEXT], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA30] AS [DIA30], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA30LINK] AS [DIA30LINK], 
-    [QTD_INCONFORMIDADE_EMAIL].[DIA30TEXT] AS [DIA30TEXT]
-    FROM [dbo].[QTD_INCONFORMIDADE_EMAIL] AS [QTD_INCONFORMIDADE_EMAIL]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_HangFire_JobParameter_Job" Association="Self.FK_HangFire_JobParameter_Job">
             <End Role="Job" EntitySet="Job" />
             <End Role="JobParameter" EntitySet="JobParameter" />
@@ -1534,6 +1452,8 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <Property Name="DESC_STATUS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LAT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LONG" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_CLIENTE" Type="Int32" />
+          <Property Name="CNPJ" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="L_NAOCONFORMIDADE">
           <Key>
@@ -1554,6 +1474,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <Property Name="CADASTRO_ESTOQUE" Type="Int32" Nullable="false" />
           <Property Name="C_ADASTRO_FUNCIONARIOS" Type="Int32" Nullable="false" />
           <Property Name="FK_CLIENTE" Type="Int32" />
+          <Property Name="ATIVO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="L_STATUSOCORRENCIA">
           <Key>
@@ -2040,60 +1961,6 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <Property Name="DATA_VENCIMENTO_30" Type="DateTime" Precision="3" />
           <Property Name="QTD_30" Type="Int32" />
         </EntityType>
-        <EntityType Name="QTD_INCONFORMIDADE_EMAIL">
-          <Key>
-            <PropertyRef Name="DIA0LINK" />
-            <PropertyRef Name="DIA0TEXT" />
-            <PropertyRef Name="DIA1LINK" />
-            <PropertyRef Name="DIA1TEXT" />
-            <PropertyRef Name="DIA2LINK" />
-            <PropertyRef Name="DIA2TEXT" />
-            <PropertyRef Name="DIA3LINK" />
-            <PropertyRef Name="DIA3TEXT" />
-            <PropertyRef Name="DIA4LINK" />
-            <PropertyRef Name="DIA4TEXT" />
-            <PropertyRef Name="DIA5LINK" />
-            <PropertyRef Name="DIA5TEXT" />
-            <PropertyRef Name="DIA6LINK" />
-            <PropertyRef Name="DIA6TEXT" />
-            <PropertyRef Name="DIA7LINK" />
-            <PropertyRef Name="DIA7TEXT" />
-            <PropertyRef Name="DIA15LINK" />
-            <PropertyRef Name="DIA15TEXT" />
-            <PropertyRef Name="DIA30LINK" />
-            <PropertyRef Name="DIA30TEXT" />
-          </Key>
-          <Property Name="DIA0" Type="Int32" />
-          <Property Name="DIA0LINK" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA0TEXT" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA1" Type="Int32" />
-          <Property Name="DIA1LINK" Type="String" MaxLength="56" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA1TEXT" Type="String" MaxLength="33" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA2" Type="Int32" />
-          <Property Name="DIA2LINK" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA2TEXT" Type="String" MaxLength="34" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA3" Type="Int32" />
-          <Property Name="DIA3LINK" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA3TEXT" Type="String" MaxLength="34" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA4" Type="Int32" />
-          <Property Name="DIA4LINK" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA4TEXT" Type="String" MaxLength="34" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA5" Type="Int32" />
-          <Property Name="DIA5LINK" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA5TEXT" Type="String" MaxLength="34" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA6" Type="Int32" />
-          <Property Name="DIA6LINK" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA6TEXT" Type="String" MaxLength="34" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA7" Type="Int32" />
-          <Property Name="DIA7LINK" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA7TEXT" Type="String" MaxLength="34" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA15" Type="Int32" />
-          <Property Name="DIA15LINK" Type="String" MaxLength="63" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA15TEXT" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA30" Type="Int32" />
-          <Property Name="DIA30LINK" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIA30TEXT" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <Association Name="FK_HangFire_JobParameter_Job">
           <End Role="Job" Type="Self.Job" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -2175,7 +2042,6 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <EntitySet Name="DATA_VALIDADE_VENCIDA_TESTE" EntityType="Self.DATA_VALIDADE_VENCIDA_TESTE" />
           <EntitySet Name="ITENS_COM_VALIDADE_A_VENCER" EntityType="Self.ITENS_COM_VALIDADE_A_VENCER" />
           <EntitySet Name="ITENS_COM_VALIDADE_DE_TESTE_A_VENCER" EntityType="Self.ITENS_COM_VALIDADE_DE_TESTE_A_VENCER" />
-          <EntitySet Name="QTD_INCONFORMIDADE_EMAIL" EntityType="Self.QTD_INCONFORMIDADE_EMAIL" />
           <AssociationSet Name="FK_HangFire_JobParameter_Job" Association="Self.FK_HangFire_JobParameter_Job">
             <End Role="Job" EntitySet="Job" />
             <End Role="JobParameter" EntitySet="JobParameter" />
@@ -2221,6 +2087,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <Property Name="CNPJ_DESTINATARIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="GRUPO_CLIENTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NORMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ATIVO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="L_PRODUTOS_ITENS">
           <Key>
@@ -2243,6 +2110,10 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <Property Name="COD_CLIENTE" Type="Int32" />
           <Property Name="GRUPO_CLIENTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NORMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ATIVO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CNV_DT_FABRICACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CNV_DT_VALIDADE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CNV_VALIDADE_TESTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2483,6 +2354,8 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <EntitySetMapping Name="L_MOVIMENTACAO_ESTOQUE">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_MOVIMENTACAO_ESTOQUE">
               <MappingFragment StoreEntitySet="L_MOVIMENTACAO_ESTOQUE">
+                <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+                <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DATA_MOVIMENTACAO" ColumnName="DATA_MOVIMENTACAO" />
                 <ScalarProperty Name="ENTRADA_SAIDA" ColumnName="ENTRADA_SAIDA" />
@@ -2518,6 +2391,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <EntitySetMapping Name="L_PERFIL">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_PERFIL">
               <MappingFragment StoreEntitySet="L_PERFIL">
+                <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
                 <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
@@ -3033,42 +2907,6 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="QTD_INCONFORMIDADE_EMAIL">
-            <EntityTypeMapping TypeName="webservicetwos3Model.QTD_INCONFORMIDADE_EMAIL">
-              <MappingFragment StoreEntitySet="QTD_INCONFORMIDADE_EMAIL">
-                <ScalarProperty Name="DIA0" ColumnName="DIA0" />
-                <ScalarProperty Name="DIA0LINK" ColumnName="DIA0LINK" />
-                <ScalarProperty Name="DIA0TEXT" ColumnName="DIA0TEXT" />
-                <ScalarProperty Name="DIA1" ColumnName="DIA1" />
-                <ScalarProperty Name="DIA1LINK" ColumnName="DIA1LINK" />
-                <ScalarProperty Name="DIA1TEXT" ColumnName="DIA1TEXT" />
-                <ScalarProperty Name="DIA2" ColumnName="DIA2" />
-                <ScalarProperty Name="DIA2LINK" ColumnName="DIA2LINK" />
-                <ScalarProperty Name="DIA2TEXT" ColumnName="DIA2TEXT" />
-                <ScalarProperty Name="DIA3" ColumnName="DIA3" />
-                <ScalarProperty Name="DIA3LINK" ColumnName="DIA3LINK" />
-                <ScalarProperty Name="DIA3TEXT" ColumnName="DIA3TEXT" />
-                <ScalarProperty Name="DIA4" ColumnName="DIA4" />
-                <ScalarProperty Name="DIA4LINK" ColumnName="DIA4LINK" />
-                <ScalarProperty Name="DIA4TEXT" ColumnName="DIA4TEXT" />
-                <ScalarProperty Name="DIA5" ColumnName="DIA5" />
-                <ScalarProperty Name="DIA5LINK" ColumnName="DIA5LINK" />
-                <ScalarProperty Name="DIA5TEXT" ColumnName="DIA5TEXT" />
-                <ScalarProperty Name="DIA6" ColumnName="DIA6" />
-                <ScalarProperty Name="DIA6LINK" ColumnName="DIA6LINK" />
-                <ScalarProperty Name="DIA6TEXT" ColumnName="DIA6TEXT" />
-                <ScalarProperty Name="DIA7" ColumnName="DIA7" />
-                <ScalarProperty Name="DIA7LINK" ColumnName="DIA7LINK" />
-                <ScalarProperty Name="DIA7TEXT" ColumnName="DIA7TEXT" />
-                <ScalarProperty Name="DIA15" ColumnName="DIA15" />
-                <ScalarProperty Name="DIA15LINK" ColumnName="DIA15LINK" />
-                <ScalarProperty Name="DIA15TEXT" ColumnName="DIA15TEXT" />
-                <ScalarProperty Name="DIA30" ColumnName="DIA30" />
-                <ScalarProperty Name="DIA30LINK" ColumnName="DIA30LINK" />
-                <ScalarProperty Name="DIA30TEXT" ColumnName="DIA30TEXT" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="L_CLIENTE">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_CLIENTE">
               <MappingFragment StoreEntitySet="L_CLIENTE">
@@ -3085,6 +2923,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <EntitySetMapping Name="L_PRODUTOS">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_PRODUTOS">
               <MappingFragment StoreEntitySet="L_PRODUTOS">
+                <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
                 <ScalarProperty Name="NORMA" ColumnName="NORMA" />
                 <ScalarProperty Name="GRUPO_CLIENTE" ColumnName="GRUPO_CLIENTE" />
                 <ScalarProperty Name="CNPJ_DESTINATARIO" ColumnName="CNPJ_DESTINATARIO" />
@@ -3108,6 +2947,10 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <EntitySetMapping Name="L_PRODUTOS_ITENS">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_PRODUTOS_ITENS">
               <MappingFragment StoreEntitySet="L_PRODUTOS_ITENS">
+                <ScalarProperty Name="CNV_VALIDADE_TESTE" ColumnName="CNV_VALIDADE_TESTE" />
+                <ScalarProperty Name="CNV_DT_VALIDADE" ColumnName="CNV_DT_VALIDADE" />
+                <ScalarProperty Name="CNV_DT_FABRICACAO" ColumnName="CNV_DT_FABRICACAO" />
+                <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
                 <ScalarProperty Name="NORMA" ColumnName="NORMA" />
                 <ScalarProperty Name="GRUPO_CLIENTE" ColumnName="GRUPO_CLIENTE" />
                 <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />

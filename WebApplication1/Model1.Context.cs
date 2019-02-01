@@ -25,7 +25,6 @@ namespace WebApplication1
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CONFIGURACOES> CONFIGURACOES { get; set; }
         public virtual DbSet<L_DESCARTE> L_DESCARTE { get; set; }
         public virtual DbSet<L_EPCPERDIDOS> L_EPCPERDIDOS { get; set; }
         public virtual DbSet<L_ESTOQUE> L_ESTOQUE { get; set; }
@@ -44,14 +43,6 @@ namespace WebApplication1
         public virtual DbSet<L_TELAS_PERFIL> L_TELAS_PERFIL { get; set; }
         public virtual DbSet<L_USUARIO_COALBORADOR> L_USUARIO_COALBORADOR { get; set; }
         public virtual DbSet<L_USUARIOS> L_USUARIOS { get; set; }
-        public virtual DbSet<LOGIN> LOGIN { get; set; }
-        public virtual DbSet<RECLAME> RECLAME { get; set; }
-        public virtual DbSet<Tab_Login> Tab_Login { get; set; }
-        public virtual DbSet<USUARIO> USUARIO { get; set; }
-        public virtual DbSet<USUARIOS_LOGADO> USUARIOS_LOGADO { get; set; }
-        public virtual DbSet<CARGO_SECUNDARIO> CARGO_SECUNDARIO { get; set; }
-        public virtual DbSet<CARGOS> CARGOS { get; set; }
-        public virtual DbSet<REL_CARGO_CARGSEC> REL_CARGO_CARGSEC { get; set; }
         public virtual DbSet<L_ENVIO_PARA_TESTE> L_ENVIO_PARA_TESTE { get; set; }
         public virtual DbSet<L_ATRIBUICAOCRACHA> L_ATRIBUICAOCRACHA { get; set; }
         public virtual DbSet<L_NAOCONFORMIDADE> L_NAOCONFORMIDADE { get; set; }
@@ -59,16 +50,6 @@ namespace WebApplication1
         public virtual DbSet<L_LOGIN_FUNCIONARIO> L_LOGIN_FUNCIONARIO { get; set; }
         public virtual DbSet<L_MENSAGEM_OCORRENCIA> L_MENSAGEM_OCORRENCIA { get; set; }
         public virtual DbSet<L_FICHACADASTRAL> L_FICHACADASTRAL { get; set; }
-        public virtual DbSet<P_FUNCIONARIOS> P_FUNCIONARIOS { get; set; }
-        public virtual DbSet<P_LOGIN> P_LOGIN { get; set; }
-        public virtual DbSet<P_OCORRENCIA> P_OCORRENCIA { get; set; }
-        public virtual DbSet<P_PRODUTOS> P_PRODUTOS { get; set; }
-        public virtual DbSet<P_SUPERVISORUSUARIO> P_SUPERVISORUSUARIO { get; set; }
-        public virtual DbSet<P_TIPOOCORRENCIA> P_TIPOOCORRENCIA { get; set; }
-        public virtual DbSet<P_TIPOUSUARIO> P_TIPOUSUARIO { get; set; }
-        public virtual DbSet<P_USUARIO> P_USUARIO { get; set; }
-        public virtual DbSet<P_USUARIO_COALBORADOR> P_USUARIO_COALBORADOR { get; set; }
-        public virtual DbSet<P_STATUSOCORRENCIA> P_STATUSOCORRENCIA { get; set; }
         public virtual DbSet<L_STATUSOCORRENCIA> L_STATUSOCORRENCIA { get; set; }
         public virtual DbSet<L_CLIENTE> L_CLIENTE { get; set; }
         public virtual DbSet<L_PACOTE_ASSINATURA_DOCUMENTOS> L_PACOTE_ASSINATURA_DOCUMENTOS { get; set; }
@@ -77,6 +58,5 @@ namespace WebApplication1
         public virtual DbSet<L_PACOTES_ASSINATURA> L_PACOTES_ASSINATURA { get; set; }
         public virtual DbSet<L_ENVIO_PARA_HIGIENIZACAO> L_ENVIO_PARA_HIGIENIZACAO { get; set; }
         public virtual DbSet<L_PACOTE_ASSINATURA> L_PACOTE_ASSINATURA { get; set; }
-        public virtual DbSet<P_HISTORICOATENDIMENTO> P_HISTORICOATENDIMENTO { get; set; }
     }
 }

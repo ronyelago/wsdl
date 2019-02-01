@@ -31,5 +31,9 @@ namespace WebApplication1
         public Nullable<int> COD_CLIENTE { get; set; }
         public string GRUPO_CLIENTE { get; set; }
         public string NORMA { get; set; }
+        public string ATIVO { get; set; }
+        public string CNV_DT_FABRICACAO { get; set; }
+        public string CNV_DT_VALIDADE { get; set; }
+        public string CNV_VALIDADE_TESTE { get; set; }
     }
 }

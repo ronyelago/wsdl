@@ -20,5 +20,6 @@ namespace WebApplication1
         public int CADASTRO_ESTOQUE { get; set; }
         public int C_ADASTRO_FUNCIONARIOS { get; set; }
         public Nullable<int> FK_CLIENTE { get; set; }
+        public string ATIVO { get; set; }
     }
 }

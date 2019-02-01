@@ -53,6 +53,7 @@
           <Property Name="DOWNLOAD" Type="varchar(max)" />
           <Property Name="CHAVE" Type="varchar(max)" />
           <Property Name="STATUS" Type="varchar(max)" />
+          <Property Name="COD_DISTRIBUICAO" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="L_ENVIO_PARA_HIGIENIZACAO">
           <Key>
@@ -351,6 +352,7 @@
           <Property Name="CADASTRO_ESTOQUE" Type="int" Nullable="false" />
           <Property Name="C ADASTRO_FUNCIONARIOS" Type="int" Nullable="false" />
           <Property Name="FK_CLIENTE" Type="int" />
+          <Property Name="ATIVO" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="L_PRODUTOS">
           <Key>
@@ -373,6 +375,7 @@
           <Property Name="CNPJ_DESTINATARIO" Type="varchar(max)" />
           <Property Name="GRUPO_CLIENTE" Type="varchar(max)" />
           <Property Name="NORMA" Type="varchar(max)" />
+          <Property Name="ATIVO" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="L_PRODUTOS_ITENS">
           <Key>
@@ -395,6 +398,10 @@
           <Property Name="COD_CLIENTE" Type="int" />
           <Property Name="GRUPO_CLIENTE" Type="varchar(max)" />
           <Property Name="NORMA" Type="varchar(max)" />
+          <Property Name="ATIVO" Type="varchar" MaxLength="1" />
+          <Property Name="CNV_DT_FABRICACAO" Type="varchar(max)" />
+          <Property Name="CNV_DT_VALIDADE" Type="varchar(max)" />
+          <Property Name="CNV_VALIDADE_TESTE" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="L_STATUSOCORRENCIA">
           <Key>
@@ -682,6 +689,7 @@
           <Property Name="CADASTRO_ESTOQUE" Type="Int32" Nullable="false" />
           <Property Name="C_ADASTRO_FUNCIONARIOS" Type="Int32" Nullable="false" />
           <Property Name="FK_CLIENTE" Type="Int32" />
+          <Property Name="ATIVO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="L_PRODUTOS">
           <Key>
@@ -704,6 +712,7 @@
           <Property Name="CNPJ_DESTINATARIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="GRUPO_CLIENTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NORMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ATIVO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="L_PRODUTOS_ITENS">
           <Key>
@@ -726,6 +735,10 @@
           <Property Name="COD_CLIENTE" Type="Int32" />
           <Property Name="GRUPO_CLIENTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NORMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ATIVO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CNV_DT_FABRICACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CNV_DT_VALIDADE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CNV_VALIDADE_TESTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="L_TELAS">
           <Key>
@@ -930,6 +943,7 @@
           <Property Name="DOWNLOAD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CHAVE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="STATUS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="COD_DISTRIBUICAO" Type="Guid" />
         </EntityType>
         <EntityType Name="L_PACOTE_ASSINATURA_CLIENTE">
           <Key>
@@ -1179,6 +1193,7 @@
           <EntitySetMapping Name="L_PERFIL">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_PERFIL">
               <MappingFragment StoreEntitySet="L_PERFIL">
+                <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
                 <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
@@ -1191,6 +1206,7 @@
           <EntitySetMapping Name="L_PRODUTOS">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_PRODUTOS">
               <MappingFragment StoreEntitySet="L_PRODUTOS">
+                <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
                 <ScalarProperty Name="NORMA" ColumnName="NORMA" />
                 <ScalarProperty Name="GRUPO_CLIENTE" ColumnName="GRUPO_CLIENTE" />
                 <ScalarProperty Name="CNPJ_DESTINATARIO" ColumnName="CNPJ_DESTINATARIO" />
@@ -1214,6 +1230,10 @@
           <EntitySetMapping Name="L_PRODUTOS_ITENS">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_PRODUTOS_ITENS">
               <MappingFragment StoreEntitySet="L_PRODUTOS_ITENS">
+                <ScalarProperty Name="CNV_VALIDADE_TESTE" ColumnName="CNV_VALIDADE_TESTE" />
+                <ScalarProperty Name="CNV_DT_VALIDADE" ColumnName="CNV_DT_VALIDADE" />
+                <ScalarProperty Name="CNV_DT_FABRICACAO" ColumnName="CNV_DT_FABRICACAO" />
+                <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
                 <ScalarProperty Name="NORMA" ColumnName="NORMA" />
                 <ScalarProperty Name="GRUPO_CLIENTE" ColumnName="GRUPO_CLIENTE" />
                 <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
@@ -1407,6 +1427,7 @@
           <EntitySetMapping Name="L_DOCUMENTO_ASSINATURA">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_DOCUMENTO_ASSINATURA">
               <MappingFragment StoreEntitySet="L_DOCUMENTO_ASSINATURA">
+                <ScalarProperty Name="COD_DISTRIBUICAO" ColumnName="COD_DISTRIBUICAO" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="CHAVE" ColumnName="CHAVE" />
                 <ScalarProperty Name="DOWNLOAD" ColumnName="DOWNLOAD" />

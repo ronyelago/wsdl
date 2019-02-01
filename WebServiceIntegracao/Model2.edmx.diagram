@@ -107,7 +107,6 @@
         <EntityTypeShape EntityType="webservicetwos3Model.DATA_VALIDADE_VENCIDA_TESTE" Width="1.5" PointX="16.75" PointY="32.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.ITENS_COM_VALIDADE_A_VENCER" Width="1.5" PointX="32.75" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.ITENS_COM_VALIDADE_DE_TESTE_A_VENCER" Width="1.5" PointX="32.75" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="webservicetwos3Model.QTD_INCONFORMIDADE_EMAIL" Width="1.5" PointX="26.75" PointY="32.75" IsExpanded="true" />
         <AssociationConnector Association="webservicetwos3Model.FK_HangFire_JobParameter_Job" ManuallyRouted="false" />
         <AssociationConnector Association="webservicetwos3Model.FK_HangFire_State_Job" ManuallyRouted="false" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_CLIENTE" Width="1.5" PointX="9.375" PointY="33.75" />

@@ -31,5 +31,6 @@ namespace WebApplication1
         public string CNPJ_DESTINATARIO { get; set; }
         public string GRUPO_CLIENTE { get; set; }
         public string NORMA { get; set; }
+        public string ATIVO { get; set; }
     }
 }

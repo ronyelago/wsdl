@@ -149,18 +149,9 @@
     <Compile Include="AggregatedCounter.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="CARGOS.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CARGO_SECUNDARIO.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Client.asmx.cs">
       <DependentUpon>Client.asmx</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CONFIGURACOES.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Counter.cs">
       <DependentUpon>Model2.tt</DependentUpon>
@@ -230,9 +221,6 @@
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="List.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LOGIN.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="L_ATRIBUICAOCRACHA.cs">
@@ -332,42 +320,6 @@
       <DependentUpon>Model2.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="P_FUNCIONARIOS.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="P_LOGIN.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="P_OCORRENCIA.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="P_PRODUTOS.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="P_STATUSOCORRENCIA.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="P_SUPERVISORUSUARIO.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="P_TIPOOCORRENCIA.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="P_TIPOUSUARIO.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="P_USUARIO.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="P_USUARIO_COALBORADOR.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="QTD_INCONFORMIDADE_EMAIL.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="REL_CARGO_CARGSEC.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Schema.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
@@ -378,15 +330,6 @@
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="State.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Tab_Login.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="USUARIO.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="USUARIOS_LOGADO.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
   </ItemGroup>
