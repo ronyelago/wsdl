@@ -2202,6 +2202,7 @@ namespace WebApplication1
             return mov;
         }
 
+        /*
         [WebMethod]
         public bool salvarMensagemOcorrencia(string number, string mensagem)
         {
@@ -2298,6 +2299,7 @@ namespace WebApplication1
                 return false;
             }
         }
+         */
 
         private string[] statusOcorrencia(string mensagem)
         {
@@ -2413,6 +2415,7 @@ namespace WebApplication1
             }
         }
 
+        /*
         [WebMethod]
         public string alterarStatus(int id, string ocorrencia)
         {
@@ -2447,6 +2450,7 @@ namespace WebApplication1
                 return "0";
             }
         }
+        */
 
         private string descStatus(string v)
         {
