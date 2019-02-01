@@ -165,6 +165,7 @@
     <Content Include="Inspecao.edmx.diagram">
       <DependentUpon>Inspecao.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Properties\PublishProfiles\nuvem.pubxml" />
     <Content Include="web.config">
