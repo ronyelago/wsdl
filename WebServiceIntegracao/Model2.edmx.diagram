@@ -113,6 +113,7 @@
         <EntityTypeShape EntityType="webservicetwos3Model.L_CLIENTE" Width="1.5" PointX="9.375" PointY="33.75" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_PRODUTOS" Width="1.5" PointX="33.375" PointY="30.75" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_PRODUTOS_ITENS" Width="1.5" PointX="23.375" PointY="34.75" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_IMPORTACAO_NOTACLIENTE" Width="1.5" PointX="35.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

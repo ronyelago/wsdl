@@ -605,6 +605,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.DISCIPLINAS' does not have a p
           <Property Name="DOWNLOAD" Type="varchar(max)" />
           <Property Name="CHAVE" Type="varchar(max)" />
           <Property Name="STATUS" Type="varchar(max)" />
+          <Property Name="COD_DISTRIBUICAO" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="L_ENVIO_PARA_HIGIENIZACAO">
           <Key>
@@ -3567,6 +3568,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.VEICULOS' does not have a prim
           <Property Name="DOWNLOAD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CHAVE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="STATUS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="COD_DISTRIBUICAO" Type="Guid" />
         </EntityType>
         <EntityType Name="L_PACOTE_ASSINATURA_CLIENTE">
           <Key>
@@ -5134,6 +5136,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.VEICULOS' does not have a prim
           <EntitySetMapping Name="L_DOCUMENTO_ASSINATURA">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_DOCUMENTO_ASSINATURA">
               <MappingFragment StoreEntitySet="L_DOCUMENTO_ASSINATURA">
+                <ScalarProperty Name="COD_DISTRIBUICAO" ColumnName="COD_DISTRIBUICAO" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="CHAVE" ColumnName="CHAVE" />
                 <ScalarProperty Name="DOWNLOAD" ColumnName="DOWNLOAD" />

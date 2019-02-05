@@ -33,5 +33,7 @@ namespace WebServiceIntegracao
         public string DESC_STATUS { get; set; }
         public string LAT { get; set; }
         public string LONG { get; set; }
+        public Nullable<int> FK_CLIENTE { get; set; }
+        public string CNPJ { get; set; }
     }
 }

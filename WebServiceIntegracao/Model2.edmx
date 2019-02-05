@@ -692,6 +692,17 @@ warning 6002: The table/view 'webservicetwos3.dbo.DISCIPLINAS' does not have a p
           <Property Name="TITULO" Type="nvarchar" MaxLength="255" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="L_IMPORTACAO_NOTACLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOTA" Type="int" />
+          <Property Name="CNPJ_CLIENTE" Type="varchar(max)" />
+          <Property Name="DATA" Type="datetime" />
+          <Property Name="QTD_ITENS" Type="int" />
+          <Property Name="NOTIFICACAO" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="L_INSPECAOFUNCIONARIO">
           <Key>
             <PropertyRef Name="ID" />
@@ -806,6 +817,8 @@ warning 6002: The table/view 'webservicetwos3.dbo.DISCIPLINAS' does not have a p
           <Property Name="DESC_STATUS" Type="varchar(max)" />
           <Property Name="LAT" Type="varchar(max)" />
           <Property Name="LONG" Type="varchar(max)" />
+          <Property Name="FK_CLIENTE" Type="int" />
+          <Property Name="CNPJ" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="L_NAOCONFORMIDADE">
           <Key>
@@ -981,8 +994,6 @@ warning 6002: The table/view 'webservicetwos3.dbo.P_FUNCIONARIOS' does not have 
           <Property Name="TELEFONE" Type="varchar(max)" />
           <Property Name="ID_SUPERVISOR" Type="nvarchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'webservicetwos3.dbo.P_HISTORICOATENDIMENTO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="P_HISTORICOATENDIMENTO">
           <Key>
             <PropertyRef Name="ID_HISTORICOATENDIMENTO" />
@@ -2035,6 +2046,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <EntitySet Name="L_FUNCAO_PRODUTOS" EntityType="Self.L_FUNCAO_PRODUTOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_FUNCIONARIOS" EntityType="Self.L_FUNCIONARIOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_FUNCOES" EntityType="Self.L_FUNCOES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="L_IMPORTACAO_NOTACLIENTE" EntityType="Self.L_IMPORTACAO_NOTACLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_INSPECAOFUNCIONARIO" EntityType="Self.L_INSPECAOFUNCIONARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_INSPITEM" EntityType="Self.L_INSPITEM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_LOCALESTOQUE" EntityType="Self.L_LOCALESTOQUE" Schema="dbo" store:Type="Tables" />
@@ -2052,6 +2064,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <EntitySet Name="L_TELAS_PERFIL" EntityType="Self.L_TELAS_PERFIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_USUARIO_COALBORADOR" EntityType="Self.L_USUARIO_COALBORADOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_USUARIOS" EntityType="Self.L_USUARIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="P_HISTORICOATENDIMENTO" EntityType="Self.P_HISTORICOATENDIMENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="P_LOGIN" EntityType="Self.P_LOGIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="P_OCORRENCIA" EntityType="Self.P_OCORRENCIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="P_PRODUTOS" EntityType="Self.P_PRODUTOS" Schema="dbo" store:Type="Tables" />
@@ -2340,18 +2353,6 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
     [P_FUNCIONARIOS].[TELEFONE] AS [TELEFONE], 
     [P_FUNCIONARIOS].[ID_SUPERVISOR] AS [ID_SUPERVISOR]
     FROM [dbo].[P_FUNCIONARIOS] AS [P_FUNCIONARIOS]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="P_HISTORICOATENDIMENTO" EntityType="Self.P_HISTORICOATENDIMENTO" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [P_HISTORICOATENDIMENTO].[ID_HISTORICOATENDIMENTO] AS [ID_HISTORICOATENDIMENTO], 
-    [P_HISTORICOATENDIMENTO].[DATA] AS [DATA], 
-    [P_HISTORICOATENDIMENTO].[HORA] AS [HORA], 
-    [P_HISTORICOATENDIMENTO].[DESCRICAO] AS [DESCRICAO], 
-    [P_HISTORICOATENDIMENTO].[ID_OCORRENCIA] AS [ID_OCORRENCIA], 
-    [P_HISTORICOATENDIMENTO].[ID_USUARIO] AS [ID_USUARIO], 
-    [P_HISTORICOATENDIMENTO].[STATUS_MENSAGEM] AS [STATUS_MENSAGEM], 
-    [P_HISTORICOATENDIMENTO].[DESC_STATUS] AS [DESC_STATUS]
-    FROM [dbo].[P_HISTORICOATENDIMENTO] AS [P_HISTORICOATENDIMENTO]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="P_STATUSOCORRENCIA" EntityType="Self.P_STATUSOCORRENCIA" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -3389,6 +3390,8 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <Property Name="DESC_STATUS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LAT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LONG" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_CLIENTE" Type="Int32" />
+          <Property Name="CNPJ" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="L_NAOCONFORMIDADE">
           <Key>
@@ -4850,6 +4853,7 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <EntitySet Name="L_CLIENTE" EntityType="webservicetwos3Model.L_CLIENTE" />
           <EntitySet Name="L_PRODUTOS" EntityType="webservicetwos3Model.L_PRODUTOS" />
           <EntitySet Name="L_PRODUTOS_ITENS" EntityType="webservicetwos3Model.L_PRODUTOS_ITENS" />
+          <EntitySet Name="L_IMPORTACAO_NOTACLIENTE" EntityType="webservicetwos3Model.L_IMPORTACAO_NOTACLIENTE" />
         </EntityContainer>
         <EntityType Name="L_CLIENTE">
           <Key>
@@ -4906,6 +4910,17 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <Property Name="COD_CLIENTE" Type="Int32" />
           <Property Name="GRUPO_CLIENTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NORMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="L_IMPORTACAO_NOTACLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOTA" Type="Int32" />
+          <Property Name="CNPJ_CLIENTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DATA" Type="DateTime" Precision="3" />
+          <Property Name="QTD_ITENS" Type="Int32" />
+          <Property Name="NOTIFICACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -5448,6 +5463,8 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
           <EntitySetMapping Name="L_MOVIMENTACAO_ESTOQUE">
             <EntityTypeMapping TypeName="webservicetwos3Model.L_MOVIMENTACAO_ESTOQUE">
               <MappingFragment StoreEntitySet="L_MOVIMENTACAO_ESTOQUE">
+                <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+                <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DATA_MOVIMENTACAO" ColumnName="DATA_MOVIMENTACAO" />
                 <ScalarProperty Name="ENTRADA_SAIDA" ColumnName="ENTRADA_SAIDA" />
@@ -6878,6 +6895,18 @@ warning 6002: The table/view 'webservicetwos3.dbo.QTD_INCONFORMIDADE_EMAIL' does
                 <ScalarProperty Name="DT_VALIDADE" ColumnName="DT_VALIDADE" />
                 <ScalarProperty Name="PRODUTO" ColumnName="PRODUTO" />
                 <ScalarProperty Name="COD_PRODUTO" ColumnName="COD_PRODUTO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="L_IMPORTACAO_NOTACLIENTE">
+            <EntityTypeMapping TypeName="webservicetwos3Model.L_IMPORTACAO_NOTACLIENTE">
+              <MappingFragment StoreEntitySet="L_IMPORTACAO_NOTACLIENTE">
+                <ScalarProperty Name="NOTIFICACAO" ColumnName="NOTIFICACAO" />
+                <ScalarProperty Name="QTD_ITENS" ColumnName="QTD_ITENS" />
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
+                <ScalarProperty Name="CNPJ_CLIENTE" ColumnName="CNPJ_CLIENTE" />
+                <ScalarProperty Name="NOTA" ColumnName="NOTA" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

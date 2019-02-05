@@ -7,21 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication1
+namespace WebServiceIntegracao
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class L_DOCUMENTO_ASSINATURA
+    public partial class L_IMPORTACAO_NOTACLIENTE
     {
         public int ID { get; set; }
-        public string NOME_DOCUMENTO { get; set; }
-        public Nullable<System.DateTime> DATA_ENVIO { get; set; }
-        public string MATRICULA { get; set; }
-        public string CLIENTE { get; set; }
-        public string DOWNLOAD { get; set; }
-        public string CHAVE { get; set; }
-        public string STATUS { get; set; }
-        public Nullable<System.Guid> COD_DISTRIBUICAO { get; set; }
+        public Nullable<int> NOTA { get; set; }
+        public string CNPJ_CLIENTE { get; set; }
+        public Nullable<System.DateTime> DATA { get; set; }
+        public Nullable<int> QTD_ITENS { get; set; }
+        public string NOTIFICACAO { get; set; }
     }
 }
