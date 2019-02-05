@@ -32,7 +32,7 @@ namespace WebServiceIntegracao
         public string importarDadosNotaFornecedor(string json)
         {
             
-            //var uri = @"E:\Projetos\LEAL\Json\Json_130718_1412222.json";
+            //var uri = @"E:\Projetos\LEAL\Json\Json_130718_1416609.json";
             //var jsonF = System.IO.File.ReadAllText(uri);
 
             webservicetwos3Entities dbo = new webservicetwos3Entities();
@@ -119,9 +119,13 @@ namespace WebServiceIntegracao
                             string codProduto = mI.Codigo_do_Produto;
                             try
                             {
-                                L_PRODUTOS lc = dbo.L_PRODUTOS.First<L_PRODUTOS>(x => x.COD_PRODUTO == codProduto);
+                                var lpr = dbo.L_PRODUTOS.Where(x => x.COD_PRODUTO == codProduto && x.CNPJ_DESTINATARIO == it.CNPJ_Destinatario).ToList();
+                                int idCod = lpr[0].ID;
+                                L_PRODUTOS lc = dbo.L_PRODUTOS.First<L_PRODUTOS>(x => x.ID == idCod);
                                 lc.COD_PRODUTO = codProduto;
                                 lc.PRODUTO = mI.Desc_Produto;
+                                lc.CNPJ_EMITENTE = it.CNPJ_Emitente;
+                                lc.CNPJ_DESTINATARIO = it.CNPJ_Destinatario;
                                 dbo.SaveChanges();
                             }
                             catch
@@ -129,6 +133,8 @@ namespace WebServiceIntegracao
                                 L_PRODUTOS lc = new L_PRODUTOS();
                                 lc.COD_PRODUTO = codProduto;
                                 lc.PRODUTO = mI.Desc_Produto;
+                                lc.CNPJ_EMITENTE = it.CNPJ_Emitente;
+                                lc.CNPJ_DESTINATARIO = it.CNPJ_Destinatario;
                                 dbo.L_PRODUTOS.Add(lc);
                                 dbo.SaveChanges();
                             }
@@ -177,6 +183,9 @@ namespace WebServiceIntegracao
                                 mensa = "OK";
                             }
 
+                          
+
+
                             r[count].Add(new ItensResultado
                             {
                                 ID = mI.ID,
@@ -196,6 +205,15 @@ namespace WebServiceIntegracao
                             });
                         }
                     }
+
+                    L_IMPORTACAO_NOTACLIENTE impNota = new L_IMPORTACAO_NOTACLIENTE();
+                    impNota.CNPJ_CLIENTE = it.CNPJ_Destinatario;
+                    impNota.DATA = DateTime.Now;
+                    impNota.NOTA = it.Numero_da_Nota;
+                    impNota.QTD_ITENS = it.Produtos.Count;
+                    impNota.NOTIFICACAO = "N";
+                    dbo.L_IMPORTACAO_NOTACLIENTE.Add(impNota);
+                    dbo.SaveChanges();
                 }
                 count++;
             }
@@ -209,13 +227,29 @@ namespace WebServiceIntegracao
             try
             {
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
-                var r = dbo.L_PRODUTOS.Where(x => x.NUMERO_NOTA == numeroNota).ToList();
+                var r = dbo.L_PRODUTOS_ITENS.Where(x => x.NUMERO_NOTA == numeroNota).ToList();
                 return JsonConvert.SerializeObject(r, Newtonsoft.Json.Formatting.Indented);
             }
             catch
             {
                 return "Nota não Importada ou Não encontrada";
             }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string testeIntegracao()
+        {
+
+            var uri = @"E:\Projetos\LEAL\Json\Json_130718_1496553.json";
+            var jsonF = System.IO.File.ReadAllText(uri);
+            //InsertTeste.Client it = new InsertTeste.Client();
+            //var result = it.importarDadosNotaFornecedor(jsonF);
+            var result = importarDadosNotaFornecedor(jsonF);
+            return result;
+
+
+
         }
 
 

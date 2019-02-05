@@ -80,8 +80,8 @@ namespace WebApplication1
                                         est.ENTRADA_SAIDA = "E";
                                         est.COD_ESTOQUE = localEstoque[0].CODIGO;
                                         est.ESTOQUE = localEstoque[0].NOME;
-                                        le.STATUS = "E";
-                                        le.DESC_STATUS = "Entrada Estoque";
+                                        est.STATUS = "E";
+                                        est.DESC_STATUS = "Entrada Estoque";
                                         dbo.SaveChanges();
 
                                         lme.COD_ESTOQUE = est.COD_ESTOQUE;
@@ -104,8 +104,8 @@ namespace WebApplication1
                                         int IDS = result[0].ID;
                                         L_ESTOQUE estSaida = dbo.L_ESTOQUE.First(x => x.ID == IDS);
                                         estSaida.ENTRADA_SAIDA = "S";
-                                        le.STATUS = "S";
-                                        le.DESC_STATUS = "Saida Estoque";
+                                        estSaida.STATUS = "S";
+                                        estSaida.DESC_STATUS = "Saida Estoque";
                                         dbo.SaveChanges();
 
                                         lme.COD_ESTOQUE = estSaida.COD_ESTOQUE;
@@ -305,6 +305,153 @@ namespace WebApplication1
 
         }
 
+
+        [WebMethod]
+        public List<RESULTADOMOV> recebimentoEstoqueCnpj(string listaEPCS, string cnpj)
+        {
+            try
+            {
+                var gdi = Guid.NewGuid();
+                L_ESTOQUE le = new L_ESTOQUE();
+                RESULTADOMOV mv = new RESULTADOMOV();
+                List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
+                L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
+                string[] lines = listaEPCS.Split('|');
+                bool erro = false;
+                string resultado = "";
+                foreach (var epc in lines)
+                {
+                    if (epc != "")
+                    {
+                        var itens = dbo.L_PRODUTOS_ITENS.First(x => x.EPC == epc);
+                        var existe = dbo.L_ESTOQUE.Where(x => x.EPC == epc).ToList();
+                        if (existe.Count == 0)
+                        {
+                            if (itens != null)
+                            {
+
+                                if(cnpj != itens.CNPJ_DESTINATARIO)
+                                {
+                                    erro = true;
+                                    resultado = resultado + "\nEste item esta vinculado para outra Empresa";
+                                }
+
+                                if (DateTime.Now.Subtract(itens.DT_VALIDADE.Value).Days >= 0)
+                                {
+                                    erro = true;
+                                    resultado = resultado + "\n" + itens.DT_VALIDADE.Value + " Data de Validade Vencida";
+                                }
+                                else
+                                {
+                                    erro = false;
+                                    resultado = "";
+
+                                }
+
+                                if (DateTime.Now.Subtract(itens.VALIDADE_TESTE.Value).Days >= 0)
+                                {
+                                    erro = true;
+                                    resultado = resultado + "\n" + itens.VALIDADE_TESTE.Value + " Data de Teste Vencida";
+                                }
+                                else
+                                {
+                                    erro = false;
+                                    resultado = "";
+                                }
+
+                                if (!erro)
+                                {
+
+                                    le.COD_PRODUTO = itens.COD_PRODUTO;
+                                    le.COD_RECEBIMENTO = gdi;
+                                    le.DATA_ENTRADA = DateTime.Now;
+                                    le.DESC_PRODUTO = itens.PRODUTO;
+                                    le.ENTRADA_SAIDA = "R";
+                                    le.EPC = itens.EPC;
+                                    le.QUANTIDADE = 1;
+                                    le.FK_PRODUTO = dbo.L_PRODUTOS.Where(x => x.COD_PRODUTO == itens.COD_PRODUTO).ToList()[0].ID;
+                                    le.STATUS = "R";
+                                    le.DESC_STATUS = "Recebido";
+                                    dbo.L_ESTOQUE.Add(le);
+                                    dbo.SaveChanges();
+
+
+                                    lme.COD_PRODUTO = le.COD_PRODUTO;
+                                    lme.DATA_MOVIMENTACAO = DateTime.Now;
+                                    lme.DESC_PRODUTO = le.DESC_PRODUTO;
+                                    lme.ENTRADA_SAIDA = "E";
+                                    lme.EPC = le.EPC;
+                                    lme.LAT = "-23.5705321";
+                                    lme.LONG = "-46.7064147";
+                                    //lme.ESTOQUE = est.ESTOQUE;
+                                    lme.FK_PRODUTO = le.FK_PRODUTO;
+                                    lme.QUANTIDADE = le.QUANTIDADE;
+                                    lme.STATUS = "R";
+                                    lme.DESC_STATUS = "Recebido";
+                                    dbo.L_MOVIMENTACAO_ESTOQUE.Add(lme);
+                                    dbo.SaveChanges();
+
+                                    mv.Produto = le.DESC_PRODUTO;
+                                    mv.Resultado = "OK";
+                                    mv.EPC = epc;
+                                    mv.corAviso = "#ffffff";
+                                    mv.DataMovimentacao = DateTime.Now;
+                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                }
+                                else
+                                {
+                                    mv.Produto = itens.PRODUTO;
+                                    mv.Resultado = resultado;
+                                    mv.EPC = epc;
+                                    mv.corAviso = "#ff7f7f";
+                                    mv.DataMovimentacao = DateTime.Now;
+                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                mv.Produto = "";
+                                mv.Resultado = "Este item não existe em nossa Base de dados";
+                                mv.EPC = epc;
+                                mv.corAviso = "#ff7f7f";
+                                mv.DataMovimentacao = DateTime.Now;
+                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+
+                            }
+                        }
+                        else
+                        {
+                            mv.Produto = "";
+                            mv.Resultado = "Este item ja foi recebido";
+                            mv.EPC = epc;
+                            mv.corAviso = "#ff7f7f";
+                            mv.DataMovimentacao = DateTime.Now;
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                        }
+                    }
+
+                }
+
+                return mov;
+            }
+            catch (Exception er)
+            {
+                RESULTADOMOV mv = new RESULTADOMOV();
+                List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
+                mv.Produto = "";
+                mv.Resultado = er.Message.ToString();
+                mv.EPC = "";
+                mv.DataMovimentacao = DateTime.Now;
+                mv.corAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                return mov;
+            }
+
+        }
+
         [WebMethod]
         public List<RESULTADOMOV> atribuicaoCracha(string matricula, string cracha)
         {
@@ -397,6 +544,7 @@ namespace WebApplication1
                 List<L_ATRIBUICAOCRACHA> cracha = new List<L_ATRIBUICAOCRACHA>();
                 L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
                 string matric = String.Empty;
+                bool enviarArquivo = false;
                 foreach (var epc in lines)
                 {
                     if (epc != "")
@@ -429,6 +577,7 @@ namespace WebApplication1
 
                     foreach (var epc in lines)
                     {
+                        enviarArquivo = false;
                         if (epc != "")
                         {
                             if (epc != codCracha)
@@ -446,23 +595,24 @@ namespace WebApplication1
                                                 var dtValidadeVencida = DateTime.Now.Subtract(itens.DT_VALIDADE.Value).Days;
                                                 var dtValTesteVencida = DateTime.Now.Subtract(itens.VALIDADE_TESTE.Value).Days;
 
-                                                if (dtValidadeVencida <= 0)
+                                                if (dtValidadeVencida < 0)
                                                 {
 
-                                                    if (dtValTesteVencida <= 0)
+                                                    if (dtValTesteVencida < 0)
                                                     {
 
                                                         var lEst = dbo.L_ESTOQUE.First(x => x.EPC == epc);
-                                                        if (lEst.STATUS == "R"  || lEst.STATUS == "B" || lEst.STATUS == "A")
+                                                        if (lEst.STATUS == "R" || lEst.STATUS == "B" || lEst.STATUS == "A" || lEst.STATUS == "O" || lEst.STATUS == "E")
                                                         {
-                                                            if (lEst.ENTRADA_SAIDA != "S")
+                                                            if (lEst.ENTRADA_SAIDA != "S"  || lEst.STATUS == "O")
                                                             {
                                                                 lEst.ENTRADA_SAIDA = "S";
-                                                                lEst.DATA_SAIDA = DateTime.Now.ToLongDateString();
+                                                                lEst.DATA_SAIDA = DateTime.Now.ToLongTimeString();
                                                                 lEst.FK_FUNCIONARIO_SAIDA = cracha[0].FK_FUNCIONARIO;
                                                                 lEst.MATRICULA = cracha[0].MATRICULA;
-                                                                lEst.STATUS = "D";
-                                                                lEst.DESC_STATUS = "Distribuição de EPI";
+                                                                lEst.STATUS = "O";
+                                                                lEst.COD_RECEBIMENTO = gdi;
+                                                                lEst.DESC_STATUS = "Aguardando Assinatura";
                                                                 dbo.SaveChanges();
 
                                                                 lme.COD_ESTOQUE = lEst.COD_ESTOQUE;
@@ -477,13 +627,13 @@ namespace WebApplication1
                                                                 lme.COD_FUNCIONARIO = cracha[0].MATRICULA;
                                                                 lme.FK_FUNCIONARIO = cracha[0].FK_FUNCIONARIO;
                                                                 lme.COD_DISTRIBUICAO = gdi;
-                                                                lme.STATUS = "D";
-                                                                lme.DESC_STATUS = "Distribuição de EPI";
+                                                                lme.STATUS = "O";
+                                                                lme.DESC_STATUS = "Aguardando Assinatura";
                                                                 dbo.L_MOVIMENTACAO_ESTOQUE.Add(lme);
                                                                 dbo.SaveChanges();
 
                                                                 mv.Produto = lEst.DESC_PRODUTO + " - Funcionario=" + lEst.MATRICULA;
-                                                                mv.Resultado = "Item Atribuido com Sucesso";
+                                                                mv.Resultado = "Aguardando Assinatura";
                                                                 mv.EPC = epc;
                                                                 mv.DataMovimentacao = DateTime.Now;
                                                                 mv.corAviso = "#ffffff";
@@ -496,7 +646,9 @@ namespace WebApplication1
                                                                 lfc.IMPRESSO = "N";
                                                                 dbo.L_FICHACADASTRAL.Add(lfc);
                                                                 dbo.SaveChanges();
+
                                                                 
+
                                                             }
                                                             else
                                                             {
@@ -558,8 +710,8 @@ namespace WebApplication1
                                                 le.FK_FUNCIONARIO_SAIDA = cracha[0].FK_FUNCIONARIO;
                                                 le.DATA_SAIDA = DateTime.Now.ToLongDateString();
                                                 le.FK_PRODUTO = dbo.L_PRODUTOS.Where(x => x.COD_PRODUTO == itens.COD_PRODUTO).ToList()[0].ID;
-                                                le.STATUS = "D";
-                                                le.DESC_STATUS = "Distribuição de EPI";
+                                                le.STATUS = "O";
+                                                le.DESC_STATUS = "Aguardando Assinatura";
                                                 dbo.L_ESTOQUE.Add(le);
                                                 dbo.SaveChanges();
 
@@ -576,13 +728,13 @@ namespace WebApplication1
                                                 lme.COD_FUNCIONARIO = cracha[0].MATRICULA;
                                                 lme.FK_FUNCIONARIO = cracha[0].FK_FUNCIONARIO;
                                                 lme.COD_DISTRIBUICAO = gdi;
-                                                lme.STATUS = "D";
-                                                lme.DESC_STATUS = "Distribuição de EPI";
+                                                lme.STATUS = "O";
+                                                lme.DESC_STATUS = "Aguardando Assinatura";
                                                 dbo.L_MOVIMENTACAO_ESTOQUE.Add(lme);
                                                 dbo.SaveChanges();
 
                                                 mv.Produto = le.DESC_PRODUTO + " - Funcionario=" + le.MATRICULA;
-                                                mv.Resultado = "Item Atribuido com Sucesso";
+                                                mv.Resultado = "Aguardando Assinatura";
                                                 mv.EPC = epc;
                                                 mv.DataMovimentacao = DateTime.Now;
                                                 mv.corAviso = "#ffffff";
@@ -595,7 +747,8 @@ namespace WebApplication1
                                                 lfc.IMPRESSO = "N";
                                                 dbo.L_FICHACADASTRAL.Add(lfc);
                                                 dbo.SaveChanges();
-                                                
+
+
                                             }
 
 
@@ -612,7 +765,7 @@ namespace WebApplication1
                                         mv.corAviso = "#ff7f7f";
                                         mv.DataMovimentacao = DateTime.Now;
                                         mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
-
+                                        return mov;
                                     }
                                 }
                                 else
@@ -623,36 +776,40 @@ namespace WebApplication1
                                     mv.corAviso = "#ff7f7f";
                                     mv.DataMovimentacao = DateTime.Now;
                                     mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
-
+                                    return mov;
                                 }
                             }
                         }
                     }
 
-
-                    var docKey = convertHtmlDocx(cracha[0].MATRICULA, Guid.Parse(lme.COD_DISTRIBUICAO.ToString()));
-                    string matriculas = cracha[0].MATRICULA;
-                    var lfunc = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matriculas).ToList();
-                    criarHookArquivo(docKey);
-                    mv.Produto = "chave";
-                    mv.Resultado = lfunc[0].TELEFONE + "|" + lfunc[0].EMAIL;
-                    mv.EPC = docKey;
-                    mv.corAviso = "#ffffff";
-                    mv.DataMovimentacao = DateTime.Now;
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
-
                 }
                 else
                 {
-
+                    mv.Produto = "";
                     mv.DataMovimentacao = DateTime.Now;
                     mv.EPC = "";
                     mv.Resultado = "Não Foi Encontrado Nenhum Codigo de Cracha para realizar a Distribuição";
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
                     mv.corAviso = "#ff7f7f";
+                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
                     return mov;
                 }
 
+                if (lme.COD_DISTRIBUICAO != null)
+                {
+                    if (lme.COD_DISTRIBUICAO.ToString() != "")
+                    {
+                        var docKey = convertHtmlDocx(cracha[0].MATRICULA, gdi.ToString());
+                        string matriculas = cracha[0].MATRICULA;
+                        var lfunc = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matriculas).ToList();
+                        criarHookArquivo(docKey);
+                        mv.Produto = "chave";
+                        mv.Resultado = lfunc[0].TELEFONE + "|" + lfunc[0].EMAIL;
+                        mv.EPC = docKey;
+                        mv.corAviso = "#ffffff";
+                        mv.DataMovimentacao = DateTime.Now;
+                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                    }
+                }
                 return mov;
             }
             catch(Exception er)
@@ -1133,52 +1290,154 @@ namespace WebApplication1
                                         mensagem = "";
                                         erro = false;
 
-                                        var statusEstoque = dbo.L_ESTOQUE.Select(x => new { x.STATUS, x.EPC }).Where(x => x.EPC == epc).ToList();
+                                        var statusEstoque = dbo.L_ESTOQUE.Select(x => new { x.STATUS, x.EPC, x.DESC_STATUS }).Where(x => x.EPC == epc).ToList();
 
                                         if(statusEstoque!= null && statusEstoque.Count > 0)
                                         {
+
                                             if(statusEstoque[0].STATUS == "B")
                                             {
-                                                
 
-                                                mv.Produto = "";
-                                                mv.Resultado = "Este EPI foi devolvido ao Estoque";
-                                                mv.EPC = epc;
-                                                mv.corAviso = "#ff7f7f";
-                                                mv.DataMovimentacao = DateTime.Now;
-                                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                                erro = true;
+                                                mensagem = mensagem + "EPI não atribuido para um funcionario, foi devolvido ao Estoque;";
 
-                                                li.COD_FUNCIONARIO = cracha[0].MATRICULA;
-                                                li.COD_INSPECAO = gdi.ToString();
-                                                li.COD_PRODUTO = itens.COD_PRODUTO;
-                                                li.DATA_INSPECAO = DateTime.Now;
-                                                li.DATA_VALIDADE = itens.DT_VALIDADE;
-                                                li.DATA_VALIDADETESTE = itens.VALIDADE_TESTE;
-                                                li.DESC_PRODUTO = itens.PRODUTO;
-                                                li.EPC = itens.EPC;
-                                                var mat = cracha[0].MATRICULA;
-                                                li.FUNCIONARIO = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == mat).ToList()[0].NOME;
-                                                li.MOTIVO = "EPI não atribuido para um funcionario";
-                                                li.LAT = latitude.Replace(',', '.');
-                                                li.LONG = longitude.Replace(',', '.');
-                                                dbo.L_INSPECAOFUNCIONARIO.Add(li);
-                                                dbo.SaveChanges();
+                                                #region
+                                                //mv.Produto = "";
+                                                //mv.Resultado = "EPI não atribuido para um funcionario, foi devolvido ao Estoque";
+                                                //mv.EPC = epc;
+                                                //mv.corAviso = "#ff7f7f";
+                                                //mv.DataMovimentacao = DateTime.Now;
+                                                //mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
 
-                                                lit.CA = itens.CA;
-                                                lit.COD_FORNECEDOR = itens.COD_FORNECEDOR;
-                                                lit.COD_PRODUTO = itens.COD_PRODUTO;
-                                                lit.DATA_FABRICACAO = itens.DT_FABRICACAO;
-                                                lit.DATA_VALIDADE = itens.DT_VALIDADE;
-                                                lit.DATA_VALIDADE_TESTE = itens.VALIDADE_TESTE;
-                                                lit.DESC_PRODUTO = itens.PRODUTO;
-                                                lit.EPC = itens.EPC;
-                                                lit.FK_INSPECAO = li.ID;
-                                                lit.LOTE = itens.NUMERO_LOTE;
-                                                lit.SITUACAO = "EPI não atribuido para um funcionario";
-                                                dbo.L_INSPITEM.Add(lit);
-                                                dbo.SaveChanges();
+                                                //li.COD_FUNCIONARIO = cracha[0].MATRICULA;
+                                                //li.COD_INSPECAO = gdi.ToString();
+                                                //li.COD_PRODUTO = itens.COD_PRODUTO;
+                                                //li.DATA_INSPECAO = DateTime.Now;
+                                                //li.DATA_VALIDADE = itens.DT_VALIDADE;
+                                                //li.DATA_VALIDADETESTE = itens.VALIDADE_TESTE;
+                                                //li.DESC_PRODUTO = itens.PRODUTO;
+                                                //li.EPC = itens.EPC;
+                                                //var mat = cracha[0].MATRICULA;
+                                                //li.FUNCIONARIO = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == mat).ToList()[0].NOME;
+                                                //li.MOTIVO = "EPI não atribuido para um funcionario, foi devolvido ao Estoque";
+                                                //li.LAT = latitude.Replace(',', '.');
+                                                //li.LONG = longitude.Replace(',', '.');
+                                                //dbo.L_INSPECAOFUNCIONARIO.Add(li);
+                                                //dbo.SaveChanges();
 
-                                                return mov;
+                                                //lit.CA = itens.CA;
+                                                //lit.COD_FORNECEDOR = itens.COD_FORNECEDOR;
+                                                //lit.COD_PRODUTO = itens.COD_PRODUTO;
+                                                //lit.DATA_FABRICACAO = itens.DT_FABRICACAO;
+                                                //lit.DATA_VALIDADE = itens.DT_VALIDADE;
+                                                //lit.DATA_VALIDADE_TESTE = itens.VALIDADE_TESTE;
+                                                //lit.DESC_PRODUTO = itens.PRODUTO;
+                                                //lit.EPC = itens.EPC;
+                                                //lit.FK_INSPECAO = li.ID;
+                                                //lit.LOTE = itens.NUMERO_LOTE;
+                                                //lit.SITUACAO = "EPI não atribuido para um funcionario, foi devolvido ao Estoque";
+                                                //dbo.L_INSPITEM.Add(lit);
+                                                //dbo.SaveChanges();
+                                                #endregion
+
+                                            }
+
+
+                                            if (statusEstoque[0].STATUS == "O")
+                                            {
+
+                                                erro = true;
+                                                mensagem = mensagem + "EPI não atribuido para um funcionario, aguardando assinatura digital;";
+
+                                                #region
+                                                //mv.Produto = "";
+                                                //mv.Resultado = "EPI não atribuido para um funcionario, aguardando assinatura digital";
+                                                //mv.EPC = epc;
+                                                //mv.corAviso = "#ff7f7f";
+                                                //mv.DataMovimentacao = DateTime.Now;
+                                                //mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+
+                                                //li.COD_FUNCIONARIO = cracha[0].MATRICULA;
+                                                //li.COD_INSPECAO = gdi.ToString();
+                                                //li.COD_PRODUTO = itens.COD_PRODUTO;
+                                                //li.DATA_INSPECAO = DateTime.Now;
+                                                //li.DATA_VALIDADE = itens.DT_VALIDADE;
+                                                //li.DATA_VALIDADETESTE = itens.VALIDADE_TESTE;
+                                                //li.DESC_PRODUTO = itens.PRODUTO;
+                                                //li.EPC = itens.EPC;
+                                                //var mat = cracha[0].MATRICULA;
+                                                //li.FUNCIONARIO = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == mat).ToList()[0].NOME;
+                                                //li.MOTIVO = "EPI não atribuido para um funcionario, aguardando assinatura digital";
+                                                //li.LAT = latitude.Replace(',', '.');
+                                                //li.LONG = longitude.Replace(',', '.');
+                                                //dbo.L_INSPECAOFUNCIONARIO.Add(li);
+                                                //dbo.SaveChanges();
+
+                                                //lit.CA = itens.CA;
+                                                //lit.COD_FORNECEDOR = itens.COD_FORNECEDOR;
+                                                //lit.COD_PRODUTO = itens.COD_PRODUTO;
+                                                //lit.DATA_FABRICACAO = itens.DT_FABRICACAO;
+                                                //lit.DATA_VALIDADE = itens.DT_VALIDADE;
+                                                //lit.DATA_VALIDADE_TESTE = itens.VALIDADE_TESTE;
+                                                //lit.DESC_PRODUTO = itens.PRODUTO;
+                                                //lit.EPC = itens.EPC;
+                                                //lit.FK_INSPECAO = li.ID;
+                                                //lit.LOTE = itens.NUMERO_LOTE;
+                                                //lit.SITUACAO = "EPI não atribuido para um funcionario, aguardando assinatura digital";
+                                                //dbo.L_INSPITEM.Add(lit);
+                                                //dbo.SaveChanges();
+                                                #endregion
+
+                                            }
+
+                                            if (statusEstoque[0].STATUS == "A"
+                                                || statusEstoque[0].STATUS == "M"
+                                                || statusEstoque[0].STATUS == "H"
+                                                || statusEstoque[0].STATUS == "T"
+                                                || statusEstoque[0].STATUS == "Z")
+                                            {
+                                                erro = true;
+                                                mensagem = mensagem + "EPI não atribuido para um funcionario, " + statusEstoque[0].DESC_STATUS + ";";
+
+                                                #region
+                                                //mv.Produto = "";
+                                                //mv.Resultado = "EPI não atribuido para um funcionario, " + statusEstoque[0].DESC_STATUS;
+                                                //mv.EPC = epc;
+                                                //mv.corAviso = "#ff7f7f";
+                                                //mv.DataMovimentacao = DateTime.Now;
+                                                //mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+
+                                                //li.COD_FUNCIONARIO = cracha[0].MATRICULA;
+                                                //li.COD_INSPECAO = gdi.ToString();
+                                                //li.COD_PRODUTO = itens.COD_PRODUTO;
+                                                //li.DATA_INSPECAO = DateTime.Now;
+                                                //li.DATA_VALIDADE = itens.DT_VALIDADE;
+                                                //li.DATA_VALIDADETESTE = itens.VALIDADE_TESTE;
+                                                //li.DESC_PRODUTO = itens.PRODUTO;
+                                                //li.EPC = itens.EPC;
+                                                //var mat = cracha[0].MATRICULA;
+                                                //li.FUNCIONARIO = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == mat).ToList()[0].NOME;
+                                                //li.MOTIVO = "EPI não atribuido para um funcionario, " + statusEstoque[0].DESC_STATUS;
+                                                //li.LAT = latitude.Replace(',', '.');
+                                                //li.LONG = longitude.Replace(',', '.');
+                                                //dbo.L_INSPECAOFUNCIONARIO.Add(li);
+                                                //dbo.SaveChanges();
+
+                                                //lit.CA = itens.CA;
+                                                //lit.COD_FORNECEDOR = itens.COD_FORNECEDOR;
+                                                //lit.COD_PRODUTO = itens.COD_PRODUTO;
+                                                //lit.DATA_FABRICACAO = itens.DT_FABRICACAO;
+                                                //lit.DATA_VALIDADE = itens.DT_VALIDADE;
+                                                //lit.DATA_VALIDADE_TESTE = itens.VALIDADE_TESTE;
+                                                //lit.DESC_PRODUTO = itens.PRODUTO;
+                                                //lit.EPC = itens.EPC;
+                                                //lit.FK_INSPECAO = li.ID;
+                                                //lit.LOTE = itens.NUMERO_LOTE;
+                                                //lit.SITUACAO = "EPI não atribuido para um funcionario, " + statusEstoque[0].DESC_STATUS;
+                                                //dbo.L_INSPITEM.Add(lit);
+                                                //dbo.SaveChanges();
+                                                #endregion
+
                                             }
                                         }
 
@@ -1202,17 +1461,20 @@ namespace WebApplication1
                                             {
                                                 if (epiFunc.Count > 0)
                                                 {
-                                                    if (epiFunc[0].MATRICULA == "")
+                                                    if (epiFunc[0].MATRICULA == "" || epiFunc[0].MATRICULA == null)
                                                     {
                                                         erro = true;
-                                                        mensagem = mensagem + "Este EPI Não esta atribuido a nenhum funcionario";
+                                                        mensagem = mensagem + "Este EPI não pertence a nenhum usuario;";
                                                     }
                                                     else
                                                     {
                                                         if (epiFunc[0].MATRICULA != cracha[0].MATRICULA)
                                                         {
-                                                            erro = true;
-                                                            mensagem = mensagem + "EPI Trocado";
+                                                            if (statusEstoque[0].STATUS != "O")
+                                                            {
+                                                                erro = true;
+                                                                mensagem = mensagem + "EPI Trocado";
+                                                            }
                                                         }
                                                     }
 
@@ -1220,13 +1482,13 @@ namespace WebApplication1
                                                 else
                                                 {
                                                     erro = true;
-                                                    mensagem = mensagem + "Este EPI não existe em nossa base de dados;";
+                                                    mensagem = mensagem + "Este EPI não pertence a nenhum usuario;";
                                                 }
                                             }
                                             else
                                             {
                                                 erro = true;
-                                                mensagem = mensagem + "Este EPI não existe em nossa base de dados;";
+                                                mensagem = mensagem + "Este EPI não pertence a nenhum usuario;";
                                             }
 
                                             if (!erro)
@@ -1455,6 +1717,8 @@ namespace WebApplication1
                             estSaida.ENTRADA_SAIDA = "S";
                             estSaida.STATUS = "M";
                             estSaida.DESC_STATUS = "Em Manutenção Cliente ou Fornecedor";
+                            estSaida.FK_FUNCIONARIO_SAIDA = null;
+                            estSaida.MATRICULA = null;
                             dbo.SaveChanges();
 
                             lme.COD_ESTOQUE = estSaida.COD_ESTOQUE;
@@ -1468,6 +1732,8 @@ namespace WebApplication1
                             lme.QUANTIDADE = estSaida.QUANTIDADE;
                             lme.STATUS = "M";
                             lme.DESC_STATUS = "Em Manutenção Cliente ou Fornecedor";
+                            estSaida.FK_FUNCIONARIO_SAIDA = null;
+                            estSaida.MATRICULA = null;
                             lme.LAT = "-23.5705321";
                             lme.LONG = "-46.7064147";
                             dbo.L_MOVIMENTACAO_ESTOQUE.Add(lme);
@@ -1596,21 +1862,24 @@ namespace WebApplication1
 
                     try
                     {
-                        llf = dbo.L_LOGIN_FUNCIONARIO.First(x => x.MATRICULA == matricula);
+                        var lfunc = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
+                        var email = lfunc[0].EMAIL;
+                        llf = dbo.L_LOGIN_FUNCIONARIO.First(x => x.MATRICULA == email);
                         llf.CRACHA = crach[0].CODIGO_CRACHA;
                         llf.DESC_FUNCIONARIO = funcMatricula[0].NOME;
                         llf.FK_FUNCIONARIO = funcMatricula[0].ID;
-                        llf.MATRICULA = matricula;
+                        //llf.MATRICULA = matricula;
                         llf.SENHA = senha;
                         dbo.SaveChanges();
                     }
                     catch
                     {
-                        
+                        var lfunc = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
+                        var email = lfunc[0].EMAIL;
                         llf.CRACHA = crach[0].CODIGO_CRACHA;
                         llf.DESC_FUNCIONARIO = funcMatricula[0].NOME;
                         llf.FK_FUNCIONARIO = funcMatricula[0].ID;
-                        llf.MATRICULA = matricula;
+                        llf.MATRICULA = email;
                         llf.SENHA = senha;
                         dbo.L_LOGIN_FUNCIONARIO.Add(llf);
                         dbo.SaveChanges();
@@ -1659,11 +1928,11 @@ namespace WebApplication1
             {
                 DADOSLOGIN mv = new DADOSLOGIN();
                 List<DADOSLOGIN> mov = new List<DADOSLOGIN>();
-                var login = dbo.L_LOGIN_FUNCIONARIO.Where(x => x.MATRICULA == matricula && x.SENHA == senha).ToList();
+                var login = dbo.L_LOGIN.Where(x => x.USUARIO == matricula && x.SENHA == senha).ToList();
                 if (login.Count > 0)
                 {
-                    int fkFuncionario = Convert.ToInt32(login[0].FK_FUNCIONARIO.ToString());
-                    var dadosFuncionarios = dbo.L_FUNCIONARIOS.Where(x => x.ID == fkFuncionario).ToList();
+                    int fkFuncionario = Convert.ToInt32(login[0].FK_USUARIO.ToString());
+                    var dadosFuncionarios = dbo.L_USUARIO_COALBORADOR.Where(x => x.id == fkFuncionario).ToList();
                     int fkCliente = Convert.ToInt32(dadosFuncionarios[0].FK_CLIENTE.ToString());
                     var dadosEmpresa = dbo.L_CLIENTE.Where(x => x.ID == fkCliente).ToList();
 
@@ -1673,7 +1942,9 @@ namespace WebApplication1
                     mv.DataMovimentacao = DateTime.Now;
                     mv.corAviso = "#ffffff";
                     mv.Empresa = dadosEmpresa[0].NOME;
-                    mv.Nome = dadosFuncionarios[0].NOME + " " + dadosFuncionarios[0].SOBRENOME;
+                    mv.Nome = dadosFuncionarios[0].nome;
+                    mv.FkCliente = Convert.ToInt32(dadosFuncionarios[0].FK_CLIENTE.ToString());
+                    mv.Cnpj = dadosFuncionarios[0].cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
                     mov.Add(new DADOSLOGIN
                     {
                         Resultado = mv.Resultado,
@@ -1682,7 +1953,9 @@ namespace WebApplication1
                         Produto = mv.Produto,
                         corAviso = mv.corAviso,
                         Empresa = mv.Empresa,
-                        Nome = mv.Nome
+                        Nome = mv.Nome,
+                        FkCliente = mv.FkCliente,
+                        Cnpj = mv.Cnpj
                     });
                     return mov;
                 }
@@ -1948,7 +2221,7 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public List<RESULTADOMOV> consultaEPI(string listaEPCS)
+        public List<RESULTADOMOV> consultaEPI(string listaEPCS, string cnpj)
         {
             try
             {
@@ -1964,8 +2237,8 @@ namespace WebApplication1
                 {
                     if (epc != "")
                     {
-                        
-                        var pte = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == epc).ToList();
+
+                        var pte = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == epc && x.CNPJ_DESTINATARIO == cnpj).ToList();
                         
                         if (pte != null)
                         {
@@ -1973,6 +2246,7 @@ namespace WebApplication1
                             {
                                 foreach (var itens in pte)
                                 {
+                                    resultado = "";
                                     var pti = dbo.L_ESTOQUE.Where(x => x.EPC == epc).ToList();
                                     if (pti != null)
                                     {
@@ -1991,21 +2265,21 @@ namespace WebApplication1
                                             }
                                             else
                                             {
-                                                erro = true;
+                                                
                                                 resultado = resultado + "\nNenhum Usuario Atribuido a este EPI";
 
                                             }
                                         }
                                         else
                                         {
-                                            erro = true;
-                                            resultado = resultado + "\nEste item não existe em nossa Base de dados";
+                                            
+                                            resultado = resultado + "\nNenhum Usuario Atribuido a este EPI";
                                         }
                                     }
                                     else
                                     {
-                                        erro = true;
-                                        resultado = resultado + "\nEste item não existe em nossa Base de dados";
+                                        
+                                        resultado = resultado + "\nNenhum Usuario Atribuido a este EPI";
                                     }
 
 
@@ -2046,6 +2320,15 @@ namespace WebApplication1
                                 mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
 
                             }
+                        }
+                        else
+                        {
+                            mv.Produto = "";
+                            mv.Resultado = "Este item não existe em nossa Base de dados";
+                            mv.EPC = "";
+                            mv.DataMovimentacao = DateTime.Now;
+                            mv.corAviso = "#ff7f7f";
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
                         }
                     }
                     
@@ -2598,7 +2881,7 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public string convertHtmlDocx(string matricula, Guid codDistribuicao)
+        public string convertHtmlDocx(string matricula, string codDistribuicao)
         {
             try
             {
@@ -2640,7 +2923,7 @@ namespace WebApplication1
                 doc.InsertParagraph("4) devolvê-lo quando da troca por outro ou no meu desligamento da empresa.").Position(20);
 
                 int count = 0;
-                var listaEpis = retornarLista(matricula, codDistribuicao);
+                var listaEpis = retornarLista(matricula, Guid.Parse(codDistribuicao));
                 Table t = doc.AddTable((listaEpis.Count + 1), 7);
                 t.Alignment = Alignment.center;
 
@@ -2695,7 +2978,7 @@ namespace WebApplication1
                 doc.InsertParagraph("ASSINATURA: _______________________________").Position(10);
                 doc.Save();
                 var docs = enviarDocumento(fileName, matricula);
-                documentoAssinado(nomeArquivo, matricula, dadosFicha.Split('|')[4], dadosFicha.Split('|')[5], docs.Key);
+                documentoAssinado(codDistribuicao,nomeArquivo, matricula, dadosFicha.Split('|')[4], dadosFicha.Split('|')[5], docs.Key);
                 return docs.Key;
             }
             catch(Exception E)
@@ -2704,7 +2987,8 @@ namespace WebApplication1
             }
         }
 
-        private void documentoAssinado(string nomeArquivo, string matricula, string cnpj, string fkCliente, string chave)
+        [WebMethod]
+        public void documentoAssinado(string codDistribuicao, string nomeArquivo, string matricula, string cnpj, string fkCliente, string chave)
         {
             try
             {
@@ -2716,6 +3000,7 @@ namespace WebApplication1
                 lda.MATRICULA = matricula;
                 lda.NOME_DOCUMENTO = nomeArquivo;
                 lda.CHAVE = chave;
+                lda.COD_DISTRIBUICAO = Guid.Parse(codDistribuicao);
                 dbo.L_DOCUMENTO_ASSINATURA.Add(lda);
                 dbo.SaveChanges();
                
@@ -2900,14 +3185,14 @@ namespace WebApplication1
                                                 else
                                                 {
                                                     codEstoque = "0";
-                                                    nomEstoque = "Enviado para Teste";
+                                                    nomEstoque = "Enviado para Higienização";
                                                 }
 
                                             }
                                             else
                                             {
                                                 codEstoque = "0";
-                                                nomEstoque = "Enviado para Teste";
+                                                nomEstoque = "Enviado para Higienização";
                                             }
                                             if (lEst.ENTRADA_SAIDA == "E")
                                             {
@@ -2926,7 +3211,7 @@ namespace WebApplication1
                                             lEst.COD_ESTOQUE = codEstoque;
                                             lEst.ESTOQUE = nomEstoque;
                                             lEst.STATUS = "H";
-                                            lEst.DESC_STATUS = "Envido para Higienização";
+                                            lEst.DESC_STATUS = "Enviado para Higienização";
                                             dbo.SaveChanges();
 
                                             lme.COD_ESTOQUE = lEst.COD_ESTOQUE;
@@ -2939,7 +3224,7 @@ namespace WebApplication1
                                             lme.FK_PRODUTO = lEst.FK_PRODUTO;
                                             lme.QUANTIDADE = lEst.QUANTIDADE;
                                             lme.STATUS = "H";
-                                            lme.DESC_STATUS = "Envido para Higienização";
+                                            lme.DESC_STATUS = "Enviado para Higienização";
                                             //lme.COD_DISTRIBUICAO = gdi;
                                             dbo.L_MOVIMENTACAO_ESTOQUE.Add(lme);
                                             dbo.SaveChanges();
@@ -2952,7 +3237,7 @@ namespace WebApplication1
                                             dbo.SaveChanges();
 
                                             mv.Produto = lEst.DESC_PRODUTO;
-                                            mv.Resultado = "Envido para Higienização";
+                                            mv.Resultado = "Enviado para Higienização";
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
                                             mv.corAviso = "#ffffff";
@@ -2985,14 +3270,14 @@ namespace WebApplication1
                                                 else
                                                 {
                                                     codEstoque = "0";
-                                                    nomEstoque = "Envido para Higienização";
+                                                    nomEstoque = "Enviado para Higienização";
                                                 }
 
                                             }
                                             else
                                             {
                                                 codEstoque = "0";
-                                                nomEstoque = "Envido para Higienização";
+                                                nomEstoque = "Enviado para Higienização";
                                             }
 
                                             L_ESTOQUE lEst = new L_ESTOQUE();
@@ -3007,7 +3292,7 @@ namespace WebApplication1
                                             lEst.COD_ESTOQUE = codEstoque;
                                             lEst.ESTOQUE = nomEstoque;
                                             lEst.STATUS = "H";
-                                            lEst.DESC_STATUS = "Envido para Higienização";
+                                            lEst.DESC_STATUS = "Enviado para Higienização";
                                             lEst.ENTRADA_SAIDA = "S";
                                             lEst.DATA_SAIDA = DateTime.Now.ToShortDateString();
                                             dbo.L_ESTOQUE.Add(lEst);
@@ -3025,7 +3310,7 @@ namespace WebApplication1
                                             lmes.FK_PRODUTO = lEst.FK_PRODUTO;
                                             lmes.QUANTIDADE = lEst.QUANTIDADE;
                                             lmes.STATUS = "H";
-                                            lmes.DESC_STATUS = "Envido para Higienização";
+                                            lmes.DESC_STATUS = "Enviado para Higienização";
                                             //lme.COD_DISTRIBUICAO = gdi;
                                             dbo.L_MOVIMENTACAO_ESTOQUE.Add(lmes);
                                             dbo.SaveChanges();
@@ -3040,7 +3325,7 @@ namespace WebApplication1
 
 
                                             mv.Produto = lEst.DESC_PRODUTO;
-                                            mv.Resultado = "Envido para Higienização";
+                                            mv.Resultado = "Enviado para Higienização";
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
                                             mv.corAviso = "#ffffff";

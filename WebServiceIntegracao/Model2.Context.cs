@@ -80,5 +80,6 @@ namespace WebServiceIntegracao
         public virtual DbSet<L_CLIENTE> L_CLIENTE { get; set; }
         public virtual DbSet<L_PRODUTOS> L_PRODUTOS { get; set; }
         public virtual DbSet<L_PRODUTOS_ITENS> L_PRODUTOS_ITENS { get; set; }
+        public virtual DbSet<L_IMPORTACAO_NOTACLIENTE> L_IMPORTACAO_NOTACLIENTE { get; set; }
     }
 }
