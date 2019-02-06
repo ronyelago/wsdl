@@ -1947,7 +1947,7 @@ namespace WebApplication1
                     mv.Empresa = dadosEmpresa.NOME;
                     mv.Nome = dadosUsuario.nome;
                     mv.FkCliente = Convert.ToInt32(dadosUsuario.FK_CLIENTE.ToString());
-                    mv.Cnpj = dadosUsuario.cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
+                    mv.Cnpj = StdTools.Unformatted(dadosUsuario.cnpj);
                     mov.Add(new DADOSLOGIN
                     {
                         Resultado = mv.Resultado,
@@ -3077,26 +3077,15 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public string formatarTelefone(string tELEFONE)
+        public string formatarTelefone(string telefone)
         {
             try
             {
-                //11 96678 - 704
-                if (tELEFONE.IndexOf('-') != -1)
-                {
-                    tELEFONE = tELEFONE.Replace("-", "");
-                    tELEFONE = tELEFONE.Replace(" ", "");
-                    return tELEFONE;
-                }
-                else
-                {
-                    tELEFONE = tELEFONE.Replace(" ", "");
-                    return tELEFONE;
-                }
+                return StdTools.Unformatted(telefone);
             }
             catch
             {
-                return tELEFONE;
+                return null;
             }
         }
 

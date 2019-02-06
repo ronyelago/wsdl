@@ -66,7 +66,7 @@ namespace WebApplication1
             }
         }
 
-        public bool incluirDadosdeSessa(SessaoUsuario inserir)
+        public bool incluirDadosdeSessao(SessaoUsuario inserir)
         {
             try {
                 SessaoUsuario sus = dbo.SessaoUsuario.First(x => x.ID == inserir.ID);
