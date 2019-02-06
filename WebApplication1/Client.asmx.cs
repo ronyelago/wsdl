@@ -30,9 +30,7 @@ namespace WebApplication1
         {
             try
             {
-
                 return dbo.L_LOCALESTOQUE.ToList();
-                //return pr.retornaLocalEstoque().ToList();
             }
             catch
             {
@@ -48,9 +46,9 @@ namespace WebApplication1
             string[] lines = listaEPCS.Split('|');
             L_ESTOQUE le = new L_ESTOQUE();
             L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
-            
+
             string mensagem = "";
-            foreach(var epc in lines)
+            foreach (var epc in lines)
             {
                 mensagem = "";
                 if (epc != "")
@@ -170,20 +168,16 @@ namespace WebApplication1
             try
             {
                 var gdi = Guid.NewGuid();
-                L_ESTOQUE le = new L_ESTOQUE();
                 RESULTADOMOV mv = new RESULTADOMOV();
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
-                L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
                 string[] lines = listaEPCS.Split('|');
-                bool erro = false;
-                string resultado = "";
                 foreach (var epc in lines)
                 {
                     if (epc != "")
                     {
                         var pti = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == epc).ToList();
-                        var existe = dbo.L_ESTOQUE.Where(x => x.EPC == epc).ToList();
-                        if (existe.Count == 0)
+                        var epcNoEstoque = dbo.L_ESTOQUE.Where(x => x.EPC == epc).ToList();
+                        if (epcNoEstoque.Count == 0)
                         {
                             if (pti != null)
                             {
@@ -191,16 +185,13 @@ namespace WebApplication1
                                 {
                                     foreach (var itens in pti)
                                     {
+                                        bool erro = false;
+                                        string resultado = "";
+
                                         if (DateTime.Now.Subtract(itens.DT_VALIDADE.Value).Days >= 0)
                                         {
                                             erro = true;
                                             resultado = resultado + "\n" + itens.DT_VALIDADE.Value + " Data de Validade Vencida";
-                                        }
-                                        else
-                                        {
-                                            erro = false;
-                                            resultado = "";
-
                                         }
 
                                         if (DateTime.Now.Subtract(itens.VALIDADE_TESTE.Value).Days >= 0)
@@ -208,14 +199,11 @@ namespace WebApplication1
                                             erro = true;
                                             resultado = resultado + "\n" + itens.VALIDADE_TESTE.Value + " Data de Teste Vencida";
                                         }
-                                        else
-                                        {
-                                            erro = false;
-                                            resultado = "";
-                                        }
 
                                         if (!erro)
                                         {
+                                            L_ESTOQUE le = new L_ESTOQUE();
+                                            L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
 
                                             le.COD_PRODUTO = itens.COD_PRODUTO;
                                             le.COD_RECEBIMENTO = gdi;
@@ -224,12 +212,11 @@ namespace WebApplication1
                                             le.ENTRADA_SAIDA = "R";
                                             le.EPC = itens.EPC;
                                             le.QUANTIDADE = 1;
-                                            le.FK_PRODUTO = dbo.L_PRODUTOS.Where(x => x.COD_PRODUTO == itens.COD_PRODUTO).ToList()[0].ID;
+                                            le.FK_PRODUTO = dbo.L_PRODUTOS.First(x => x.COD_PRODUTO == itens.COD_PRODUTO).ID;
                                             le.STATUS = "R";
                                             le.DESC_STATUS = "Recebido";
                                             dbo.L_ESTOQUE.Add(le);
                                             dbo.SaveChanges();
-
 
                                             lme.COD_PRODUTO = le.COD_PRODUTO;
                                             lme.DATA_MOVIMENTACAO = DateTime.Now;
@@ -331,7 +318,7 @@ namespace WebApplication1
                             if (itens != null)
                             {
 
-                                if(cnpj != itens.CNPJ_DESTINATARIO)
+                                if (cnpj != itens.CNPJ_DESTINATARIO)
                                 {
                                     erro = true;
                                     resultado = resultado + "\nEste item esta vinculado para outra Empresa";
@@ -518,7 +505,8 @@ namespace WebApplication1
                     return mov;
                 }
             }
-            catch {
+            catch
+            {
                 RESULTADOMOV mv = new RESULTADOMOV();
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                 mv.DataMovimentacao = DateTime.Now;
@@ -603,7 +591,7 @@ namespace WebApplication1
                                                         var lEst = dbo.L_ESTOQUE.First(x => x.EPC == epc);
                                                         if (lEst.STATUS == "R" || lEst.STATUS == "B" || lEst.STATUS == "A" || lEst.STATUS == "O" || lEst.STATUS == "E")
                                                         {
-                                                            if (lEst.ENTRADA_SAIDA != "S"  || lEst.STATUS == "O")
+                                                            if (lEst.ENTRADA_SAIDA != "S" || lEst.STATUS == "O")
                                                             {
                                                                 lEst.ENTRADA_SAIDA = "S";
                                                                 lEst.DATA_SAIDA = DateTime.Now.ToLongTimeString();
@@ -646,7 +634,7 @@ namespace WebApplication1
                                                                 dbo.L_FICHACADASTRAL.Add(lfc);
                                                                 dbo.SaveChanges();
 
-                                                                
+
 
                                                             }
                                                             else
@@ -754,7 +742,7 @@ namespace WebApplication1
 
                                         }
 
-                                        
+
                                     }
                                     else
                                     {
@@ -811,7 +799,7 @@ namespace WebApplication1
                 }
                 return mov;
             }
-            catch(Exception er)
+            catch (Exception er)
             {
                 RESULTADOMOV mv = new RESULTADOMOV();
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
@@ -824,7 +812,7 @@ namespace WebApplication1
                 return mov;
             }
 
-            
+
         }
 
         private void criarHookArquivo(string docKey)
@@ -1063,7 +1051,7 @@ namespace WebApplication1
 
                     }
                 }
-                
+
                 return mov;
             }
             catch (Exception er)
@@ -1114,7 +1102,7 @@ namespace WebApplication1
 
                                             lEst.ENTRADA_SAIDA = "E";
                                             lEst.DATA_ENTRADA = DateTime.Now;
-                                           
+
 
 
                                             //lEst.ENTRADA_SAIDA = "E";
@@ -1223,7 +1211,8 @@ namespace WebApplication1
                 return mov;
 
             }
-            catch {
+            catch
+            {
                 RESULTADOMOV mv = new RESULTADOMOV();
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                 mv.Produto = "";
@@ -1252,7 +1241,7 @@ namespace WebApplication1
                 L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
                 L_INSPECAOFUNCIONARIO li = new L_INSPECAOFUNCIONARIO();
                 L_INSPITEM lit = new L_INSPITEM();
-                string mensagem = String.Empty; 
+                string mensagem = String.Empty;
                 bool erro = false;
                 foreach (var epc in lines)
                 {
@@ -1289,10 +1278,10 @@ namespace WebApplication1
 
                                         var statusEstoque = dbo.L_ESTOQUE.Select(x => new { x.STATUS, x.EPC, x.DESC_STATUS }).Where(x => x.EPC == epc).ToList();
 
-                                        if(statusEstoque!= null && statusEstoque.Count > 0)
+                                        if (statusEstoque != null && statusEstoque.Count > 0)
                                         {
 
-                                            if(statusEstoque[0].STATUS == "B")
+                                            if (statusEstoque[0].STATUS == "B")
                                             {
 
                                                 erro = true;
@@ -1800,8 +1789,8 @@ namespace WebApplication1
                     return mov;
                 }
             }
-            catch(Exception er) {
-
+            catch (Exception er)
+            {
                 RESULTADOMOV mv = new RESULTADOMOV();
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                 mv.Produto = "";
@@ -1819,7 +1808,7 @@ namespace WebApplication1
         {
             webservicetwos3Entities dbo = new webservicetwos3Entities();
             string[] lines = listaEPCS.Split('|');
-            foreach(var epc in lines)
+            foreach (var epc in lines)
             {
                 var atr = dbo.L_LOGIN_FUNCIONARIO.Where(x => x.CRACHA == epc).ToList();
                 if (atr != null)
@@ -2015,11 +2004,11 @@ namespace WebApplication1
                 if (epc != "")
                 {
                     var result = dbo.L_ESTOQUE.Where(x => x.EPC == epc).ToList();
-                    
+
                     if (result.Count > 0)
                     {
 
-                        if (result[0].STATUS == "M" || result[0].STATUS =="D")
+                        if (result[0].STATUS == "M" || result[0].STATUS == "D")
                         {
 
                             int IDS = result[0].ID;
@@ -2071,7 +2060,7 @@ namespace WebApplication1
                             mv.corAviso = "#ff7f7f";
                             mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
                         }
-                        
+
                     }
                     else
                     {
@@ -2098,7 +2087,7 @@ namespace WebApplication1
             L_DESCARTE ldesc = new L_DESCARTE();
             foreach (var epc in lines)
             {
-                
+
                 if (epc != "")
                 {
                     try
@@ -2224,10 +2213,10 @@ namespace WebApplication1
                             mv.corAviso = "#ff7f7f";
                             mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
                         }
-                        
+
                     }
 
-                    
+
                 }
             }
 
@@ -2253,7 +2242,7 @@ namespace WebApplication1
                     {
 
                         var pte = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == epc && x.CNPJ_DESTINATARIO == cnpj).ToList();
-                        
+
                         if (pte != null)
                         {
                             if (pte.Count > 0)
@@ -2279,20 +2268,20 @@ namespace WebApplication1
                                             }
                                             else
                                             {
-                                                
+
                                                 resultado = resultado + "\nNenhum Usuario Atribuido a este EPI";
 
                                             }
                                         }
                                         else
                                         {
-                                            
+
                                             resultado = resultado + "\nNenhum Usuario Atribuido a este EPI";
                                         }
                                     }
                                     else
                                     {
-                                        
+
                                         resultado = resultado + "\nNenhum Usuario Atribuido a este EPI";
                                     }
 
@@ -2345,7 +2334,7 @@ namespace WebApplication1
                             mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
                         }
                     }
-                    
+
                 }
 
                 return mov;
@@ -2386,7 +2375,7 @@ namespace WebApplication1
                             {
                                 foreach (var itens in pti)
                                 {
-                                    
+
                                     var matricula = itens.MATRICULA;
                                     if (itens.MATRICULA != null)
                                     {
@@ -2465,7 +2454,8 @@ namespace WebApplication1
                 var result = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == epc).ToList();
                 if (result != null)
                 {
-                    if (result.Count > 0) {
+                    if (result.Count > 0)
+                    {
                         mov.Add(new DADOSEPI { CodProduto = result[0].COD_PRODUTO, Produto = result[0].PRODUTO, Qtd = 1, CodFornecedor = result[0].COD_FORNECEDOR, EPC = result[0].EPC });
                     }
                     else
@@ -2478,21 +2468,21 @@ namespace WebApplication1
                     mov.Add(new DADOSEPI { CodProduto = "0", Produto = "", Qtd = 0, CodFornecedor = "", EPC = "" });
                 }
 
-                
-                    var cracha = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == epc).ToList();
-                    if (cracha != null)
+
+                var cracha = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == epc).ToList();
+                if (cracha != null)
+                {
+                    if (cracha.Count > 0)
                     {
-                        if (cracha.Count > 0)
+                        int fks = Convert.ToInt32(cracha[0].FK_FUNCIONARIO.ToString());
+                        var nome = dbo.L_FUNCIONARIOS.Where(x => x.ID == fks).ToList();
+                        if (nome.Count > 0)
                         {
-                            int fks = Convert.ToInt32(cracha[0].FK_FUNCIONARIO.ToString());
-                            var nome = dbo.L_FUNCIONARIOS.Where(x => x.ID == fks).ToList();
-                            if (nome.Count > 0)
-                            {
-                                mov.Add(new DADOSEPI { CodProduto = "Matricula=" + cracha[0].MATRICULA, Produto = "Funcionario=" + nome[0].NOME + " " + nome[0].SOBRENOME, Qtd = 1, CodFornecedor = "", EPC = cracha[0].CODIGO_CRACHA });
-                            }
+                            mov.Add(new DADOSEPI { CodProduto = "Matricula=" + cracha[0].MATRICULA, Produto = "Funcionario=" + nome[0].NOME + " " + nome[0].SOBRENOME, Qtd = 1, CodFornecedor = "", EPC = cracha[0].CODIGO_CRACHA });
                         }
                     }
-                
+                }
+
 
             }
 
@@ -2638,7 +2628,7 @@ namespace WebApplication1
             }
             catch
             {
-                string[] arr2 = { "", ""};
+                string[] arr2 = { "", "" };
                 return arr2;
             }
         }
@@ -2648,7 +2638,7 @@ namespace WebApplication1
         {
             try
             {
-                
+
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
                 var result = dbo.L_MENSAGEM_OCORRENCIA.OrderByDescending(x => x.DATA_MENSAGEM).ToList();
@@ -2660,7 +2650,7 @@ namespace WebApplication1
                         DateTime dt = DateTime.Parse(mv.DATA_MENSAGEM.Value.ToString());
                         mov.Add(new RESULTADOMOV { Resultado = mv.MENSAGEM, EPC = mv.NUMERO, DataMovimentacao = dt, Produto = mv.ID.ToString(), corAviso = "" });
                     }
-                    
+
                 }
 
                 return mov;
@@ -2677,7 +2667,7 @@ namespace WebApplication1
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
                 var result = dbo.L_MENSAGEM_OCORRENCIA.OrderByDescending(x => x.DATA_MENSAGEM).ToList();
-                
+
                 if (result != null)
                 {
                     foreach (var mv in result)
@@ -2702,7 +2692,7 @@ namespace WebApplication1
 
         private string isNull(string oCORRENCIA)
         {
-            if(oCORRENCIA== null)
+            if (oCORRENCIA == null)
             {
                 return "A";
             }
@@ -2870,7 +2860,7 @@ namespace WebApplication1
             try
             {
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
-                
+
                 var result = dbo.L_MOVIMENTACAO_ESTOQUE.Where(x => x.COD_FUNCIONARIO == matricula && x.COD_DISTRIBUICAO == codDistribuicao).ToList();
                 RESULTADO mv = new RESULTADO();
                 List<RESULTADO> mov = new List<RESULTADO>();
@@ -2918,7 +2908,7 @@ namespace WebApplication1
                 string path = Server.MapPath("Doc_FichaCadastral");
                 string fileName = path + "\\" + nomeArquivo + ".docx";
                 var doc = DocX.Create(fileName);
-                
+
                 doc.InsertParagraph("FICHA DE EPI'S:", false, titleFormat).Alignment = Alignment.center;
                 titleFormat.Size = 14D;
                 titleFormat.Position = 20;
@@ -2929,7 +2919,7 @@ namespace WebApplication1
                 titleFormat.Position = 0;
                 doc.InsertParagraph("CONTROLE DE ENTREGA DE EPI'S\nEQUIPAMENTOS DE PROTEÇÃO INDIVIDUAL", false, titleFormat).Alignment = Alignment.center;
                 doc.InsertParagraph("", false, titleFormat).Position(20);
-                doc.InsertParagraph("Eu " + dadosFicha.Split('|')[0] + " Registro No "+ dadosFicha.Split('|')[1] + " Função "+ dadosFicha.Split('|')[2] + " declaro para  todos  os  efeitos  legais  que  recebi  da Leal Equipamentos de Proteção , os equipamentos de proteção individual (EPI) relacionados abaixo, bem como as instruções para sua correta utilização, obrigando-me:");
+                doc.InsertParagraph("Eu " + dadosFicha.Split('|')[0] + " Registro No " + dadosFicha.Split('|')[1] + " Função " + dadosFicha.Split('|')[2] + " declaro para  todos  os  efeitos  legais  que  recebi  da Leal Equipamentos de Proteção , os equipamentos de proteção individual (EPI) relacionados abaixo, bem como as instruções para sua correta utilização, obrigando-me:");
 
                 doc.InsertParagraph("1) usar o EPI e uniforme indicado, apenas às finalidades a que se destina;");
                 doc.InsertParagraph("2) comunicar o setor de obras /segurança do trabalho, qualquer alteração no EPI que o torne parcialmente ou totalmente danificado;");
@@ -2949,8 +2939,8 @@ namespace WebApplication1
                 Formatting column = new Formatting();
                 column.Bold = true;
                 column.Size = 8d;
-                
-                t.Rows[count].Cells[0].Paragraphs[0].Append("Qtd.", column).Alignment = Alignment.center ;
+
+                t.Rows[count].Cells[0].Paragraphs[0].Append("Qtd.", column).Alignment = Alignment.center;
                 t.Rows[count].Cells[1].Paragraphs[0].Append("EPI'S", column).Alignment = Alignment.center;
                 t.Rows[count].Cells[2].Paragraphs[0].Append("Data de Entrega", column).Alignment = Alignment.center;
                 t.Rows[count].Cells[3].Paragraphs[0].Append("EPC", column).Alignment = Alignment.center;
@@ -2969,7 +2959,7 @@ namespace WebApplication1
                     t.Rows[count].Cells[5].Paragraphs[0].Append("").FontSize(8d).Alignment = Alignment.center;
                     t.Rows[count].Cells[6].Paragraphs[0].Append("").FontSize(8d).Alignment = Alignment.center;
                 }
-                
+
                 //t.SetWidths(new float[] { 1, 1, 1, 1, 1, 1, 1 });
                 doc.InsertTable(t);
 
@@ -2992,10 +2982,10 @@ namespace WebApplication1
                 doc.InsertParagraph("ASSINATURA: _______________________________").Position(10);
                 doc.Save();
                 var docs = enviarDocumento(fileName, matricula);
-                documentoAssinado(codDistribuicao,nomeArquivo, matricula, dadosFicha.Split('|')[4], dadosFicha.Split('|')[5], docs.Key);
+                documentoAssinado(codDistribuicao, nomeArquivo, matricula, dadosFicha.Split('|')[4], dadosFicha.Split('|')[5], docs.Key);
                 return docs.Key;
             }
-            catch(Exception E)
+            catch (Exception E)
             {
                 throw new Exception(E.Message.ToString());
             }
@@ -3017,7 +3007,7 @@ namespace WebApplication1
                 lda.COD_DISTRIBUICAO = Guid.Parse(codDistribuicao);
                 dbo.L_DOCUMENTO_ASSINATURA.Add(lda);
                 dbo.SaveChanges();
-               
+
 
             }
             catch
@@ -3062,9 +3052,9 @@ namespace WebApplication1
                     var response = client.PostAsJsonAsync<BdAssinatura>("/v1/documents/" + documento + "/list?access_token=de3861faf07687e8afefeaf8ad9bb466", SG).Result;
                     //PostAsJsonAsync("/v1/documents/673c8736-6299-4f78-a5c8-6b31516d863c/list?access_token=6e7717ba405a88754d3943b558ce2a1c", SG);
                     //PostAsJsonAsync<Signer>("/v1/documents/673c8736-6299-4f78-a5c8-6b31516d863c/list?access_token=6e7717ba405a88754d3943b558ce2a1c", SG);
-                   
+
                 }
-                
+
             }
             catch (Exception er)
             {
@@ -3078,7 +3068,7 @@ namespace WebApplication1
             try
             {
                 return StdTools.Unformatted(telefone);
-                }
+            }
             catch
             {
                 return null;
@@ -3103,7 +3093,8 @@ namespace WebApplication1
                 lda.STATUS = status;
                 dbo.SaveChanges();
             }
-            catch {
+            catch
+            {
 
             }
         }
