@@ -545,7 +545,6 @@ namespace WebApplication1
                 List<L_ATRIBUICAOCRACHA> cracha = new List<L_ATRIBUICAOCRACHA>();
                 L_MOVIMENTACAO_ESTOQUE lme = new L_MOVIMENTACAO_ESTOQUE();
                 string matric = String.Empty;
-                bool enviarArquivo = false;
                 foreach (var epc in lines)
                 {
                     if (epc != "")
@@ -578,7 +577,6 @@ namespace WebApplication1
 
                     foreach (var epc in lines)
                     {
-                        enviarArquivo = false;
                         if (epc != "")
                         {
                             if (epc != codCracha)
@@ -842,11 +840,9 @@ namespace WebApplication1
             try
             {
                 string[] lines = listaEPCS.Split('|');
-                string codCracha = "";
                 L_ESTOQUE le = new L_ESTOQUE();
                 L_ENVIO_PARA_TESTE lteste = new L_ENVIO_PARA_TESTE();
                 var gdi = Guid.NewGuid();
-                bool existeCracha = false;
                 RESULTADOMOV mv = new RESULTADOMOV();
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                 List<L_ATRIBUICAOCRACHA> cracha = new List<L_ATRIBUICAOCRACHA>();
@@ -3082,7 +3078,7 @@ namespace WebApplication1
             try
             {
                 return StdTools.Unformatted(telefone);
-            }
+                }
             catch
             {
                 return null;
@@ -3152,11 +3148,9 @@ namespace WebApplication1
             try
             {
                 string[] lines = listaEPCS.Split('|');
-                string codCracha = "";
                 L_ESTOQUE le = new L_ESTOQUE();
                 L_ENVIO_PARA_HIGIENIZACAO lteste = new L_ENVIO_PARA_HIGIENIZACAO();
                 var gdi = Guid.NewGuid();
-                bool existeCracha = false;
                 RESULTADOMOV mv = new RESULTADOMOV();
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                 List<L_ATRIBUICAOCRACHA> cracha = new List<L_ATRIBUICAOCRACHA>();
