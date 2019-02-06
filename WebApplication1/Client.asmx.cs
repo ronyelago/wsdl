@@ -1970,6 +1970,11 @@ namespace WebApplication1
                     sessaoUsuario.senhaFuncionario = usuario.SENHA;
                     sessaoUsuario.codigoFuncionario = usuario.FK_USUARIO.ToString();
 
+                    Sessao.FkCnpj = Convert.ToInt32(sessaoUsuario.fkCnpj);
+                    Sessao.Cnpj = sessaoUsuario.Cnpj;
+
+                    controleSessao.incluirDadosdeSessao(sessaoUsuario);
+
                     return mov;
                 }
                 else
