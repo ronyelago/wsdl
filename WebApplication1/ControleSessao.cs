@@ -38,21 +38,11 @@ namespace WebApplication1
             try
             {
                 var result = dbo.Database.SqlQuery<string>("SELECT " + v + " FROM SessaoUsuario WHERE SessionId='" + sessionID + "'").ToList();
-                if (result != null)
+                if (result != null && result.Count > 0)
                 {
-                    if (result.Count > 0)
-                    {
-                        return result[0];
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    return result[0];
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
             catch
             {
@@ -89,7 +79,10 @@ namespace WebApplication1
                 dbo.SaveChanges();
                 return true;
             }
-            catch { return false; }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

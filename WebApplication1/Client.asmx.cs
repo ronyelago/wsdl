@@ -22,6 +22,7 @@ namespace WebApplication1
     public class Client : System.Web.Services.WebService
     {
         webservicetwos3Entities dbo = new webservicetwos3Entities();
+        ControleSessao controleSessao = new ControleSessao();
         HttpClient client;
 
         [WebMethod]
@@ -1922,29 +1923,31 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public List<DADOSLOGIN> loginFuncionario(string matricula, string senha)
+        public List<DADOSLOGIN> loginFuncionario(string loginUsuario, string senha)
         {
             try
             {
                 DADOSLOGIN mv = new DADOSLOGIN();
                 List<DADOSLOGIN> mov = new List<DADOSLOGIN>();
-                var login = dbo.L_LOGIN.Where(x => x.USUARIO == matricula && x.SENHA == senha).ToList();
-                if (login.Count > 0)
+                var listaUsuarios = dbo.L_LOGIN.Where(x => x.USUARIO == loginUsuario && x.SENHA == senha).ToList();
+                if (listaUsuarios.Count > 0)
                 {
-                    int fkFuncionario = Convert.ToInt32(login[0].FK_USUARIO.ToString());
-                    var dadosFuncionarios = dbo.L_USUARIO_COALBORADOR.Where(x => x.id == fkFuncionario).ToList();
-                    int fkCliente = Convert.ToInt32(dadosFuncionarios[0].FK_CLIENTE.ToString());
-                    var dadosEmpresa = dbo.L_CLIENTE.Where(x => x.ID == fkCliente).ToList();
+                    var usuario = listaUsuarios[0];
+
+                    int fkFuncionario = Convert.ToInt32(usuario.FK_USUARIO.ToString());
+                    var dadosUsuario = dbo.L_USUARIO_COALBORADOR.First(x => x.id == fkFuncionario);
+                    int fkCliente = Convert.ToInt32(dadosUsuario.FK_CLIENTE.ToString());
+                    var dadosEmpresa = dbo.L_CLIENTE.First(x => x.ID == fkCliente);
 
                     mv.Produto = "1";
                     mv.Resultado = "OK";
-                    mv.EPC = matricula;
+                    mv.EPC = loginUsuario;
                     mv.DataMovimentacao = DateTime.Now;
                     mv.corAviso = "#ffffff";
-                    mv.Empresa = dadosEmpresa[0].NOME;
-                    mv.Nome = dadosFuncionarios[0].nome;
-                    mv.FkCliente = Convert.ToInt32(dadosFuncionarios[0].FK_CLIENTE.ToString());
-                    mv.Cnpj = dadosFuncionarios[0].cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
+                    mv.Empresa = dadosEmpresa.NOME;
+                    mv.Nome = dadosUsuario.nome;
+                    mv.FkCliente = Convert.ToInt32(dadosUsuario.FK_CLIENTE.ToString());
+                    mv.Cnpj = dadosUsuario.cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
                     mov.Add(new DADOSLOGIN
                     {
                         Resultado = mv.Resultado,
@@ -1957,13 +1960,23 @@ namespace WebApplication1
                         FkCliente = mv.FkCliente,
                         Cnpj = mv.Cnpj
                     });
+
+                    //Controle de sessao
+                    //inicialização dos parametros durante login
+                    SessaoUsuario sessaoUsuario = controleSessao.criarSessao(Session.SessionID);
+                    sessaoUsuario.autenticado = "OK";
+                    sessaoUsuario.nomeFuncionario = usuario.NOME;
+                    sessaoUsuario.pAcesso = usuario.P_ACESSO;
+                    sessaoUsuario.senhaFuncionario = usuario.SENHA;
+                    sessaoUsuario.codigoFuncionario = usuario.FK_USUARIO.ToString();
+
                     return mov;
                 }
                 else
                 {
                     mv.Produto = "2";
                     mv.Resultado = "Matricula ou Senha Incorreta";
-                    mv.EPC = matricula;
+                    mv.EPC = loginUsuario;
                     mv.DataMovimentacao = DateTime.Now;
                     mv.corAviso = "#ff7f7f";
                     mov.Add(new DADOSLOGIN { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
@@ -1976,7 +1989,7 @@ namespace WebApplication1
                 List<DADOSLOGIN> mov = new List<DADOSLOGIN>();
                 mv.Produto = "3";
                 mv.Resultado = "Verifique sua Conexão!";
-                mv.EPC = matricula;
+                mv.EPC = loginUsuario;
                 mv.DataMovimentacao = DateTime.Now;
                 mv.corAviso = "#ff7f7f";
                 mov.Add(new DADOSLOGIN { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
