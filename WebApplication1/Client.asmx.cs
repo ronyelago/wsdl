@@ -446,8 +446,7 @@ namespace WebApplication1
             try
             {
                 RESULTADOMOV mv = new RESULTADOMOV();
-                var listaFuncionarios = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
-                L_ATRIBUICAOCRACHA lac = new L_ATRIBUICAOCRACHA();
+
                 var crac = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == cracha).ToList();
                 if (crac.Count > 0)
                 {
@@ -460,28 +459,29 @@ namespace WebApplication1
                     return mov;
                 }
 
+                var listaFuncionarios = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
                 if (listaFuncionarios.Count > 0)
                 {
-                    lac.ATIVO = "S";
-                    lac.CODIGO_CRACHA = cracha;
+                    var funcionario = listaFuncionarios[0];
                     if (listaFuncionarios.Count > 1)
                     {
-                        // BUG FIX PLACEHOLDER
-                        // (Crachá Multiempresas: 2 funcionarios com mesma matricula em empresas diferentes, aqui refere-se sempre ao primeiro, independentemente da empresa)
-                        // precisa-se que seja atualizado o cracha apenas do Funcionário da empresa atualmente logada
-                        // como o método de login foi alterado desde essa versão extremamente desatualizada do código, é melhor não tentar fazer grandes alterações nessa parte
-                        // esse if-else é de minha autoria
-                        // (Rodolfo Cortese)
-                        lac.FK_FUNCIONARIO = listaFuncionarios[0].ID;
-                        lac.MATRICULA = listaFuncionarios[0].MATRICULA;
+                        for (int i = 0; i < listaFuncionarios.Count; i++)
+                        {
+                            if (listaFuncionarios[i].CNPJ == Sessao.Cnpj)
+                            {
+                                funcionario = listaFuncionarios[i];
+                                break;
+                            }
+                        }
                     }
-                    else
-                    {
-                        lac.FK_FUNCIONARIO = listaFuncionarios[0].ID;
-                        lac.MATRICULA = listaFuncionarios[0].MATRICULA;
-                    }
-                    lac.DATA_ATRIBUICAO = DateTime.Now;
-                    dbo.L_ATRIBUICAOCRACHA.Add(lac);
+
+                    L_ATRIBUICAOCRACHA atribuicaoCracha = new L_ATRIBUICAOCRACHA();
+                    atribuicaoCracha.ATIVO = "S";
+                    atribuicaoCracha.CODIGO_CRACHA = cracha;
+                    atribuicaoCracha.FK_FUNCIONARIO = funcionario.ID;
+                    atribuicaoCracha.MATRICULA = funcionario.MATRICULA;
+                    atribuicaoCracha.DATA_ATRIBUICAO = DateTime.Now;
+                    dbo.L_ATRIBUICAOCRACHA.Add(atribuicaoCracha);
                     dbo.SaveChanges();
 
                     List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
