@@ -2439,13 +2439,13 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public List<DADOSEPI> retornarDadosEpiValidar(string listaEPCS)
+        public List<DADOSEPI> retornarDadosEpiValidar(string listaEPCS,string cnpj, int fkCliente)
         {
             List<DADOSEPI> mov = new List<DADOSEPI>();
             string[] lines = listaEPCS.Split('|');
             foreach (var epc in lines)
             {
-                var result = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == epc).ToList();
+                var result = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == epc && x.CNPJ_DESTINATARIO == cnpj).ToList();
                 if (result != null)
                 {
                     if (result.Count > 0) {
@@ -2461,14 +2461,14 @@ namespace WebApplication1
                     mov.Add(new DADOSEPI { CodProduto = "0", Produto = "", Qtd = 0, CodFornecedor = "", EPC = "" });
                 }
 
-                
-                    var cracha = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == epc).ToList();
+
+                var cracha = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == epc).ToList();
                     if (cracha != null)
                     {
                         if (cracha.Count > 0)
                         {
                             int fks = Convert.ToInt32(cracha[0].FK_FUNCIONARIO.ToString());
-                            var nome = dbo.L_FUNCIONARIOS.Where(x => x.ID == fks).ToList();
+                        var nome = dbo.L_FUNCIONARIOS.Where(x => x.ID == fks && x.FK_CLIENTE == fkCliente).ToList();
                             if (nome.Count > 0)
                             {
                                 mov.Add(new DADOSEPI { CodProduto = "Matricula=" + cracha[0].MATRICULA, Produto = "Funcionario=" + nome[0].NOME + " " + nome[0].SOBRENOME, Qtd = 1, CodFornecedor = "", EPC = cracha[0].CODIGO_CRACHA });
