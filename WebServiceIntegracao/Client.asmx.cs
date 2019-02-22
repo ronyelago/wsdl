@@ -39,7 +39,7 @@ namespace WebServiceIntegracao
             List<RootObject> bsObj = JsonConvert.DeserializeObject<List<RootObject>>(json);
             List<RESULTADO_IMPORTACAO> r = new List<RESULTADO_IMPORTACAO>();
             string erro = "";
-            int count = 0;
+            int contador = 0;
             foreach(var it in bsObj)
             {
                 erro = "";
@@ -60,70 +60,70 @@ namespace WebServiceIntegracao
                 }
                 else
                 {
-                    foreach(var mI in it.Produtos)
+                    foreach(var produtoImportacao in it.Produtos)
                     {
                         //if(mI.CA == "")
                         //{
                         //    erro = erro + ";CA em Branco";
                         //}
 
-                        if (mI.Codigo_do_Produto == "")
+                        if (produtoImportacao.Codigo_do_Produto == "")
                         {
                             erro = erro + ";Codigo do Produto em Branco";
                         }
 
-                        if (mI.Cod_Fornecedor == "")
+                        if (produtoImportacao.Cod_Fornecedor == "")
                         {
                             erro = erro + ";Cod. Fornecedor em Branco";
                         }
 
-                        if (mI.Data_Fabricacao == "")
+                        if (produtoImportacao.Data_Fabricacao == "")
                         {
                             erro = erro + ";Dt. Fabricação em Branco";
                         }
 
-                        if (mI.Data_Validade == "")
+                        if (produtoImportacao.Data_Validade == "")
                         {
                             erro = erro + ";Dt. Validade em Branco";
                         }
 
-                        if (mI.Desc_Produto == "")
+                        if (produtoImportacao.Desc_Produto == "")
                         {
                             erro = erro + ";Desc. Produto em Branco";
                         }
 
-                        if (mI.EPC == "")
+                        if (produtoImportacao.EPC == "")
                         {
                             erro = erro + ";EPC em Branco";
                         }
 
-                        if (mI.ID < 1)
+                        if (produtoImportacao.ID < 1)
                         {
                             erro = erro + ";ID em Branco";
                         }
 
-                        if (mI.Numero_Lote == "")
+                        if (produtoImportacao.Numero_Lote == "")
                         {
                             erro = erro + ";Numero Lote em Branco";
                         }
 
-                        if (mI.Validade_Teste == "")
+                        if (produtoImportacao.Validade_Teste == "")
                         {
                             erro = erro + ";Validade de Teste em Branco";
                         }
 
                         if(erro == "")
                         {
-                            string epc = mI.EPC;
-                            string mensa = "";
-                            string codProduto = mI.Codigo_do_Produto;
+                            string epc = produtoImportacao.EPC;
+                            string mensagem = "";
+                            string codigoProduto = produtoImportacao.Codigo_do_Produto;
                             try
                             {
-                                var lpr = dbo.L_PRODUTOS.Where(x => x.COD_PRODUTO == codProduto && x.CNPJ_DESTINATARIO == it.CNPJ_Destinatario).ToList();
+                                var lpr = dbo.L_PRODUTOS.Where(x => x.COD_PRODUTO == codigoProduto && x.CNPJ_DESTINATARIO == it.CNPJ_Destinatario).ToList();
                                 int idCod = lpr[0].ID;
                                 L_PRODUTOS lc = dbo.L_PRODUTOS.First<L_PRODUTOS>(x => x.ID == idCod);
-                                lc.COD_PRODUTO = codProduto;
-                                lc.PRODUTO = mI.Desc_Produto;
+                                lc.COD_PRODUTO = codigoProduto;
+                                lc.PRODUTO = produtoImportacao.Desc_Produto;
                                 lc.CNPJ_EMITENTE = it.CNPJ_Emitente;
                                 lc.CNPJ_DESTINATARIO = it.CNPJ_Destinatario;
                                 dbo.SaveChanges();
@@ -131,8 +131,8 @@ namespace WebServiceIntegracao
                             catch
                             {
                                 L_PRODUTOS lc = new L_PRODUTOS();
-                                lc.COD_PRODUTO = codProduto;
-                                lc.PRODUTO = mI.Desc_Produto;
+                                lc.COD_PRODUTO = codigoProduto;
+                                lc.PRODUTO = produtoImportacao.Desc_Produto;
                                 lc.CNPJ_EMITENTE = it.CNPJ_Emitente;
                                 lc.CNPJ_DESTINATARIO = it.CNPJ_Destinatario;
                                 dbo.L_PRODUTOS.Add(lc);
@@ -142,80 +142,80 @@ namespace WebServiceIntegracao
                             try
                             {
                                 L_PRODUTOS_ITENS lp = dbo.L_PRODUTOS_ITENS.First<L_PRODUTOS_ITENS>(x => x.EPC == epc);
-                                lp.CA = mI.CA;
+                                lp.CA = produtoImportacao.CA;
                                 lp.CNPJ_EMITENTE = it.CNPJ_Emitente;
                                 lp.CNPJ_DESTINATARIO = it.CNPJ_Destinatario;
-                                lp.COD_FORNECEDOR = mI.Cod_Fornecedor;
-                                lp.COD_PRODUTO = mI.Codigo_do_Produto;
+                                lp.COD_FORNECEDOR = produtoImportacao.Cod_Fornecedor;
+                                lp.COD_PRODUTO = produtoImportacao.Codigo_do_Produto;
                                 lp.DATA_ENTRADA = DateTime.Now;
-                                lp.DT_FABRICACAO = DateTime.Parse(mI.Data_Fabricacao);
-                                lp.DT_VALIDADE = DateTime.Parse(mI.Data_Validade);
-                                lp.EPC = mI.EPC;
-                                lp.NUMERO_LOTE = mI.Numero_Lote;
+                                lp.DT_FABRICACAO = DateTime.Parse(produtoImportacao.Data_Fabricacao);
+                                lp.DT_VALIDADE = DateTime.Parse(produtoImportacao.Data_Validade);
+                                lp.EPC = produtoImportacao.EPC;
+                                lp.NUMERO_LOTE = produtoImportacao.Numero_Lote;
                                 lp.NUMERO_NOTA = it.Numero_da_Nota;
-                                lp.PRODUTO = mI.Desc_Produto;
-                                lp.VALIDADE_TESTE = DateTime.Parse(mI.Validade_Teste);
-                                lp.GRUPO_CLIENTE = mI.Grupo;
-                                lp.NORMA = mI.Norma;
+                                lp.PRODUTO = produtoImportacao.Desc_Produto;
+                                lp.VALIDADE_TESTE = DateTime.Parse(produtoImportacao.Validade_Teste);
+                                lp.GRUPO_CLIENTE = produtoImportacao.Grupo;
+                                lp.NORMA = produtoImportacao.Norma;
                                 dbo.SaveChanges();
-                                mensa = "Atualizado";
+                                mensagem = "Atualizado";
                             }
                             catch
                             {
                                 L_PRODUTOS_ITENS lp = new L_PRODUTOS_ITENS();
-                                lp.CA = mI.CA;
+                                lp.CA = produtoImportacao.CA;
                                 lp.CNPJ_EMITENTE = it.CNPJ_Emitente;
                                 lp.CNPJ_DESTINATARIO = it.CNPJ_Destinatario;
-                                lp.COD_FORNECEDOR = mI.Cod_Fornecedor;
-                                lp.COD_PRODUTO = mI.Codigo_do_Produto;
+                                lp.COD_FORNECEDOR = produtoImportacao.Cod_Fornecedor;
+                                lp.COD_PRODUTO = produtoImportacao.Codigo_do_Produto;
                                 lp.DATA_ENTRADA = DateTime.Now;
-                                lp.DT_FABRICACAO = DateTime.Parse(mI.Data_Fabricacao);
-                                lp.DT_VALIDADE = DateTime.Parse(mI.Data_Validade);
-                                lp.EPC = mI.EPC;
-                                lp.NUMERO_LOTE = mI.Numero_Lote;
+                                lp.DT_FABRICACAO = DateTime.Parse(produtoImportacao.Data_Fabricacao);
+                                lp.DT_VALIDADE = DateTime.Parse(produtoImportacao.Data_Validade);
+                                lp.EPC = produtoImportacao.EPC;
+                                lp.NUMERO_LOTE = produtoImportacao.Numero_Lote;
                                 lp.NUMERO_NOTA = it.Numero_da_Nota;
-                                lp.PRODUTO = mI.Desc_Produto;
-                                lp.VALIDADE_TESTE = DateTime.Parse(mI.Validade_Teste);
-                                lp.GRUPO_CLIENTE = mI.Grupo;
-                                lp.NORMA = mI.Norma;
+                                lp.PRODUTO = produtoImportacao.Desc_Produto;
+                                lp.VALIDADE_TESTE = DateTime.Parse(produtoImportacao.Validade_Teste);
+                                lp.GRUPO_CLIENTE = produtoImportacao.Grupo;
+                                lp.NORMA = produtoImportacao.Norma;
                                 dbo.L_PRODUTOS_ITENS.Add(lp);
                                 dbo.SaveChanges();
-                                mensa = "OK";
+                                mensagem = "OK";
                             }
 
                           
 
 
-                            r[count].Add(new ItensResultado
+                            r[contador].Add(new ItensResultado
                             {
-                                ID = mI.ID,
-                                Cod_Produto = mI.Codigo_do_Produto,
-                                EPC = mI.EPC,
-                                Mensagem = mensa
+                                ID = produtoImportacao.ID,
+                                Cod_Produto = produtoImportacao.Codigo_do_Produto,
+                                EPC = produtoImportacao.EPC,
+                                Mensagem = mensagem
                             });
                         }
                         else
                         {
-                            r[count].Add(new ItensResultado
+                            r[contador].Add(new ItensResultado
                             {
-                                ID = mI.ID,
-                                Cod_Produto = mI.Codigo_do_Produto,
-                                EPC = mI.EPC,
+                                ID = produtoImportacao.ID,
+                                Cod_Produto = produtoImportacao.Codigo_do_Produto,
+                                EPC = produtoImportacao.EPC,
                                 Mensagem = erro
                             });
                         }
                     }
 
-                    L_IMPORTACAO_NOTACLIENTE impNota = new L_IMPORTACAO_NOTACLIENTE();
-                    impNota.CNPJ_CLIENTE = it.CNPJ_Destinatario;
-                    impNota.DATA = DateTime.Now;
-                    impNota.NOTA = it.Numero_da_Nota;
-                    impNota.QTD_ITENS = it.Produtos.Count;
-                    impNota.NOTIFICACAO = "N";
-                    dbo.L_IMPORTACAO_NOTACLIENTE.Add(impNota);
+                    L_IMPORTACAO_NOTACLIENTE notaImportacao = new L_IMPORTACAO_NOTACLIENTE();
+                    notaImportacao.CNPJ_CLIENTE = it.CNPJ_Destinatario;
+                    notaImportacao.DATA = DateTime.Now;
+                    notaImportacao.NOTA = it.Numero_da_Nota;
+                    notaImportacao.QTD_ITENS = it.Produtos.Count;
+                    notaImportacao.NOTIFICACAO = "N";
+                    dbo.L_IMPORTACAO_NOTACLIENTE.Add(notaImportacao);
                     dbo.SaveChanges();
                 }
-                count++;
+                contador++;
             }
 
             return JsonConvert.SerializeObject(r, Newtonsoft.Json.Formatting.Indented);
@@ -227,12 +227,12 @@ namespace WebServiceIntegracao
             try
             {
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
-                var r = dbo.L_PRODUTOS_ITENS.Where(x => x.NUMERO_NOTA == numeroNota).ToList();
-                return JsonConvert.SerializeObject(r, Newtonsoft.Json.Formatting.Indented);
+                var itensNota = dbo.L_PRODUTOS_ITENS.Where(x => x.NUMERO_NOTA == numeroNota).ToList();
+                return JsonConvert.SerializeObject(itensNota, Newtonsoft.Json.Formatting.Indented);
             }
             catch
             {
-                return "Nota não Importada ou Não encontrada";
+                return "Nota não encontrada";
             }
         }
 
