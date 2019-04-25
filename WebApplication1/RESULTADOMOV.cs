@@ -8,7 +8,6 @@ namespace WebApplication1
         public string EPC { get;  set; }
         public string Produto { get;  set; }
         public string Resultado { get;  set; }
-
         public string corAviso { get; set; }
     }
 }
