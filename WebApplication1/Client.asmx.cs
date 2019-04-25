@@ -448,6 +448,7 @@ namespace WebApplication1
                 RESULTADOMOV mv = new RESULTADOMOV();
 
                 var crac = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == cracha).ToList();
+
                 if (crac.Count > 0)
                 {
                     List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
