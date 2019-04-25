@@ -446,15 +446,16 @@ namespace WebApplication1
                 RESULTADOMOV resultadoMovimentacao = new RESULTADOMOV();
 
                 List<L_ATRIBUICAOCRACHA> atribuicaoCrachaList = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == cracha).ToList();
+                List<L_PRODUTOS_ITENS> ProdutosItensList = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == cracha).ToList();
 
-                //Verifica se o crachá já foi atrubuído a outro funcionário
-                if (atribuicaoCrachaList.Count > 0)
+                //Verifica se o EPCCode escaneado já foi atrubuído como crachá ou EPI
+                if (atribuicaoCrachaList.Any() || ProdutosItensList.Any())
                 {
                     List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
 
                     resultadoMovimentacao.DataMovimentacao = DateTime.Now;
                     resultadoMovimentacao.EPC = cracha;
-                    resultadoMovimentacao.Resultado = "Crachá já atribuído a um funcionário.";
+                    resultadoMovimentacao.Resultado = "Ítem já atribuído a um funcionário ou produto.";
                     resultadoMovimentacao.CorAviso = "#FFFFFF";
 
                     mov.Add(resultadoMovimentacao);
