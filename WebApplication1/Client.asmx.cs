@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
-using System.Web;
+using System.Text;
 using System.Web.Services;
 using Xceed.Words.NET;
-using System.Net.Http.Headers;
-using System.Text;
 
 namespace WebApplication1
 {
@@ -19,7 +17,7 @@ namespace WebApplication1
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
-    public class Client : System.Web.Services.WebService
+    public class Client : WebService
     {
         webservicetwos3Entities dbo = new webservicetwos3Entities();
         ControleSessao controleSessao = new ControleSessao();
@@ -60,8 +58,8 @@ namespace WebApplication1
                         mv.EPC = epc;
                         mv.DataMovimentacao = DateTime.Now;
                         mv.Produto = "";
-                        mv.corAviso = "#ffffff";
-                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                        mv.CorAviso = "#ffffff";
+                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                     }
                     else
@@ -141,9 +139,9 @@ namespace WebApplication1
                             mv.Produto = result[0].DESC_PRODUTO;
                             mv.Resultado = mensagem;
                             mv.EPC = epc;
-                            mv.corAviso = "#ffffff";
+                            mv.CorAviso = "#ffffff";
                             mv.DataMovimentacao = DateTime.Now;
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
                         else
                         {
@@ -151,8 +149,8 @@ namespace WebApplication1
                             mv.EPC = epc;
                             mv.DataMovimentacao = DateTime.Now;
                             mv.Produto = result[0].DESC_PRODUTO;
-                            mv.corAviso = "#ff7f7f";
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mv.CorAviso = "#ff7f7f";
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                         }
                     }
@@ -236,18 +234,18 @@ namespace WebApplication1
                                             mv.Produto = le.DESC_PRODUTO;
                                             mv.Resultado = "OK";
                                             mv.EPC = epc;
-                                            mv.corAviso = "#ffffff";
+                                            mv.CorAviso = "#ffffff";
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
                                         else
                                         {
                                             mv.Produto = itens.PRODUTO;
                                             mv.Resultado = resultado;
                                             mv.EPC = epc;
-                                            mv.corAviso = "#ff7f7f";
+                                            mv.CorAviso = "#ff7f7f";
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
                                     }
                                 }
@@ -256,9 +254,9 @@ namespace WebApplication1
                                     mv.Produto = "";
                                     mv.Resultado = "Este item não existe em nossa Base de dados";
                                     mv.EPC = epc;
-                                    mv.corAviso = "#ff7f7f";
+                                    mv.CorAviso = "#ff7f7f";
                                     mv.DataMovimentacao = DateTime.Now;
-                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                                 }
                             }
@@ -268,9 +266,9 @@ namespace WebApplication1
                             mv.Produto = "";
                             mv.Resultado = "Este item ja foi recebido";
                             mv.EPC = epc;
-                            mv.corAviso = "#ff7f7f";
+                            mv.CorAviso = "#ff7f7f";
                             mv.DataMovimentacao = DateTime.Now;
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
                     }
 
@@ -286,8 +284,8 @@ namespace WebApplication1
                 mv.Resultado = er.Message.ToString();
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
 
@@ -382,18 +380,18 @@ namespace WebApplication1
                                     mv.Produto = le.DESC_PRODUTO;
                                     mv.Resultado = "OK";
                                     mv.EPC = epc;
-                                    mv.corAviso = "#ffffff";
+                                    mv.CorAviso = "#ffffff";
                                     mv.DataMovimentacao = DateTime.Now;
-                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                 }
                                 else
                                 {
                                     mv.Produto = itens.PRODUTO;
                                     mv.Resultado = resultado;
                                     mv.EPC = epc;
-                                    mv.corAviso = "#ff7f7f";
+                                    mv.CorAviso = "#ff7f7f";
                                     mv.DataMovimentacao = DateTime.Now;
-                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                 }
 
 
@@ -404,9 +402,9 @@ namespace WebApplication1
                                 mv.Produto = "";
                                 mv.Resultado = "Este item não existe em nossa Base de dados";
                                 mv.EPC = epc;
-                                mv.corAviso = "#ff7f7f";
+                                mv.CorAviso = "#ff7f7f";
                                 mv.DataMovimentacao = DateTime.Now;
-                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                             }
                         }
@@ -415,9 +413,9 @@ namespace WebApplication1
                             mv.Produto = "";
                             mv.Resultado = "Este item ja foi recebido";
                             mv.EPC = epc;
-                            mv.corAviso = "#ff7f7f";
+                            mv.CorAviso = "#ff7f7f";
                             mv.DataMovimentacao = DateTime.Now;
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
                     }
 
@@ -433,8 +431,8 @@ namespace WebApplication1
                 mv.Resultado = er.Message.ToString();
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
 
@@ -445,22 +443,27 @@ namespace WebApplication1
         {
             try
             {
-                RESULTADOMOV mv = new RESULTADOMOV();
+                RESULTADOMOV resultadoMovimentacao = new RESULTADOMOV();
 
-                var crac = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == cracha).ToList();
+                List<L_ATRIBUICAOCRACHA> atribuicaoCrachaList = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == cracha).ToList();
 
-                if (crac.Count > 0)
+                //Verifica se o crachá já foi atrubuído a outro funcionário
+                if (atribuicaoCrachaList.Count > 0)
                 {
                     List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
-                    mv.DataMovimentacao = DateTime.Now;
-                    mv.EPC = cracha;
-                    mv.Resultado = "Este Cracha já esta atribuido!";
-                    mv.corAviso = "#ffffff";
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+
+                    resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                    resultadoMovimentacao.EPC = cracha;
+                    resultadoMovimentacao.Resultado = "Crachá já atribuído a um funcionário.";
+                    resultadoMovimentacao.CorAviso = "#FFFFFF";
+
+                    mov.Add(resultadoMovimentacao);
+
                     return mov;
                 }
 
-                var listaFuncionarios = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
+                List<L_FUNCIONARIOS> listaFuncionarios = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
+
                 if (listaFuncionarios.Count > 0)
                 {
                     var funcionario = listaFuncionarios[0];
@@ -486,23 +489,23 @@ namespace WebApplication1
                     dbo.SaveChanges();
 
                     List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
-                    mv.DataMovimentacao = DateTime.Now;
-                    mv.EPC = cracha;
-                    mv.Produto = listaFuncionarios[0].MATRICULA + " - " + listaFuncionarios[0].NOME;
-                    mv.Resultado = "Atribuido com Sucesso!";
-                    mv.corAviso = "#ffffff";
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                    resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                    resultadoMovimentacao.EPC = cracha;
+                    resultadoMovimentacao.Produto = listaFuncionarios[0].MATRICULA + " - " + listaFuncionarios[0].NOME;
+                    resultadoMovimentacao.Resultado = "Atribuido com Sucesso!";
+                    resultadoMovimentacao.CorAviso = "#ffffff";
+                    mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
                     return mov;
 
                 }
                 else
                 {
                     List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
-                    mv.DataMovimentacao = DateTime.Now;
-                    mv.EPC = cracha;
-                    mv.Resultado = "Não existe esta Matricula em nossa base de dados";
-                    mv.corAviso = "#ffffff";
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                    resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                    resultadoMovimentacao.EPC = cracha;
+                    resultadoMovimentacao.Resultado = "Não existe esta Matricula em nossa base de dados";
+                    resultadoMovimentacao.CorAviso = "#ffffff";
+                    mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
                     return mov;
                 }
             }
@@ -513,8 +516,8 @@ namespace WebApplication1
                 mv.DataMovimentacao = DateTime.Now;
                 mv.EPC = cracha;
                 mv.Resultado = "Erro";
-                mv.corAviso = "#ffffff";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ffffff";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
         }
@@ -555,12 +558,12 @@ namespace WebApplication1
                 {
                     //if (matricula != matric)
                     //{
-                    //    mv.Produto = "";
-                    //    mv.Resultado = "O cracha deve ter a mesma Matricula do Login";
-                    //    mv.EPC = "Matricula do Cracha:" + codCracha + " Matricula do Login:" + matric;
-                    //    mv.corAviso = "#ff7f7f";
-                    //    mv.DataMovimentacao = DateTime.Now;
-                    //    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                    //    resultadoMovimentacao.Produto = "";
+                    //    resultadoMovimentacao.Resultado = "O cracha deve ter a mesma Matricula do Login";
+                    //    resultadoMovimentacao.EPC = "Matricula do Cracha:" + codCracha + " Matricula do Login:" + matric;
+                    //    resultadoMovimentacao.CorAviso = "#ff7f7f";
+                    //    resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                    //    mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
                     //    return mov;
                     //}
 
@@ -624,8 +627,8 @@ namespace WebApplication1
                                                                 mv.Resultado = "Aguardando Assinatura";
                                                                 mv.EPC = epc;
                                                                 mv.DataMovimentacao = DateTime.Now;
-                                                                mv.corAviso = "#ffffff";
-                                                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                                                mv.CorAviso = "#ffffff";
+                                                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                                                                 L_FICHACADASTRAL lfc = new L_FICHACADASTRAL();
                                                                 lfc.DATA = DateTime.Now;
@@ -644,8 +647,8 @@ namespace WebApplication1
                                                                 mv.Resultado = "Este Item já esta Atribuido!";
                                                                 mv.EPC = epc;
                                                                 mv.DataMovimentacao = DateTime.Now;
-                                                                mv.corAviso = "#ff7f7f";
-                                                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                                                mv.CorAviso = "#ff7f7f";
+                                                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                                             }
                                                         }
                                                         else
@@ -660,9 +663,9 @@ namespace WebApplication1
                                                                 mv.Resultado = "Este Item já esta Atribuido!";
                                                             }
                                                             mv.EPC = epc;
-                                                            mv.corAviso = "#ff7f7f";
+                                                            mv.CorAviso = "#ff7f7f";
                                                             mv.DataMovimentacao = DateTime.Now;
-                                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                                         }
                                                     }
                                                     else
@@ -670,9 +673,9 @@ namespace WebApplication1
                                                         mv.Produto = mv.Produto;
                                                         mv.Resultado = "Data de Teste Vencida";
                                                         mv.EPC = epc;
-                                                        mv.corAviso = "#ff7f7f";
+                                                        mv.CorAviso = "#ff7f7f";
                                                         mv.DataMovimentacao = DateTime.Now;
-                                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                                     }
                                                 }
                                                 else
@@ -680,9 +683,9 @@ namespace WebApplication1
                                                     mv.Produto = mv.Produto;
                                                     mv.Resultado = "Data de Validade Vencida";
                                                     mv.EPC = epc;
-                                                    mv.corAviso = "#ff7f7f";
+                                                    mv.CorAviso = "#ff7f7f";
                                                     mv.DataMovimentacao = DateTime.Now;
-                                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                                 }
                                             }
                                             catch
@@ -725,8 +728,8 @@ namespace WebApplication1
                                                 mv.Resultado = "Aguardando Assinatura";
                                                 mv.EPC = epc;
                                                 mv.DataMovimentacao = DateTime.Now;
-                                                mv.corAviso = "#ffffff";
-                                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                                mv.CorAviso = "#ffffff";
+                                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                                                 L_FICHACADASTRAL lfc = new L_FICHACADASTRAL();
                                                 lfc.DATA = DateTime.Now;
@@ -750,9 +753,9 @@ namespace WebApplication1
                                         mv.Produto = "";
                                         mv.Resultado = "Este item não existe em nossa Base de dados";
                                         mv.EPC = epc;
-                                        mv.corAviso = "#ff7f7f";
+                                        mv.CorAviso = "#ff7f7f";
                                         mv.DataMovimentacao = DateTime.Now;
-                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         return mov;
                                     }
                                 }
@@ -761,9 +764,9 @@ namespace WebApplication1
                                     mv.Produto = "";
                                     mv.Resultado = "Este item não existe em nossa Base de dados";
                                     mv.EPC = epc;
-                                    mv.corAviso = "#ff7f7f";
+                                    mv.CorAviso = "#ff7f7f";
                                     mv.DataMovimentacao = DateTime.Now;
-                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                     return mov;
                                 }
                             }
@@ -777,8 +780,8 @@ namespace WebApplication1
                     mv.DataMovimentacao = DateTime.Now;
                     mv.EPC = "";
                     mv.Resultado = "Não Foi Encontrado Nenhum Codigo de Cracha para realizar a Distribuição";
-                    mv.corAviso = "#ff7f7f";
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                    mv.CorAviso = "#ff7f7f";
+                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                     return mov;
                 }
 
@@ -793,9 +796,9 @@ namespace WebApplication1
                         mv.Produto = "chave";
                         mv.Resultado = lfunc[0].TELEFONE + "|" + lfunc[0].EMAIL;
                         mv.EPC = docKey;
-                        mv.corAviso = "#ffffff";
+                        mv.CorAviso = "#ffffff";
                         mv.DataMovimentacao = DateTime.Now;
-                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                     }
                 }
                 return mov;
@@ -808,8 +811,8 @@ namespace WebApplication1
                 mv.Resultado = er.Message.ToString();
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
 
@@ -922,8 +925,8 @@ namespace WebApplication1
                                             mv.Resultado = "Item Enviado para Teste com Sucesso";
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mv.corAviso = "#ffffff";
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mv.CorAviso = "#ffffff";
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
                                         else
                                         {
@@ -931,8 +934,8 @@ namespace WebApplication1
                                             mv.Resultado = lEst.DESC_STATUS;
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mv.corAviso = "#ff7f7f";
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mv.CorAviso = "#ff7f7f";
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
                                     }
                                     catch
@@ -1009,8 +1012,8 @@ namespace WebApplication1
                                             mv.Resultado = "Item Enviado para Teste com Sucesso";
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mv.corAviso = "#ffffff";
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mv.CorAviso = "#ffffff";
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
 
                                         }
@@ -1019,9 +1022,9 @@ namespace WebApplication1
                                             mv.Produto = "";
                                             mv.Resultado = "Data de Validade Vencida";
                                             mv.EPC = epc;
-                                            mv.corAviso = "#ff7f7f";
+                                            mv.CorAviso = "#ff7f7f";
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
 
 
@@ -1033,9 +1036,9 @@ namespace WebApplication1
                                 mv.Produto = "";
                                 mv.Resultado = "Este item não existe em nossa Base de dados";
                                 mv.EPC = epc;
-                                mv.corAviso = "#ff7f7f";
+                                mv.CorAviso = "#ff7f7f";
                                 mv.DataMovimentacao = DateTime.Now;
-                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                             }
                         }
@@ -1044,9 +1047,9 @@ namespace WebApplication1
                             mv.Produto = "";
                             mv.Resultado = "Este item não existe em nossa Base de dados";
                             mv.EPC = epc;
-                            mv.corAviso = "#ff7f7f";
+                            mv.CorAviso = "#ff7f7f";
                             mv.DataMovimentacao = DateTime.Now;
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                         }
 
@@ -1063,8 +1066,8 @@ namespace WebApplication1
                 mv.Resultado = er.Message.ToString();
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
         }
@@ -1153,17 +1156,17 @@ namespace WebApplication1
                                             mv.Resultado = "Item Recebido com Sucesso";
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mv.corAviso = "#ffffff";
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mv.CorAviso = "#ffffff";
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
                                         else
                                         {
                                             mv.Produto = "";
                                             mv.Resultado = "Este item não esta em Teste";
                                             mv.EPC = epc;
-                                            mv.corAviso = "#ff7f7f";
+                                            mv.CorAviso = "#ff7f7f";
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
 
                                     }
@@ -1172,9 +1175,9 @@ namespace WebApplication1
                                         mv.Produto = "";
                                         mv.Resultado = "Este item não esta em Teste";
                                         mv.EPC = epc;
-                                        mv.corAviso = "#ff7f7f";
+                                        mv.CorAviso = "#ff7f7f";
                                         mv.DataMovimentacao = DateTime.Now;
-                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                     }
                                 }
                                 else
@@ -1182,9 +1185,9 @@ namespace WebApplication1
                                     mv.Produto = "";
                                     mv.Resultado = "Este item não esta em Teste";
                                     mv.EPC = epc;
-                                    mv.corAviso = "#ff7f7f";
+                                    mv.CorAviso = "#ff7f7f";
                                     mv.DataMovimentacao = DateTime.Now;
-                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                 }
                             }
                             else
@@ -1192,9 +1195,9 @@ namespace WebApplication1
                                 mv.Produto = "";
                                 mv.Resultado = "Este item não esta em Teste";
                                 mv.EPC = epc;
-                                mv.corAviso = "#ff7f7f";
+                                mv.CorAviso = "#ff7f7f";
                                 mv.DataMovimentacao = DateTime.Now;
-                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                             }
                         }
                         else
@@ -1202,9 +1205,9 @@ namespace WebApplication1
                             mv.Produto = "";
                             mv.Resultado = "Este item não esta em Teste";
                             mv.EPC = epc;
-                            mv.corAviso = "#ff7f7f";
+                            mv.CorAviso = "#ff7f7f";
                             mv.DataMovimentacao = DateTime.Now;
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
                     }
                 }
@@ -1220,8 +1223,8 @@ namespace WebApplication1
                 mv.Resultado = "Erro";
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
         }
@@ -1289,12 +1292,12 @@ namespace WebApplication1
                                                 mensagem = mensagem + "EPI não atribuido para um funcionario, foi devolvido ao Estoque;";
 
                                                 #region
-                                                //mv.Produto = "";
-                                                //mv.Resultado = "EPI não atribuido para um funcionario, foi devolvido ao Estoque";
-                                                //mv.EPC = epc;
-                                                //mv.corAviso = "#ff7f7f";
-                                                //mv.DataMovimentacao = DateTime.Now;
-                                                //mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                                //resultadoMovimentacao.Produto = "";
+                                                //resultadoMovimentacao.Resultado = "EPI não atribuido para um funcionario, foi devolvido ao Estoque";
+                                                //resultadoMovimentacao.EPC = epc;
+                                                //resultadoMovimentacao.CorAviso = "#ff7f7f";
+                                                //resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                                                //mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
 
                                                 //li.COD_FUNCIONARIO = cracha[0].MATRICULA;
                                                 //li.COD_INSPECAO = gdi.ToString();
@@ -1337,12 +1340,12 @@ namespace WebApplication1
                                                 mensagem = mensagem + "EPI não atribuido para um funcionario, aguardando assinatura digital;";
 
                                                 #region
-                                                //mv.Produto = "";
-                                                //mv.Resultado = "EPI não atribuido para um funcionario, aguardando assinatura digital";
-                                                //mv.EPC = epc;
-                                                //mv.corAviso = "#ff7f7f";
-                                                //mv.DataMovimentacao = DateTime.Now;
-                                                //mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                                //resultadoMovimentacao.Produto = "";
+                                                //resultadoMovimentacao.Resultado = "EPI não atribuido para um funcionario, aguardando assinatura digital";
+                                                //resultadoMovimentacao.EPC = epc;
+                                                //resultadoMovimentacao.CorAviso = "#ff7f7f";
+                                                //resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                                                //mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
 
                                                 //li.COD_FUNCIONARIO = cracha[0].MATRICULA;
                                                 //li.COD_INSPECAO = gdi.ToString();
@@ -1387,12 +1390,12 @@ namespace WebApplication1
                                                 mensagem = mensagem + "EPI não atribuido para um funcionario, " + statusEstoque[0].DESC_STATUS + ";";
 
                                                 #region
-                                                //mv.Produto = "";
-                                                //mv.Resultado = "EPI não atribuido para um funcionario, " + statusEstoque[0].DESC_STATUS;
-                                                //mv.EPC = epc;
-                                                //mv.corAviso = "#ff7f7f";
-                                                //mv.DataMovimentacao = DateTime.Now;
-                                                //mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                                //resultadoMovimentacao.Produto = "";
+                                                //resultadoMovimentacao.Resultado = "EPI não atribuido para um funcionario, " + statusEstoque[0].DESC_STATUS;
+                                                //resultadoMovimentacao.EPC = epc;
+                                                //resultadoMovimentacao.CorAviso = "#ff7f7f";
+                                                //resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                                                //mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
 
                                                 //li.COD_FUNCIONARIO = cracha[0].MATRICULA;
                                                 //li.COD_INSPECAO = gdi.ToString();
@@ -1481,11 +1484,11 @@ namespace WebApplication1
                                             if (!erro)
                                             {
                                                 mensagem = "OK";
-                                                mv.corAviso = "#ffffff";
+                                                mv.CorAviso = "#ffffff";
                                             }
                                             else
                                             {
-                                                mv.corAviso = "#ff7f7f";
+                                                mv.CorAviso = "#ff7f7f";
                                             }
 
                                             mv.Produto = itens.PRODUTO + " - Funcionario=" + cracha[0].MATRICULA;
@@ -1493,7 +1496,7 @@ namespace WebApplication1
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
 
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                                             li.COD_FUNCIONARIO = cracha[0].MATRICULA;
                                             li.COD_INSPECAO = gdi.ToString();
@@ -1535,8 +1538,8 @@ namespace WebApplication1
                                             mv.Resultado = er.Message.ToString();
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mv.corAviso = "#ffffff";
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mv.CorAviso = "#ffffff";
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
 
 
@@ -1550,9 +1553,9 @@ namespace WebApplication1
                                     mv.Produto = "";
                                     mv.Resultado = "Este EPI não existe em nossa Base de dados";
                                     mv.EPC = epc;
-                                    mv.corAviso = "#ff7f7f";
+                                    mv.CorAviso = "#ff7f7f";
                                     mv.DataMovimentacao = DateTime.Now;
-                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                                 }
                             }
@@ -1565,8 +1568,8 @@ namespace WebApplication1
                     mv.DataMovimentacao = DateTime.Now;
                     mv.EPC = "";
                     mv.Resultado = "Não Foi Encontrado Cracha do Funcionario para realizar a Inspeção";
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
-                    mv.corAviso = "#ff7f7f";
+                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
+                    mv.CorAviso = "#ff7f7f";
                     return mov;
                 }
 
@@ -1580,8 +1583,8 @@ namespace WebApplication1
                 mv.Resultado = er.Message.ToString();
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
 
@@ -1611,8 +1614,8 @@ namespace WebApplication1
                         mv.EPC = epc;
                         mv.DataMovimentacao = DateTime.Now;
                         mv.Produto = "";
-                        mv.corAviso = "#ffffff";
-                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                        mv.CorAviso = "#ffffff";
+                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                     }
                     else
@@ -1651,9 +1654,9 @@ namespace WebApplication1
                         mv.Produto = result[0].DESC_PRODUTO;
                         mv.Resultado = mensagem;
                         mv.EPC = epc;
-                        mv.corAviso = "#ffffff";
+                        mv.CorAviso = "#ffffff";
                         mv.DataMovimentacao = DateTime.Now;
-                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                     }
 
@@ -1690,8 +1693,8 @@ namespace WebApplication1
                         mv.EPC = epc;
                         mv.DataMovimentacao = DateTime.Now;
                         mv.Produto = "";
-                        mv.corAviso = "#ffffff";
-                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                        mv.CorAviso = "#ffffff";
+                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                     }
                     else
@@ -1737,9 +1740,9 @@ namespace WebApplication1
                             mv.Produto = result[0].DESC_PRODUTO;
                             mv.Resultado = mensagem;
                             mv.EPC = epc;
-                            mv.corAviso = "#ffffff";
+                            mv.CorAviso = "#ffffff";
                             mv.DataMovimentacao = DateTime.Now;
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
                         else
                         {
@@ -1747,8 +1750,8 @@ namespace WebApplication1
                             mv.EPC = epc;
                             mv.DataMovimentacao = DateTime.Now;
                             mv.Produto = "";
-                            mv.corAviso = "#ff7f7f";
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mv.CorAviso = "#ff7f7f";
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
                     }
                 }
@@ -1774,8 +1777,8 @@ namespace WebApplication1
                     mv.Resultado = "OK";
                     mv.EPC = funcMatricula[0].MATRICULA;
                     mv.DataMovimentacao = DateTime.Now;
-                    mv.corAviso = "#ff7f7f";
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                    mv.CorAviso = "#ff7f7f";
+                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                     return mov;
 
                 }
@@ -1785,8 +1788,8 @@ namespace WebApplication1
                     mv.Resultado = "Este cracha não esta atribuido";
                     mv.EPC = "";
                     mv.DataMovimentacao = DateTime.Now;
-                    mv.corAviso = "#ff7f7f";
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                    mv.CorAviso = "#ff7f7f";
+                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                     return mov;
                 }
             }
@@ -1798,8 +1801,8 @@ namespace WebApplication1
                 mv.Resultado = er.Message.ToString();
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
         }
@@ -1877,8 +1880,8 @@ namespace WebApplication1
                     mv.Resultado = "OK";
                     mv.EPC = funcMatricula[0].MATRICULA;
                     mv.DataMovimentacao = DateTime.Now;
-                    mv.corAviso = "#ffffff";
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                    mv.CorAviso = "#ffffff";
+                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                     return mov;
 
                 }
@@ -1888,8 +1891,8 @@ namespace WebApplication1
                     mv.Resultado = "Este cracha não esta atribuido";
                     mv.EPC = "";
                     mv.DataMovimentacao = DateTime.Now;
-                    mv.corAviso = "#ff7f7f";
-                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                    mv.CorAviso = "#ff7f7f";
+                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                     return mov;
                 }
             }
@@ -1902,8 +1905,8 @@ namespace WebApplication1
                 mv.Resultado = er.Message.ToString();
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
         }
@@ -2048,9 +2051,9 @@ namespace WebApplication1
                             mv.Produto = result[0].DESC_PRODUTO;
                             mv.Resultado = mensagem;
                             mv.EPC = epc;
-                            mv.corAviso = "#ffffff";
+                            mv.CorAviso = "#ffffff";
                             mv.DataMovimentacao = DateTime.Now;
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
                         else
                         {
@@ -2058,8 +2061,8 @@ namespace WebApplication1
                             mv.EPC = epc;
                             mv.DataMovimentacao = DateTime.Now;
                             mv.Produto = result[0].DESC_PRODUTO;
-                            mv.corAviso = "#ff7f7f";
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mv.CorAviso = "#ff7f7f";
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
 
                     }
@@ -2069,8 +2072,8 @@ namespace WebApplication1
                         mv.EPC = epc;
                         mv.DataMovimentacao = DateTime.Now;
                         mv.Produto = "";
-                        mv.corAviso = "#ff7f7f";
-                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                        mv.CorAviso = "#ff7f7f";
+                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                     }
                 }
             }
@@ -2130,8 +2133,8 @@ namespace WebApplication1
                             mv.EPC = epc;
                             mv.DataMovimentacao = DateTime.Now;
                             mv.Produto = result.DESC_PRODUTO;
-                            mv.corAviso = "#ffffff";
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mv.CorAviso = "#ffffff";
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
                         else
                         {
@@ -2139,8 +2142,8 @@ namespace WebApplication1
                             mv.EPC = epc;
                             mv.DataMovimentacao = DateTime.Now;
                             mv.Produto = result.DESC_PRODUTO;
-                            mv.corAviso = "#ff7f7f";
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mv.CorAviso = "#ff7f7f";
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
 
                     }
@@ -2192,8 +2195,8 @@ namespace WebApplication1
                                 mv.EPC = epc;
                                 mv.DataMovimentacao = DateTime.Now;
                                 mv.Produto = result.DESC_PRODUTO;
-                                mv.corAviso = "#ffffff";
-                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                mv.CorAviso = "#ffffff";
+                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                             }
                             else
                             {
@@ -2201,8 +2204,8 @@ namespace WebApplication1
                                 mv.EPC = epc;
                                 mv.DataMovimentacao = DateTime.Now;
                                 mv.Produto = "";
-                                mv.corAviso = "#ff7f7f";
-                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                mv.CorAviso = "#ff7f7f";
+                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                             }
                         }
                         else
@@ -2211,8 +2214,8 @@ namespace WebApplication1
                             mv.EPC = epc;
                             mv.DataMovimentacao = DateTime.Now;
                             mv.Produto = "";
-                            mv.corAviso = "#ff7f7f";
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mv.CorAviso = "#ff7f7f";
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
 
                     }
@@ -2304,14 +2307,14 @@ namespace WebApplication1
                                     mv.EPC = epc;
                                     if (erro)
                                     {
-                                        mv.corAviso = "#ff7f7f";
+                                        mv.CorAviso = "#ff7f7f";
                                     }
                                     else
                                     {
-                                        mv.corAviso = "#ffffff";
+                                        mv.CorAviso = "#ffffff";
                                     }
                                     mv.DataMovimentacao = DateTime.Now;
-                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                 }
                             }
                             else
@@ -2319,9 +2322,9 @@ namespace WebApplication1
                                 mv.Produto = "";
                                 mv.Resultado = "Este item não existe em nossa Base de dados";
                                 mv.EPC = epc;
-                                mv.corAviso = "#ff7f7f";
+                                mv.CorAviso = "#ff7f7f";
                                 mv.DataMovimentacao = DateTime.Now;
-                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                             }
                         }
@@ -2331,8 +2334,8 @@ namespace WebApplication1
                             mv.Resultado = "Este item não existe em nossa Base de dados";
                             mv.EPC = "";
                             mv.DataMovimentacao = DateTime.Now;
-                            mv.corAviso = "#ff7f7f";
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mv.CorAviso = "#ff7f7f";
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
                     }
 
@@ -2348,8 +2351,8 @@ namespace WebApplication1
                 mv.Resultado = er.Message.ToString();
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
 
@@ -2384,9 +2387,9 @@ namespace WebApplication1
                                         mv.Produto = itens.DESC_PRODUTO;
                                         mv.Resultado = "Funcionario Atribuido=" + dadorFuncionario[0].MATRICULA + " - " + dadorFuncionario[0].NOME + " " + dadorFuncionario[0].SOBRENOME;
                                         mv.EPC = epc;
-                                        mv.corAviso = "#ff7f7f";
+                                        mv.CorAviso = "#ff7f7f";
                                         mv.DataMovimentacao = DateTime.Now;
-                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                     }
                                     else
                                     {
@@ -2394,9 +2397,9 @@ namespace WebApplication1
                                         mv.Produto = itens.DESC_PRODUTO;
                                         mv.Resultado = "Nenhum Usuario Atribuido a este EPI";
                                         mv.EPC = epc;
-                                        mv.corAviso = "#ffffff";
+                                        mv.CorAviso = "#ffffff";
                                         mv.DataMovimentacao = DateTime.Now;
-                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                     }
                                 }
                             }
@@ -2405,9 +2408,9 @@ namespace WebApplication1
                                 mv.Produto = "";
                                 mv.Resultado = "Este item não existe em nossa Base de dados";
                                 mv.EPC = epc;
-                                mv.corAviso = "#ff7f7f";
+                                mv.CorAviso = "#ff7f7f";
                                 mv.DataMovimentacao = DateTime.Now;
-                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                             }
                         }
@@ -2425,8 +2428,8 @@ namespace WebApplication1
                 mv.Resultado = er.Message.ToString();
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
 
@@ -2649,7 +2652,7 @@ namespace WebApplication1
                     foreach (var mv in result)
                     {
                         DateTime dt = DateTime.Parse(mv.DATA_MENSAGEM.Value.ToString());
-                        mov.Add(new RESULTADOMOV { Resultado = mv.MENSAGEM, EPC = mv.NUMERO, DataMovimentacao = dt, Produto = mv.ID.ToString(), corAviso = "" });
+                        mov.Add(new RESULTADOMOV { Resultado = mv.MENSAGEM, EPC = mv.NUMERO, DataMovimentacao = dt, Produto = mv.ID.ToString(), CorAviso = "" });
                     }
 
                 }
@@ -2680,7 +2683,7 @@ namespace WebApplication1
                             EPC = mv.NUMERO + " - 1234 - Andre Graciano Local: R.Agostinho Cantu - Lat:-23.5705321 Long:-46.7064147 ",
                             DataMovimentacao = dt,
                             Produto = mv.ID.ToString(),
-                            corAviso = isNull(mv.OCORRENCIA)
+                            CorAviso = isNull(mv.OCORRENCIA)
                         });
                     }
 
@@ -3233,8 +3236,8 @@ namespace WebApplication1
                                             mv.Resultado = "Enviado para Higienização";
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mv.corAviso = "#ffffff";
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mv.CorAviso = "#ffffff";
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
                                         else
                                         {
@@ -3242,8 +3245,8 @@ namespace WebApplication1
                                             mv.Resultado = lEst.DESC_STATUS;
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mv.corAviso = "#ff7f7f";
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mv.CorAviso = "#ff7f7f";
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
                                     }
                                     catch
@@ -3321,8 +3324,8 @@ namespace WebApplication1
                                             mv.Resultado = "Enviado para Higienização";
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mv.corAviso = "#ffffff";
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mv.CorAviso = "#ffffff";
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
 
                                         }
@@ -3331,9 +3334,9 @@ namespace WebApplication1
                                             mv.Produto = "";
                                             mv.Resultado = "Data de Validade Vencida";
                                             mv.EPC = epc;
-                                            mv.corAviso = "#ff7f7f";
+                                            mv.CorAviso = "#ff7f7f";
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
 
 
@@ -3345,9 +3348,9 @@ namespace WebApplication1
                                 mv.Produto = "";
                                 mv.Resultado = "Este item não existe em nossa Base de dados";
                                 mv.EPC = epc;
-                                mv.corAviso = "#ff7f7f";
+                                mv.CorAviso = "#ff7f7f";
                                 mv.DataMovimentacao = DateTime.Now;
-                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                             }
                         }
@@ -3356,9 +3359,9 @@ namespace WebApplication1
                             mv.Produto = "";
                             mv.Resultado = "Este item não existe em nossa Base de dados";
                             mv.EPC = epc;
-                            mv.corAviso = "#ff7f7f";
+                            mv.CorAviso = "#ff7f7f";
                             mv.DataMovimentacao = DateTime.Now;
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
 
                         }
 
@@ -3375,8 +3378,8 @@ namespace WebApplication1
                 mv.Resultado = er.Message.ToString();
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
         }
@@ -3455,17 +3458,17 @@ namespace WebApplication1
                                             mv.Resultado = "Item Recebido com Sucesso";
                                             mv.EPC = epc;
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mv.corAviso = "#ffffff";
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mv.CorAviso = "#ffffff";
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
                                         else
                                         {
                                             mv.Produto = "";
                                             mv.Resultado = "Este item não esta em Higienização";
                                             mv.EPC = epc;
-                                            mv.corAviso = "#ff7f7f";
+                                            mv.CorAviso = "#ff7f7f";
                                             mv.DataMovimentacao = DateTime.Now;
-                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                         }
 
                                     }
@@ -3474,9 +3477,9 @@ namespace WebApplication1
                                         mv.Produto = "";
                                         mv.Resultado = "Este item não esta em Higienização";
                                         mv.EPC = epc;
-                                        mv.corAviso = "#ff7f7f";
+                                        mv.CorAviso = "#ff7f7f";
                                         mv.DataMovimentacao = DateTime.Now;
-                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                        mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                     }
                                 }
                                 else
@@ -3484,9 +3487,9 @@ namespace WebApplication1
                                     mv.Produto = "";
                                     mv.Resultado = "Este item não esta em Higienização";
                                     mv.EPC = epc;
-                                    mv.corAviso = "#ff7f7f";
+                                    mv.CorAviso = "#ff7f7f";
                                     mv.DataMovimentacao = DateTime.Now;
-                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                                 }
                             }
                             else
@@ -3494,9 +3497,9 @@ namespace WebApplication1
                                 mv.Produto = "";
                                 mv.Resultado = "Este item não esta em Higienização";
                                 mv.EPC = epc;
-                                mv.corAviso = "#ff7f7f";
+                                mv.CorAviso = "#ff7f7f";
                                 mv.DataMovimentacao = DateTime.Now;
-                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                             }
                         }
                         else
@@ -3504,9 +3507,9 @@ namespace WebApplication1
                             mv.Produto = "";
                             mv.Resultado = "Este item não esta em Higienização";
                             mv.EPC = epc;
-                            mv.corAviso = "#ff7f7f";
+                            mv.CorAviso = "#ff7f7f";
                             mv.DataMovimentacao = DateTime.Now;
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                         }
                     }
                 }
@@ -3522,8 +3525,8 @@ namespace WebApplication1
                 mv.Resultado = "Erro";
                 mv.EPC = "";
                 mv.DataMovimentacao = DateTime.Now;
-                mv.corAviso = "#ff7f7f";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                mv.CorAviso = "#ff7f7f";
+                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
                 return mov;
             }
         }

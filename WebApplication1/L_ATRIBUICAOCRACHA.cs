@@ -10,8 +10,7 @@
 namespace WebApplication1
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class L_ATRIBUICAOCRACHA
     {
         public int ID { get; set; }
