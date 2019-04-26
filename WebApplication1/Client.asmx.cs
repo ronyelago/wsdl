@@ -468,6 +468,7 @@ namespace WebApplication1
                 if (listaFuncionarios.Count > 0)
                 {
                     var funcionario = listaFuncionarios[0];
+
                     if (listaFuncionarios.Count > 1)
                     {
                         for (int i = 0; i < listaFuncionarios.Count; i++)
