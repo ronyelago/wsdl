@@ -2309,11 +2309,11 @@ namespace WebApplication1
                                     resultadoMovimentacao.EPC = epc;
                                     if (erro)
                                     {
-                                        resultadoMovimentacao.corAviso = "#ff7f7f";
+                                        resultadoMovimentacao.CorAviso = "#ff7f7f";
                                     }
                                     else
                                     {
-                                        resultadoMovimentacao.corAviso = "#ffffff";
+                                        resultadoMovimentacao.CorAviso = "#ffffff";
                                     }
                                     resultadoMovimentacao.DataMovimentacao = DateTime.Now;
                                     mov.Add(resultadoMovimentacao);
@@ -2338,7 +2338,7 @@ namespace WebApplication1
                                     resultadoMovimentacao.Resultado = "Este item não existe em nossa Base de dados";
                                     resultadoMovimentacao.EPC = "";
                                     resultadoMovimentacao.DataMovimentacao = DateTime.Now;
-                                    resultadoMovimentacao.corAviso = "#ff7f7f";
+                                    resultadoMovimentacao.CorAviso = "#ff7f7f";
                                     mov.Add(resultadoMovimentacao);
                                 }
                                 else
@@ -2355,7 +2355,7 @@ namespace WebApplication1
                                         
                                     resultadoMovimentacao.EPC = epc;
                                     resultadoMovimentacao.DataMovimentacao = DateTime.Now;
-                                    resultadoMovimentacao.corAviso = "#ffffff";
+                                    resultadoMovimentacao.CorAviso = "#ffffff";
                                     mov.Add(resultadoMovimentacao);
                                 }
 
@@ -2368,7 +2368,7 @@ namespace WebApplication1
                             resultadoMovimentacao.Produto = "";
                             resultadoMovimentacao.Resultado = "Este item não existe em nossa Base de dados";
                             resultadoMovimentacao.EPC = epc;
-                            resultadoMovimentacao.corAviso = "#ff7f7f";
+                            resultadoMovimentacao.CorAviso = "#ff7f7f";
                             resultadoMovimentacao.DataMovimentacao = DateTime.Now;
                             mov.Add(resultadoMovimentacao);
 
