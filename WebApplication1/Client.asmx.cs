@@ -2224,13 +2224,13 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public List<RESULTADOMOV> consultaEPI(string listaEPCS, string cnpj)
+        public List<RESULTADOMOV> consultaEPIouCracha(string listaEPCS, string cnpj)
         {
             try
             {
                 var gdi = Guid.NewGuid();
                 L_ESTOQUE le = new L_ESTOQUE();
-                RESULTADOMOV mv = new RESULTADOMOV();
+                RESULTADOMOV resultadoMovimentacao = new RESULTADOMOV();
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                 string[] lines = listaEPCS.Split('|');
                 string resultado = "";
@@ -2241,13 +2241,13 @@ namespace WebApplication1
                     if (epc != "")
                     {
 
-                        var pte = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == epc && x.CNPJ_DESTINATARIO == cnpj).ToList();
+                        var lista_epis = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == epc && x.CNPJ_DESTINATARIO == cnpj).ToList();
 
-                        if (pte != null)
+                        if (lista_epis != null)
                         {
-                            if (pte.Count > 0)
+                            if (lista_epis.Count > 0)
                             {
-                                foreach (var itens in pte)
+                                foreach (var itens in lista_epis)
                                 {
                                     resultado = "";
                                     var pti = dbo.L_ESTOQUE.Where(x => x.EPC == epc).ToList();
@@ -2298,40 +2298,74 @@ namespace WebApplication1
                                         resultado = resultado + "\n" + itens.VALIDADE_TESTE.Value + " Data de Teste Vencida";
                                     }
 
-                                    mv.Produto = itens.PRODUTO;
-                                    mv.Resultado = resultado;
-                                    mv.EPC = epc;
+                                    resultadoMovimentacao.Produto = itens.PRODUTO;
+                                    resultadoMovimentacao.Resultado = resultado;
+                                    resultadoMovimentacao.EPC = epc;
                                     if (erro)
                                     {
-                                        mv.corAviso = "#ff7f7f";
+                                        resultadoMovimentacao.corAviso = "#ff7f7f";
                                     }
                                     else
                                     {
-                                        mv.corAviso = "#ffffff";
+                                        resultadoMovimentacao.corAviso = "#ffffff";
                                     }
-                                    mv.DataMovimentacao = DateTime.Now;
-                                    mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                    resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                                    mov.Add(resultadoMovimentacao);
                                 }
                             }
                             else
                             {
-                                mv.Produto = "";
-                                mv.Resultado = "Este item não existe em nossa Base de dados";
-                                mv.EPC = epc;
-                                mv.corAviso = "#ff7f7f";
-                                mv.DataMovimentacao = DateTime.Now;
-                                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+                                // Através de Joins verifica na tabela Clientes o CNPJ da empresa logada
+                                var funcionario_da_empresa_solicitada =
+                                    (from atribuicaoCracha in dbo.L_ATRIBUICAOCRACHA
+                                     join funcionarios in dbo.L_FUNCIONARIOS on atribuicaoCracha.FK_FUNCIONARIO equals funcionarios.ID
+                                     join cliente in dbo.L_CLIENTE on funcionarios.FK_CLIENTE equals cliente.ID
+                                     where atribuicaoCracha.CODIGO_CRACHA == epc && cliente.CNPJ == cnpj
+                                     select funcionarios
+                                    ).ToList();
+
+                                if (funcionario_da_empresa_solicitada.Count == 0)
+                                {
+                                    // Não encontrou funcionários na empresa com CNPJ informado
+
+                                    resultadoMovimentacao.Produto = "";
+                                    resultadoMovimentacao.Resultado = "Este item não existe em nossa Base de dados";
+                                    resultadoMovimentacao.EPC = "";
+                                    resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                                    resultadoMovimentacao.corAviso = "#ff7f7f";
+                                    mov.Add(resultadoMovimentacao);
+                                }
+                                else
+                                {
+                                    // Encontrou funcionários na empresa com CNPJ informado
+
+                                    StringBuilder exibicao_funcionario = new StringBuilder();
+                                    exibicao_funcionario.Append(funcionario_da_empresa_solicitada[0].MATRICULA);
+                                    exibicao_funcionario.Append(" - ");
+                                    exibicao_funcionario.Append(funcionario_da_empresa_solicitada[0].NOME);
+
+                                    resultadoMovimentacao.Produto = "";
+                                    resultadoMovimentacao.Resultado = exibicao_funcionario.ToString();
+                                        
+                                    resultadoMovimentacao.EPC = epc;
+                                    resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                                    resultadoMovimentacao.corAviso = "#ffffff";
+                                    mov.Add(resultadoMovimentacao);
+                                }
+
 
                             }
                         }
                         else
                         {
-                            mv.Produto = "";
-                            mv.Resultado = "Este item não existe em nossa Base de dados";
-                            mv.EPC = "";
-                            mv.DataMovimentacao = DateTime.Now;
-                            mv.corAviso = "#ff7f7f";
-                            mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, corAviso = mv.corAviso });
+
+                            resultadoMovimentacao.Produto = "";
+                            resultadoMovimentacao.Resultado = "Este item não existe em nossa Base de dados";
+                            resultadoMovimentacao.EPC = epc;
+                            resultadoMovimentacao.corAviso = "#ff7f7f";
+                            resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                            mov.Add(resultadoMovimentacao);
+
                         }
                     }
 
