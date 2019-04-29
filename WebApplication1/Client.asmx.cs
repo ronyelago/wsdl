@@ -1925,7 +1925,7 @@ namespace WebApplication1
             }
         }
 
-        [WebMethod]
+        [WebMethod (EnableSession = true)]
         public List<DADOSLOGIN> loginFuncionario(string loginUsuario, string senha)
         {
             try
