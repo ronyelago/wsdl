@@ -441,46 +441,52 @@ namespace WebApplication1
         [WebMethod]
         public List<RESULTADOMOV> atribuicaoCracha(string matricula, string cracha)
         {
+            RESULTADOMOV resultadoMovimentacao = new RESULTADOMOV();
+            List<RESULTADOMOV> listaResultadoMovimentacao = new List<RESULTADOMOV>();
+
             try
             {
-                RESULTADOMOV resultadoMovimentacao = new RESULTADOMOV();
-
                 List<L_ATRIBUICAOCRACHA> atribuicaoCrachaList = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == cracha).ToList();
                 List<L_PRODUTOS_ITENS> ProdutosItensList = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == cracha).ToList();
 
                 //Verifica se o EPCCode escaneado já foi atrubuído como crachá ou EPI
                 if (atribuicaoCrachaList.Any() || ProdutosItensList.Any())
                 {
-                    List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
-
                     resultadoMovimentacao.DataMovimentacao = DateTime.Now;
                     resultadoMovimentacao.EPC = cracha;
                     resultadoMovimentacao.Resultado = "Ítem já atribuído a um funcionário ou produto.";
                     resultadoMovimentacao.CorAviso = "#FFFFFF";
 
-                    mov.Add(resultadoMovimentacao);
+                    listaResultadoMovimentacao.Add(resultadoMovimentacao);
 
-                    return mov;
+                    return listaResultadoMovimentacao;
                 }
 
+                //Busca de funcionários pela matrícula passada como parâmetro
                 List<L_FUNCIONARIOS> listaFuncionarios = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
 
+                // Checa se a consulta retornou algum registro e preencheu a lista de funcionários
                 if (listaFuncionarios.Count > 0)
                 {
-                    var funcionario = listaFuncionarios[0];
+                    L_FUNCIONARIOS funcionario = listaFuncionarios[0];
 
+                    // Na base de dados podem existir funcionários com matrículas idênticas, porém, somente se forem
+                    // de empresas distintas
                     if (listaFuncionarios.Count > 1)
                     {
-                        for (int i = 0; i < listaFuncionarios.Count; i++)
+                        foreach (L_FUNCIONARIOS func in listaFuncionarios)
                         {
-                            if (listaFuncionarios[i].CNPJ == Sessao.Cnpj)
+                            //Checa qual o CNPJ da lista combina com o da Sessão ativa
+                            if (func.CNPJ == Sessao.Cnpj)
                             {
-                                funcionario = listaFuncionarios[i];
+                                funcionario = func;
+
                                 break;
                             }
                         }
                     }
 
+                    // Monta o objeto e o salva na base de dados
                     L_ATRIBUICAOCRACHA atribuicaoCracha = new L_ATRIBUICAOCRACHA();
 
                     atribuicaoCracha.ATIVO = "S";
@@ -492,47 +498,42 @@ namespace WebApplication1
                     dbo.L_ATRIBUICAOCRACHA.Add(atribuicaoCracha);
                     dbo.SaveChanges();
 
-                    List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
-
                     resultadoMovimentacao.DataMovimentacao = DateTime.Now;
                     resultadoMovimentacao.EPC = cracha;
                     resultadoMovimentacao.Produto = listaFuncionarios[0].MATRICULA + " - " + listaFuncionarios[0].NOME;
-                    resultadoMovimentacao.Resultado = "Atribuido com Sucesso!";
-                    resultadoMovimentacao.CorAviso = "#ffffff";
+                    resultadoMovimentacao.Resultado = "Crachá atribuído com sucesso.";
+                    resultadoMovimentacao.CorAviso = "#FFFFFF";
 
-                    mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
+                    listaResultadoMovimentacao.Add(resultadoMovimentacao);
 
-                    return mov;
+                    return listaResultadoMovimentacao;
 
                 }
 
+                // Caso a lista de funcionários esteja vazia:
                 else
                 {
-                    List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
-
                     resultadoMovimentacao.DataMovimentacao = DateTime.Now;
                     resultadoMovimentacao.EPC = cracha;
-                    resultadoMovimentacao.Resultado = "Não existe esta Matricula em nossa base de dados";
-                    resultadoMovimentacao.CorAviso = "#ffffff";
+                    resultadoMovimentacao.Resultado = "Matrícula inválida ou inexistente.";
+                    resultadoMovimentacao.CorAviso = "#FFFFFF";
 
-                    mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
+                    listaResultadoMovimentacao.Add(resultadoMovimentacao);
 
-                    return mov;
+                    return listaResultadoMovimentacao;
                 }
             }
 
-            catch
+            catch (Exception ex)
             {
-                RESULTADOMOV mv = new RESULTADOMOV();
-                List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
+                resultadoMovimentacao.DataMovimentacao = DateTime.Now;
+                resultadoMovimentacao.EPC = cracha;
+                resultadoMovimentacao.Resultado = $"Erro: {ex.Message}";
+                resultadoMovimentacao.CorAviso = "#FFFFFF";
 
-                mv.DataMovimentacao = DateTime.Now;
-                mv.EPC = cracha;
-                mv.Resultado = "Erro";
-                mv.CorAviso = "#ffffff";
-                mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
+                listaResultadoMovimentacao.Add(resultadoMovimentacao);
 
-                return mov;
+                return listaResultadoMovimentacao;
             }
         }
 
@@ -577,8 +578,8 @@ namespace WebApplication1
                     //    resultadoMovimentacao.EPC = "Matricula do Cracha:" + codCracha + " Matricula do Login:" + matric;
                     //    resultadoMovimentacao.CorAviso = "#ff7f7f";
                     //    resultadoMovimentacao.DataMovimentacao = DateTime.Now;
-                    //    mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
-                    //    return mov;
+                    //    listaResultadoMovimentacao.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
+                    //    return listaResultadoMovimentacao;
                     //}
 
                     foreach (var epc in lines)
@@ -1311,7 +1312,7 @@ namespace WebApplication1
                                                 //resultadoMovimentacao.EPC = epc;
                                                 //resultadoMovimentacao.CorAviso = "#ff7f7f";
                                                 //resultadoMovimentacao.DataMovimentacao = DateTime.Now;
-                                                //mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
+                                                //listaResultadoMovimentacao.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
 
                                                 //li.COD_FUNCIONARIO = cracha[0].MATRICULA;
                                                 //li.COD_INSPECAO = gdi.ToString();
@@ -1359,7 +1360,7 @@ namespace WebApplication1
                                                 //resultadoMovimentacao.EPC = epc;
                                                 //resultadoMovimentacao.CorAviso = "#ff7f7f";
                                                 //resultadoMovimentacao.DataMovimentacao = DateTime.Now;
-                                                //mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
+                                                //listaResultadoMovimentacao.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
 
                                                 //li.COD_FUNCIONARIO = cracha[0].MATRICULA;
                                                 //li.COD_INSPECAO = gdi.ToString();
@@ -1409,7 +1410,7 @@ namespace WebApplication1
                                                 //resultadoMovimentacao.EPC = epc;
                                                 //resultadoMovimentacao.CorAviso = "#ff7f7f";
                                                 //resultadoMovimentacao.DataMovimentacao = DateTime.Now;
-                                                //mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
+                                                //listaResultadoMovimentacao.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
 
                                                 //li.COD_FUNCIONARIO = cracha[0].MATRICULA;
                                                 //li.COD_INSPECAO = gdi.ToString();
@@ -2004,7 +2005,6 @@ namespace WebApplication1
                 return mov;
             }
         }
-
 
         [WebMethod]
         public List<RESULTADOMOV> devolucaoEPI(string listaEPCS, string estoque)
