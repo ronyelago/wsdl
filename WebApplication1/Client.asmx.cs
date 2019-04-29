@@ -482,44 +482,56 @@ namespace WebApplication1
                     }
 
                     L_ATRIBUICAOCRACHA atribuicaoCracha = new L_ATRIBUICAOCRACHA();
+
                     atribuicaoCracha.ATIVO = "S";
                     atribuicaoCracha.CODIGO_CRACHA = cracha;
                     atribuicaoCracha.FK_FUNCIONARIO = funcionario.ID;
                     atribuicaoCracha.MATRICULA = funcionario.MATRICULA;
                     atribuicaoCracha.DATA_ATRIBUICAO = DateTime.Now;
+
                     dbo.L_ATRIBUICAOCRACHA.Add(atribuicaoCracha);
                     dbo.SaveChanges();
 
                     List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
+
                     resultadoMovimentacao.DataMovimentacao = DateTime.Now;
                     resultadoMovimentacao.EPC = cracha;
                     resultadoMovimentacao.Produto = listaFuncionarios[0].MATRICULA + " - " + listaFuncionarios[0].NOME;
                     resultadoMovimentacao.Resultado = "Atribuido com Sucesso!";
                     resultadoMovimentacao.CorAviso = "#ffffff";
+
                     mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
+
                     return mov;
 
                 }
+
                 else
                 {
                     List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
+
                     resultadoMovimentacao.DataMovimentacao = DateTime.Now;
                     resultadoMovimentacao.EPC = cracha;
                     resultadoMovimentacao.Resultado = "Não existe esta Matricula em nossa base de dados";
                     resultadoMovimentacao.CorAviso = "#ffffff";
+
                     mov.Add(new RESULTADOMOV { Resultado = resultadoMovimentacao.Resultado, EPC = resultadoMovimentacao.EPC, DataMovimentacao = resultadoMovimentacao.DataMovimentacao, Produto = resultadoMovimentacao.Produto, CorAviso = resultadoMovimentacao.CorAviso });
+
                     return mov;
                 }
             }
+
             catch
             {
                 RESULTADOMOV mv = new RESULTADOMOV();
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
+
                 mv.DataMovimentacao = DateTime.Now;
                 mv.EPC = cracha;
                 mv.Resultado = "Erro";
                 mv.CorAviso = "#ffffff";
                 mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
+
                 return mov;
             }
         }
