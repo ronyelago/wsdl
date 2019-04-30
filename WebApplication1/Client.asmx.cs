@@ -1985,7 +1985,7 @@ namespace WebApplication1
                 else
                 {
                     mv.Produto = "2";
-                    mv.Resultado = "Matricula ou Senha Incorreta";
+                    mv.Resultado = "Credenciais inválidas";
                     mv.EPC = loginUsuario;
                     mv.DataMovimentacao = DateTime.Now;
                     mv.corAviso = "#ff7f7f";
