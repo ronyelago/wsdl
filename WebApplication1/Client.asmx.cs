@@ -2248,7 +2248,6 @@ namespace WebApplication1
             {
                 var gdi = Guid.NewGuid();
                 L_ESTOQUE le = new L_ESTOQUE();
-                RESULTADOMOV resultadoMovimentacao = new RESULTADOMOV();
                 List<RESULTADOMOV> mov = new List<RESULTADOMOV>();
                 string[] lines = listaEPCS.Split('|');
                 string resultado = "";
@@ -2316,6 +2315,8 @@ namespace WebApplication1
                                         resultado = resultado + "\n" + itens.VALIDADE_TESTE.Value + " Data de Teste Vencida";
                                     }
 
+                                    RESULTADOMOV resultadoMovimentacao = new RESULTADOMOV();
+
                                     resultadoMovimentacao.Produto = itens.PRODUTO;
                                     resultadoMovimentacao.Resultado = resultado;
                                     resultadoMovimentacao.EPC = epc;
@@ -2345,6 +2346,7 @@ namespace WebApplication1
                                 if (funcionario_da_empresa_solicitada.Count == 0)
                                 {
                                     // Não encontrou funcionários na empresa com CNPJ informado
+                                    RESULTADOMOV resultadoMovimentacao = new RESULTADOMOV();
 
                                     resultadoMovimentacao.Produto = "";
                                     resultadoMovimentacao.Resultado = "Este item não existe em nossa Base de dados";
@@ -2362,6 +2364,8 @@ namespace WebApplication1
                                     exibicao_funcionario.Append(" - ");
                                     exibicao_funcionario.Append(funcionario_da_empresa_solicitada[0].NOME);
 
+                                    RESULTADOMOV resultadoMovimentacao = new RESULTADOMOV();
+
                                     resultadoMovimentacao.Produto = "";
                                     resultadoMovimentacao.Resultado = exibicao_funcionario.ToString();
                                         
@@ -2376,6 +2380,7 @@ namespace WebApplication1
                         }
                         else
                         {
+                            RESULTADOMOV resultadoMovimentacao = new RESULTADOMOV();
 
                             resultadoMovimentacao.Produto = "";
                             resultadoMovimentacao.Resultado = "Este item não existe em nossa Base de dados";
