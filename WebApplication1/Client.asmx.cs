@@ -456,6 +456,7 @@ namespace WebApplication1
                     resultadoMovimentacao.EPC = cracha;
                     resultadoMovimentacao.Resultado = "Ítem já atribuído a um funcionário ou produto.";
                     resultadoMovimentacao.CorAviso = "#FFFFFF";
+                    resultadoMovimentacao.HasError = true;
 
                     listaResultadoMovimentacao.Add(resultadoMovimentacao);
 
@@ -507,7 +508,6 @@ namespace WebApplication1
                     listaResultadoMovimentacao.Add(resultadoMovimentacao);
 
                     return listaResultadoMovimentacao;
-
                 }
 
                 // Caso a lista de funcionários esteja vazia:
@@ -517,6 +517,7 @@ namespace WebApplication1
                     resultadoMovimentacao.EPC = cracha;
                     resultadoMovimentacao.Resultado = "Matrícula inválida ou inexistente.";
                     resultadoMovimentacao.CorAviso = "#FFFFFF";
+                    resultadoMovimentacao.HasError = true;
 
                     listaResultadoMovimentacao.Add(resultadoMovimentacao);
 
@@ -828,9 +829,9 @@ namespace WebApplication1
                 mv.DataMovimentacao = DateTime.Now;
                 mv.CorAviso = "#ff7f7f";
                 mov.Add(new RESULTADOMOV { Resultado = mv.Resultado, EPC = mv.EPC, DataMovimentacao = mv.DataMovimentacao, Produto = mv.Produto, CorAviso = mv.CorAviso });
+
                 return mov;
             }
-
 
         }
 

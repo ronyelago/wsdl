@@ -9,5 +9,6 @@ namespace WebApplication1
         public string Produto { get;  set; }
         public string Resultado { get;  set; }
         public string CorAviso { get; set; }
+        public bool HasError { get; set; }
     }
 }
