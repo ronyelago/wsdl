@@ -16,8 +16,7 @@ namespace WebApplication1
     {
         public int ID { get; set; }
         public Nullable<System.DateTime> DATA { get; set; }
-        public string MATRICULA { get; set; }
-        public string FUNCIONARIO { get; set; }
+        public int? FK_FUNCIONARIO { get; set; }
         public string IMPRESSO { get; set; }
     }
 }
