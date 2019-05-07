@@ -915,8 +915,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DATA" Type="DateTime" Precision="3" />
-          <Property Name="MATRICULA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FUNCIONARIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_FUNCIONARIO" Type="Int32" />
           <Property Name="IMPRESSO" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="L_STATUSOCORRENCIA">
@@ -1418,8 +1417,7 @@
             <EntityTypeMapping TypeName="webservicetwos3Model.L_FICHACADASTRAL">
               <MappingFragment StoreEntitySet="L_FICHACADASTRAL">
                 <ScalarProperty Name="IMPRESSO" ColumnName="IMPRESSO" />
-                <ScalarProperty Name="FUNCIONARIO" ColumnName="FUNCIONARIO" />
-                <ScalarProperty Name="MATRICULA" ColumnName="MATRICULA" />
+                <ScalarProperty Name="FK_FUNCIONARIO" ColumnName="MATRICULA" />
                 <ScalarProperty Name="DATA" ColumnName="DATA" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="60db479e76534e38b02cbc87385a8292" Name="Diagram1" ZoomLevel="51">
+      <Diagram DiagramId="60db479e76534e38b02cbc87385a8292" Name="Diagram1" ZoomLevel="75">
         <EntityTypeShape EntityType="webservicetwos3Model.L_DESCARTE" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_EPCPERDIDOS" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_ESTOQUE" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -29,7 +29,7 @@
         <EntityTypeShape EntityType="webservicetwos3Model.L_MANUTENCAOEPI" Width="1.5" PointX="14.75" PointY="0.75" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_LOGIN_FUNCIONARIO" Width="1.5" PointX="0.75" PointY="14.75" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_MENSAGEM_OCORRENCIA" Width="1.5" PointX="2.75" PointY="14.75" />
-        <EntityTypeShape EntityType="webservicetwos3Model.L_FICHACADASTRAL" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_FICHACADASTRAL" Width="1.5" PointX="14.625" PointY="3.75" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_STATUSOCORRENCIA" Width="1.5" PointX="14.75" PointY="6.75" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_CLIENTE" Width="1.5" PointX="14.75" PointY="9.75" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_PACOTE_ASSINATURA_DOCUMENTOS" Width="4.5" PointX="10.75" PointY="14.75" />

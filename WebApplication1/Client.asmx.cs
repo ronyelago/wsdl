@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Services;
@@ -648,8 +649,7 @@ namespace WebApplication1
 
                                                                 L_FICHACADASTRAL lfc = new L_FICHACADASTRAL();
                                                                 lfc.DATA = DateTime.Now;
-                                                                lfc.FUNCIONARIO = cracha[0].MATRICULA;
-                                                                lfc.MATRICULA = cracha[0].MATRICULA;
+                                                                lfc.FK_FUNCIONARIO = cracha[0].FK_FUNCIONARIO;
                                                                 lfc.IMPRESSO = "N";
                                                                 dbo.L_FICHACADASTRAL.Add(lfc);
                                                                 dbo.SaveChanges();
@@ -749,8 +749,7 @@ namespace WebApplication1
 
                                                 L_FICHACADASTRAL lfc = new L_FICHACADASTRAL();
                                                 lfc.DATA = DateTime.Now;
-                                                lfc.FUNCIONARIO = cracha[0].MATRICULA;
-                                                lfc.MATRICULA = cracha[0].MATRICULA;
+                                                lfc.FK_FUNCIONARIO = cracha[0].FK_FUNCIONARIO;
                                                 lfc.IMPRESSO = "N";
                                                 dbo.L_FICHACADASTRAL.Add(lfc);
                                                 dbo.SaveChanges();
@@ -805,7 +804,7 @@ namespace WebApplication1
                 {
                     if (lme.COD_DISTRIBUICAO.ToString() != "")
                     {
-                        var docKey = convertHtmlDocx(cracha[0].MATRICULA, gdi.ToString());
+                        var docKey = convertHtmlDocx(cracha[0].FK_FUNCIONARIO, gdi.ToString());
                         string matriculas = cracha[0].MATRICULA;
                         var lfunc = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matriculas).ToList();
                         criarHookArquivo(docKey);
@@ -2888,17 +2887,16 @@ namespace WebApplication1
             return mov;
         }
 
-        [WebMethod]
-        public static string retornarDadosFicha(string matricula)
+        private static string retornarDadosFicha(int? FK_FUNCIONARIO)
         {
             try
             {
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
-                var l = dbo.L_FICHACADASTRAL.Where(x => x.MATRICULA == matricula).ToList();
+                var l = dbo.L_FICHACADASTRAL.Where(x => x.FK_FUNCIONARIO == FK_FUNCIONARIO).ToList();
                 if (l.Count > 0)
                 {
-                    var matri = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
-                    return matri[0].NOME + " " + matri[0].SOBRENOME + "|" + l[0].MATRICULA + "|" + matri[0].FUNCAO + "|" + DateTime.Now.ToLongDateString() + "|" + matri[0].CNPJ + "|" + matri[0].FK_CLIENTE;
+                    var matri = dbo.L_FUNCIONARIOS.Where(x => x.ID == FK_FUNCIONARIO).ToList();
+                    return matri[0].NOME + " " + matri[0].SOBRENOME + "|" + matri[0].MATRICULA + "|" + matri[0].FUNCAO + "|" + DateTime.Now.ToLongDateString() + "|" + matri[0].CNPJ + "|" + matri[0].FK_CLIENTE;
                 }
                 else
                 {
@@ -2912,14 +2910,13 @@ namespace WebApplication1
             }
         }
 
-        [WebMethod]
-        public List<RESULTADO> retornarLista(string matricula, Guid codDistribuicao)
+        private List<RESULTADO> retornarLista(int? FK_FUNCIONARIO, Guid codDistribuicao)
         {
             try
             {
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
 
-                var result = dbo.L_MOVIMENTACAO_ESTOQUE.Where(x => x.COD_FUNCIONARIO == matricula && x.COD_DISTRIBUICAO == codDistribuicao).ToList();
+                var result = dbo.L_MOVIMENTACAO_ESTOQUE.Where(x => x.FK_FUNCIONARIO == FK_FUNCIONARIO && x.COD_DISTRIBUICAO == codDistribuicao).ToList();
                 RESULTADO mv = new RESULTADO();
                 List<RESULTADO> mov = new List<RESULTADO>();
                 if (result.Count > 0)
@@ -2943,7 +2940,7 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public string convertHtmlDocx(string matricula, string codDistribuicao)
+        private string convertHtmlDocx(int? FK_FUNCIONARIO, string codDistribuicao)
         {
             try
             {
@@ -2960,9 +2957,9 @@ namespace WebApplication1
                 titleFormat.Bold = true;
                 #endregion
 
-                var dadosFicha = retornarDadosFicha(matricula);
+                var dadosFicha = retornarDadosFicha(FK_FUNCIONARIO);
 
-                var nomeArquivo = matricula + "_" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+                var nomeArquivo = FK_FUNCIONARIO + "_" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
                 string path = Server.MapPath("Doc_FichaCadastral");
                 string fileName = path + "\\" + nomeArquivo + ".docx";
                 var doc = DocX.Create(fileName);
@@ -2985,7 +2982,7 @@ namespace WebApplication1
                 doc.InsertParagraph("4) devolvê-lo quando da troca por outro ou no meu desligamento da empresa.").Position(20);
 
                 int count = 0;
-                var listaEpis = retornarLista(matricula, Guid.Parse(codDistribuicao));
+                var listaEpis = retornarLista(FK_FUNCIONARIO, Guid.Parse(codDistribuicao));
                 Table t = doc.AddTable((listaEpis.Count + 1), 7);
                 t.Alignment = Alignment.center;
 
@@ -3039,9 +3036,9 @@ namespace WebApplication1
                 doc.InsertParagraph("Local: _______________________________", false, titleFormat).Position(10);
                 doc.InsertParagraph("ASSINATURA: _______________________________").Position(10);
                 doc.Save();
-                var docs = enviarDocumento(fileName, matricula);
-                documentoAssinado(codDistribuicao, nomeArquivo, matricula, dadosFicha.Split('|')[4], dadosFicha.Split('|')[5], docs.Key);
-                return docs.Key;
+                var docs = enviarDocumento(fileName, FK_FUNCIONARIO);
+                if (HttpStatusCode.OK == documentoAssinado(codDistribuicao, nomeArquivo, FK_FUNCIONARIO, dadosFicha.Split('|')[4], dadosFicha.Split('|')[5], docs.Key))
+                    return docs.Key;
             }
             catch (Exception E)
             {
@@ -3050,32 +3047,43 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public void documentoAssinado(string codDistribuicao, string nomeArquivo, string matricula, string cnpj, string fkCliente, string chave)
+        public HttpStatusCode documentoAssinado(string codDistribuicao, string nomeArquivo, int? FK_FUNCIONARIO, string cnpj, string fkCliente, string chave)
         {
             try
             {
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
                 L_DOCUMENTO_ASSINATURA lda = new L_DOCUMENTO_ASSINATURA();
-                lda.CLIENTE = fkCliente;
-                lda.DATA_ENVIO = DateTime.Now;
-                lda.DOWNLOAD = "N";
-                lda.MATRICULA = matricula;
-                lda.NOME_DOCUMENTO = nomeArquivo;
-                lda.CHAVE = chave;
-                lda.COD_DISTRIBUICAO = Guid.Parse(codDistribuicao);
-                dbo.L_DOCUMENTO_ASSINATURA.Add(lda);
-                dbo.SaveChanges();
 
+                var lfunc = dbo.L_FUNCIONARIOS.FirstOrDefault(x => x.ID == FK_FUNCIONARIO);
+
+                if (lfunc != null)
+                {
+                    lda.CLIENTE = fkCliente;
+                    lda.DATA_ENVIO = DateTime.Now;
+                    lda.DOWNLOAD = "N";
+                    lda.MATRICULA = lfunc.MATRICULA;
+                    lda.NOME_DOCUMENTO = nomeArquivo;
+                    lda.CHAVE = chave;
+                    lda.COD_DISTRIBUICAO = Guid.Parse(codDistribuicao);
+                    dbo.L_DOCUMENTO_ASSINATURA.Add(lda);
+                    dbo.SaveChanges();
+
+                    return HttpStatusCode.OK;
+                }
+                else
+                {
+                    return HttpStatusCode.NotFound;
+                }
 
             }
-            catch
+            catch (Exception e)
             {
-
+                return HttpStatusCode.Conflict;
             }
         }
 
         [WebMethod]
-        public Clicksign.Document enviarDocumento(string path, string matricula)
+        public Clicksign.Document enviarDocumento(string path, int? FK_FUNCIONARIO)
         {
             var clicksign = new Clicksign.Clicksign();
 
@@ -3084,20 +3092,20 @@ namespace WebApplication1
             //var uri = path + "\\" + 1 + ".pdf";
             clicksign.Upload(path);
             var doc = clicksign.Document;
-            restListaAssinatura(matricula, doc.Key);
+            restListaAssinatura(FK_FUNCIONARIO, doc.Key);
 
             return clicksign.Document;
         }
 
         [WebMethod]
-        public void restListaAssinatura(string matricula, string documento)
+        public void restListaAssinatura(int? FK_FUNCIONARIO, string documento)
         {
             try
             {
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
                 if (client == null)
                 {
-                    var lfunc = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
+                    var lfunc = dbo.L_FUNCIONARIOS.Where(x => x.ID == FK_FUNCIONARIO).ToList();
                     string telefone = lfunc[0].TELEFONE;
                     List<Signer> sgn = new List<Signer>();
                     sgn.Add(new Signer { act = "sign", email = lfunc[0].EMAIL, allow_method = "sms", phone_number = formatarTelefone(lfunc[0].TELEFONE) });
