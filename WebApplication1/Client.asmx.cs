@@ -3037,8 +3037,8 @@ namespace WebApplication1
                 doc.InsertParagraph("ASSINATURA: _______________________________").Position(10);
                 doc.Save();
                 var docs = enviarDocumento(fileName, FK_FUNCIONARIO);
-                if (HttpStatusCode.OK == documentoAssinado(codDistribuicao, nomeArquivo, FK_FUNCIONARIO, dadosFicha.Split('|')[4], dadosFicha.Split('|')[5], docs.Key))
-                    return docs.Key;
+                documentoAssinado(codDistribuicao, nomeArquivo, FK_FUNCIONARIO, dadosFicha.Split('|')[4], dadosFicha.Split('|')[5], docs.Key);
+                return docs.Key;
             }
             catch (Exception E)
             {
@@ -3047,7 +3047,7 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public HttpStatusCode documentoAssinado(string codDistribuicao, string nomeArquivo, int? FK_FUNCIONARIO, string cnpj, string fkCliente, string chave)
+        public void documentoAssinado(string codDistribuicao, string nomeArquivo, int? FK_FUNCIONARIO, string cnpj, string fkCliente, string chave)
         {
             try
             {
@@ -3067,18 +3067,16 @@ namespace WebApplication1
                     lda.COD_DISTRIBUICAO = Guid.Parse(codDistribuicao);
                     dbo.L_DOCUMENTO_ASSINATURA.Add(lda);
                     dbo.SaveChanges();
-
-                    return HttpStatusCode.OK;
                 }
                 else
                 {
-                    return HttpStatusCode.NotFound;
+                    throw new Exception("Funcionario não encontrado");
                 }
 
             }
-            catch (Exception e)
+            catch (Exception E)
             {
-                return HttpStatusCode.Conflict;
+                throw new Exception(E.Message.ToString());
             }
         }
 

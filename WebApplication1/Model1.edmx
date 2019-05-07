@@ -126,8 +126,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DATA" Type="datetime" />
-          <Property Name="MATRICULA" Type="varchar(max)" />
-          <Property Name="FUNCIONARIO" Type="varchar(max)" />
+          <Property Name="FK_FUNCIONARIO" Type="int" />
           <Property Name="IMPRESSO" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="L_FUNCAO_PRODUTOS">
@@ -1417,7 +1416,7 @@
             <EntityTypeMapping TypeName="webservicetwos3Model.L_FICHACADASTRAL">
               <MappingFragment StoreEntitySet="L_FICHACADASTRAL">
                 <ScalarProperty Name="IMPRESSO" ColumnName="IMPRESSO" />
-                <ScalarProperty Name="FK_FUNCIONARIO" ColumnName="MATRICULA" />
+                <ScalarProperty Name="FK_FUNCIONARIO" ColumnName="FK_FUNCIONARIO" />
                 <ScalarProperty Name="DATA" ColumnName="DATA" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
