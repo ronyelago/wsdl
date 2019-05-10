@@ -1,11 +1,11 @@
 ﻿namespace WebApplication1
 {
-    public partial class DADOSEPI
+    public partial class DadosEpi
     {
-        public string CodFornecedor { get;  set; }
-        public string CodProduto { get;  set; }
-        public string EPC { get;  set; }
+        public string CodigoFornecedor { get;  set; }
+        public string CodigoProduto { get;  set; }
+        public string Epc { get;  set; }
         public string Produto { get;  set; }
-        public int Qtd { get;  set; }
+        public int Quantidade { get;  set; }
     }
 }

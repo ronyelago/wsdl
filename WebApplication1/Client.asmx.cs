@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Web.Services;
+using WebApplication1.Services;
+using WebApplication1.ViewModels;
 using Xceed.Words.NET;
 
 namespace WebApplication1
@@ -22,6 +24,7 @@ namespace WebApplication1
         webservicetwos3Entities dbo = new webservicetwos3Entities();
         ControleSessao controleSessao = new ControleSessao();
         HttpClient client;
+        readonly DistribuicaoServices distribuicaoServices = new DistribuicaoServices();
 
         [WebMethod]
         public List<L_LOCALESTOQUE> retornaLocalEstoque()
@@ -35,7 +38,6 @@ namespace WebApplication1
                 return null;
             }
         }
-        
 
         [WebMethod]
         public List<RESULTADOMOV> movimentacaoEstoque(string listaEPCS, string estoque, string entSaida)
@@ -2497,52 +2499,95 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public List<DADOSEPI> retornarDadosEpiValidar(string listaEPCS,string cnpj, int fkCliente)
+        public List<DistribuicaoCrachaViewModel> ValidaEListaCrachas(string listaEpc)
         {
-            List<DADOSEPI> listaDadosEpi = new List<DADOSEPI>();
-            List<string> epcList = listaEPCS.Split('|').ToList();
+            List<string> epcList = listaEpc.Split('|').ToList();
+            List<DistribuicaoCrachaViewModel> crachaViewModels = new List<DistribuicaoCrachaViewModel>();
+
+            foreach(string epc in epcList)
+            {
+                var cracha = distribuicaoServices.CrachaHandler(epc);
+
+                if (cracha != null)
+                {
+                    crachaViewModels.Add(cracha);
+                }
+            }
+
+            return crachaViewModels;
+        }
+
+        [WebMethod]
+        public List<DistribuicaoEpiViewModel> ValidaItens(string listaEpc)
+        {
+            // Lista de epc's que chegaram
+            List<string> epcList = listaEpc.Split('|').ToList();
+            // Lista a ser enviada
+            List<DistribuicaoEpiViewModel> listaDistribuicaoViewModel = new List<DistribuicaoEpiViewModel>();
+            // Objeto DistribuicaoViewModel a ser adicionado à lista que será retornada
+            DistribuicaoEpiViewModel distribuicaoViewModel = new DistribuicaoEpiViewModel();
+
+            // Análise individual de inconformidade de epc
+            foreach (string epc in epcList)
+            {
+                // Verifica se o epc existe na tabela de crachás (L_ATRIBUICAOCRACHA)
+                var item = dbo.L_ATRIBUICAOCRACHA.FirstOrDefault(x => x.CODIGO_CRACHA == epc);
+                
+                // Se sim, mapeia o cracha encontrado para um DistribuicaoViewModel
+                if (item != null)
+                {
+                    var funcionario = dbo.L_FUNCIONARIOS.FirstOrDefault(f => f.ID == item.FK_FUNCIONARIO);
+
+                }
+
+                // Verifica se o epc está cadastrado (tabela L_PRODUTOS_ITENS)
+            }
+
+            return listaDistribuicaoViewModel;
+        }
+
+        [WebMethod]
+        public List<DadosEpi> retornarDadosEpiValidar(string listaEpc, string cnpj, int fkCliente)
+        {
+            List<DadosEpi> listaDadosEpi = new List<DadosEpi>();
+            List<string> epcList = listaEpc.Split('|').ToList();
 
             foreach (string epc in epcList)
             {
-                // Busca pelo EPC na tabela L_PRODUTOS_ITENS um registro que corresponda ao EPC iterado
-                List<L_PRODUTOS_ITENS> produtos = dbo.L_PRODUTOS_ITENS.Where(x => x.EPC == epc && x.CNPJ_DESTINATARIO == cnpj).ToList();
+                // Busca pelo EPC na tabela L_PRODUTOS_ITENS um registro que corresponda ao EPC iterado e o CNPJ
+                var produto = dbo.L_PRODUTOS_ITENS.FirstOrDefault(x => x.EPC == epc && x.CNPJ_DESTINATARIO == cnpj);
 
-                if (produtos != null)
+
+                if (produto != null)
                 {
-                    if (produtos.Count > 0)
-                    {
-                        listaDadosEpi.Add(new DADOSEPI { CodProduto = produtos[0].COD_PRODUTO, Produto = produtos[0].PRODUTO, Qtd = 1, CodFornecedor = produtos[0].COD_FORNECEDOR, EPC = produtos[0].EPC });
-                    }
+                    DadosEpi dadosEpi = new DadosEpi();
+                    dadosEpi.CodigoProduto = produto.COD_PRODUTO;
+                    dadosEpi.Produto = produto.PRODUTO;
+                    dadosEpi.Quantidade = 1;
+                    dadosEpi.CodigoFornecedor = produto.COD_FORNECEDOR;
+                    dadosEpi.Epc = produto.EPC;
 
-                    else
-                    {
-                        listaDadosEpi.Add(new DADOSEPI { CodProduto = "0", Produto = "", Qtd = 0, CodFornecedor = "", EPC = "" });
-                    }
+                    listaDadosEpi.Add(dadosEpi);
                 }
 
                 else
                 {
-                    listaDadosEpi.Add(new DADOSEPI { CodProduto = "0", Produto = "", Qtd = 0, CodFornecedor = "", EPC = "" });
+                    listaDadosEpi.Add(new DadosEpi { CodigoProduto = "0", Produto = "", Quantidade = 0, CodigoFornecedor = "", Epc = "" });
                 }
 
 
-                var cracha = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == epc).ToList();
+                var listaCrachas = dbo.L_ATRIBUICAOCRACHA.Where(x => x.CODIGO_CRACHA == epc).ToList();
 
-                if (cracha != null)
+                if (listaCrachas.Any())
                 {
-                    if (cracha.Count > 0)
-                    {
-                        int fks = Convert.ToInt32(cracha[0].FK_FUNCIONARIO.ToString());
-                        var nome = dbo.L_FUNCIONARIOS.Where(x => x.ID == fks && x.FK_CLIENTE == fkCliente).ToList();
+                    int fks = Convert.ToInt32(listaCrachas[0].FK_FUNCIONARIO.ToString());
+                    var nome = dbo.L_FUNCIONARIOS.Where(x => x.ID == fks && x.FK_CLIENTE == fkCliente).ToList();
 
-                        if (nome.Count > 0)
-                        {
-                            listaDadosEpi.Add(new DADOSEPI { CodProduto = "Matricula=" + cracha[0].MATRICULA, Produto = "Funcionario=" + nome[0].NOME + " " + nome[0].SOBRENOME, Qtd = 1, CodFornecedor = "", EPC = cracha[0].CODIGO_CRACHA });
-                        }
+                    if (nome.Count > 0)
+                    {
+                        listaDadosEpi.Add(new DadosEpi { CodigoProduto = "Matricula=" + listaCrachas[0].MATRICULA, Produto = "Funcionario=" + nome[0].NOME + " " + nome[0].SOBRENOME, Quantidade = 1, CodigoFornecedor = "", Epc = listaCrachas[0].CODIGO_CRACHA });
                     }
                 }
-
-
             }
 
             return listaDadosEpi;
@@ -2721,9 +2766,9 @@ namespace WebApplication1
 
 
         [WebMethod]
-        public List<DADOSEPI> retornarDadosEpiValidarRecebimento(string listaEPCS)
+        public List<DadosEpi> retornarDadosEpiValidarRecebimento(string listaEPCS)
         {
-            List<DADOSEPI> mov = new List<DADOSEPI>();
+            List<DadosEpi> mov = new List<DadosEpi>();
             string[] lines = listaEPCS.Split('|');
             string html = "";
             int count = 0;
@@ -2753,11 +2798,11 @@ namespace WebApplication1
                             if (crachaQTD == 0)
                             {
                                 crachaQTD++;
-                                mov.Add(new DADOSEPI { CodProduto = "Matricula=" + cracha[0].MATRICULA, Produto = "Funcionario=" + nome[0].NOME + " " + nome[0].SOBRENOME, Qtd = 1, CodFornecedor = "", EPC = cracha[0].CODIGO_CRACHA });
+                                mov.Add(new DadosEpi { CodigoProduto = "Matricula=" + cracha[0].MATRICULA, Produto = "Funcionario=" + nome[0].NOME + " " + nome[0].SOBRENOME, Quantidade = 1, CodigoFornecedor = "", Epc = cracha[0].CODIGO_CRACHA });
                             }
                             else
                             {
-                                mov.Add(new DADOSEPI { CodProduto = "Seleciona Apenas 1 Cracha", Produto = "", Qtd = 0, CodFornecedor = "", EPC = "" });
+                                mov.Add(new DadosEpi { CodigoProduto = "Seleciona Apenas 1 Cracha", Produto = "", Quantidade = 0, CodigoFornecedor = "", Epc = "" });
                                 return mov;
                             }
                         }
@@ -2774,13 +2819,13 @@ namespace WebApplication1
             {
                 foreach (var epcs in result)
                 {
-                    mov.Add(new DADOSEPI { CodProduto = epcs.COD_PRODUTO, Produto = epcs.PRODUTO, Qtd = epcs.QTD, CodFornecedor = epcs.COD_FORNECEDOR, EPC = "" });
+                    mov.Add(new DadosEpi { CodigoProduto = epcs.COD_PRODUTO, Produto = epcs.PRODUTO, Quantidade = epcs.QTD, CodigoFornecedor = epcs.COD_FORNECEDOR, Epc = "" });
 
                 }
             }
             else
             {
-                mov.Add(new DADOSEPI { CodProduto = "0", Produto = "", Qtd = 0, CodFornecedor = "", EPC = "" });
+                mov.Add(new DadosEpi { CodigoProduto = "0", Produto = "", Quantidade = 0, CodigoFornecedor = "", Epc = "" });
             }
 
 
