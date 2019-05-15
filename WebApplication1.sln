@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebAppli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceIntegracao", "WebServiceIntegracao\WebServiceIntegracao.csproj", "{459561CA-F3B3-4197-8387-57E77F2A3970}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyEPI.Infra", "EasyEPI.Infra\EasyEPI.Infra.csproj", "{1CC5F486-16F3-4B98-80D0-F59FBC372728}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "easyepi.api", "easyepi.api\easyepi.api.csproj", "{8E78CE51-7543-4E18-8A78-D77184D1B0CE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +21,6 @@ Global
 		{459561CA-F3B3-4197-8387-57E77F2A3970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{459561CA-F3B3-4197-8387-57E77F2A3970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{459561CA-F3B3-4197-8387-57E77F2A3970}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CC5F486-16F3-4B98-80D0-F59FBC372728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CC5F486-16F3-4B98-80D0-F59FBC372728}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CC5F486-16F3-4B98-80D0-F59FBC372728}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CC5F486-16F3-4B98-80D0-F59FBC372728}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E78CE51-7543-4E18-8A78-D77184D1B0CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E78CE51-7543-4E18-8A78-D77184D1B0CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E78CE51-7543-4E18-8A78-D77184D1B0CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E78CE51-7543-4E18-8A78-D77184D1B0CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

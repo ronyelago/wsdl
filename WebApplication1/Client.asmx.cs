@@ -322,7 +322,7 @@ namespace WebApplication1
                                 if (cnpj != itens.CNPJ_DESTINATARIO)
                                 {
                                     erro = true;
-                                    resultado = resultado + "\nEste item esta vinculado para outra Empresa";
+                                    resultado = resultado + "\nEste item está vinculado para outra Empresa";
                                 }
 
                                 if (DateTime.Now.Subtract(itens.DT_VALIDADE.Value).Days >= 0)
@@ -414,7 +414,7 @@ namespace WebApplication1
                         else
                         {
                             mv.Produto = "";
-                            mv.Resultado = "Este item ja foi recebido";
+                            mv.Resultado = "Este item já foi recebido";
                             mv.EPC = epc;
                             mv.CorAviso = "#ff7f7f";
                             mv.DataMovimentacao = DateTime.Now;
@@ -2499,10 +2499,10 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public List<DistribuicaoCrachaViewModel> ValidaEListaCrachas(string listaEpc)
+        public List<DistribuicaoViewModel> ValidaListaCrachas(string listaEpc)
         {
             List<string> epcList = listaEpc.Split('|').ToList();
-            List<DistribuicaoCrachaViewModel> crachaViewModels = new List<DistribuicaoCrachaViewModel>();
+            List<DistribuicaoViewModel> crachaViewModels = new List<DistribuicaoViewModel>();
 
             foreach(string epc in epcList)
             {
@@ -2518,32 +2518,19 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public List<DistribuicaoEpiViewModel> ValidaItens(string listaEpc)
+        public List<DistribuicaoViewModel> ValidaListaEpi(string listaEpc)
         {
-            // Lista de epc's que chegaram
             List<string> epcList = listaEpc.Split('|').ToList();
-            // Lista a ser enviada
-            List<DistribuicaoEpiViewModel> listaDistribuicaoViewModel = new List<DistribuicaoEpiViewModel>();
-            // Objeto DistribuicaoViewModel a ser adicionado à lista que será retornada
-            DistribuicaoEpiViewModel distribuicaoViewModel = new DistribuicaoEpiViewModel();
+            List<DistribuicaoViewModel> epcViewModels = new List<DistribuicaoViewModel>();
+            DistribuicaoViewModel distribuicaoViewModel = new DistribuicaoViewModel();
 
-            // Análise individual de inconformidade de epc
             foreach (string epc in epcList)
             {
-                // Verifica se o epc existe na tabela de crachás (L_ATRIBUICAOCRACHA)
-                var item = dbo.L_ATRIBUICAOCRACHA.FirstOrDefault(x => x.CODIGO_CRACHA == epc);
-                
-                // Se sim, mapeia o cracha encontrado para um DistribuicaoViewModel
-                if (item != null)
-                {
-                    var funcionario = dbo.L_FUNCIONARIOS.FirstOrDefault(f => f.ID == item.FK_FUNCIONARIO);
-
-                }
-
-                // Verifica se o epc está cadastrado (tabela L_PRODUTOS_ITENS)
+                var epi = distribuicaoServices.EpiHandler(epc);
+                epcViewModels.Add(epi);
             }
 
-            return listaDistribuicaoViewModel;
+            return epcViewModels;
         }
 
         [WebMethod]

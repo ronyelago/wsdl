@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using WebApplication1.ViewModels;
 
 namespace WebApplication1.Services
@@ -12,9 +13,12 @@ namespace WebApplication1.Services
             this._context = new webservicetwos3Entities();
         }
 
-        public DistribuicaoCrachaViewModel CrachaHandler(string epc)
+        public DistribuicaoViewModel CrachaHandler(string epc)
         {
-            DistribuicaoCrachaViewModel distribuicaoCrachaViewModel;
+            DistribuicaoViewModel distribuicaoCrachaViewModel = new DistribuicaoViewModel
+            {
+                Epc = epc
+            };
 
             var cracha = _context.L_ATRIBUICAOCRACHA.FirstOrDefault(x => x.CODIGO_CRACHA == epc);
 
@@ -30,9 +34,9 @@ namespace WebApplication1.Services
             return null;
         }
 
-        public DistribuicaoEpiViewModel EpiHandler(string epc)
+        public DistribuicaoViewModel EpiHandler(string epc)
         {
-            DistribuicaoEpiViewModel distribuicaoViewModel = new DistribuicaoEpiViewModel();
+            DistribuicaoViewModel distribuicaoViewModel = new DistribuicaoViewModel();
             distribuicaoViewModel.Epc = epc;
 
             // Verifica pelo epc se o item existe na base de dados (tabela L_PRODUTOS_ITENS)
@@ -41,41 +45,107 @@ namespace WebApplication1.Services
             if (item != null)
             {
                 var epi = _context.L_ESTOQUE.FirstOrDefault(x => x.EPC == epc);
+
+                if (epi != null)
+                {
+                    return AssemblyEpcIsEpi(item, epi);
+                }
+
+                else
+                {
+                    return AssemblyEpcIsEpi(item, null);
+                }
             }
 
-            // Caso o epc não seja encontrado na base de dados
-            else
-            {
-                distribuicaoViewModel = AssemblyEpcNotFound();
-            }
-
-            return distribuicaoViewModel;
+            return distribuicaoViewModel = AssemblyEpcNotFound(epc);
         }
 
-        public DistribuicaoCrachaViewModel AssemblyEpcIsCracha(L_FUNCIONARIOS funcionario, L_ATRIBUICAOCRACHA cracha)
+        public DistribuicaoViewModel AssemblyEpcIsCracha(L_FUNCIONARIOS funcionario, L_ATRIBUICAOCRACHA cracha)
         {
-            DistribuicaoCrachaViewModel viewModel = new DistribuicaoCrachaViewModel();
-            viewModel.NomeFuncionario = $"{funcionario.NOME} {funcionario.SOBRENOME}";
+            DistribuicaoViewModel viewModel = new DistribuicaoViewModel();
+            viewModel.Titulo = $"{funcionario.NOME} {funcionario.SOBRENOME}";
             viewModel.Epc = cracha.CODIGO_CRACHA;
-            viewModel.Matricula = funcionario.MATRICULA;
+            viewModel.Observacoes = $"Matrícula: {funcionario.MATRICULA}";
+            viewModel.Disponivel = true;
+            viewModel.Tipo = 2; // Tipo crachá
 
             return viewModel;
         }
 
-        //public DistribuicaoEpiViewModel AssemblyEpcIsEpi(L_PRODUTOS_ITENS item, L_ESTOQUE epi)
-        //{
-        //    DistribuicaoEpiViewModel distribuicaoViewModel = new DistribuicaoEpiViewModel();
-        //    distribuicaoViewModel.Titulo = "EPI";
-        //    distribuicaoViewModel.Epc = epi.EPC;
-        //    distribuicaoViewModel.Situacao = item.ATIVO;
-        //}
-
-        public DistribuicaoEpiViewModel AssemblyEpcNotFound()
+        public DistribuicaoViewModel AssemblyEpcIsEpi(L_PRODUTOS_ITENS item, L_ESTOQUE epi)
         {
-            DistribuicaoEpiViewModel distribuicaoViewModel = new DistribuicaoEpiViewModel();
+            DistribuicaoViewModel distribuicaoViewModel = new DistribuicaoViewModel();
+            distribuicaoViewModel.Titulo = item.PRODUTO;
+            distribuicaoViewModel.Epc = item.EPC;
+            distribuicaoViewModel.Icone = "epiicon";
+            distribuicaoViewModel.Disponivel = false;
+            distribuicaoViewModel.Tipo = 1; // tipo Epi
 
-            distribuicaoViewModel.Titulo = "Item não encontrado";
-            distribuicaoViewModel.Situacao = "Item não cadastrado na base de dados";
+            if (item.DT_VALIDADE < DateTime.Now)
+            {
+                distribuicaoViewModel.Observacoes = "Data de Validade vencida";
+
+                return distribuicaoViewModel;
+            }
+
+            else if (item.VALIDADE_TESTE < DateTime.Now)
+            {
+                distribuicaoViewModel.Observacoes = "Data de Validade de Teste vencida";
+
+                return distribuicaoViewModel;
+            }
+
+            if (epi != null)
+            {
+                // Recebido (somente na tabela L_PRODUTOS_ITENS)
+                // ou Recebimento de Itens Testado
+                if (epi.STATUS == "R" || epi.STATUS == "A")
+                {
+                    distribuicaoViewModel.Disponivel = true;
+                }
+
+                else if (epi.STATUS == "D") // Distribuição de EPI
+                {
+                    distribuicaoViewModel.Observacoes = "EPI já atribuído a um funcionário";
+
+                    return distribuicaoViewModel;
+                }
+
+                else if (epi.STATUS == "B") // Devolução de EPI ao Estoque
+                {
+                    distribuicaoViewModel.Observacoes = "EPI encontra-se para ser devolvido ao estoque";
+                }
+
+                else if (epi.STATUS == "O") // Distribuído e aguardando assinatura
+                {
+                    distribuicaoViewModel.Observacoes = "EPI aguardando assinatura";
+                }
+
+                else if (epi.STATUS == "M") // Em Manutenção Cliente ou Fornecedor
+                {
+                    distribuicaoViewModel.Observacoes = "EPI em manutenção";
+                }
+            }
+
+            else
+            {
+                distribuicaoViewModel.Observacoes = "EPI disponível para distribuição";
+                distribuicaoViewModel.Disponivel = true;
+            }
+            
+            return distribuicaoViewModel;
+        }
+
+        public DistribuicaoViewModel AssemblyEpcNotFound(string epc)
+        {
+            DistribuicaoViewModel distribuicaoViewModel = new DistribuicaoViewModel();
+
+            distribuicaoViewModel.Titulo = "Crachá/EPI não encontrado";
+            distribuicaoViewModel.Epc = epc;
+            distribuicaoViewModel.Icone = "epcnotfoundicon";
+            distribuicaoViewModel.Observacoes = "Item não cadastrado na base de dados";
+            distribuicaoViewModel.Disponivel = false;
+            distribuicaoViewModel.Tipo = 0; // não encontrado
 
             return distribuicaoViewModel;
         }
