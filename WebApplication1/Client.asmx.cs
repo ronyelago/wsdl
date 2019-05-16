@@ -2534,6 +2534,12 @@ namespace WebApplication1
         }
 
         [WebMethod]
+        public DistribuicaoSuccessViewModel DistribuiEpi(int crachaId, string epiIdListString)
+        {
+
+        }
+
+        [WebMethod]
         public List<DadosEpi> retornarDadosEpiValidar(string listaEpc, string cnpj, int fkCliente)
         {
             List<DadosEpi> listaDadosEpi = new List<DadosEpi>();

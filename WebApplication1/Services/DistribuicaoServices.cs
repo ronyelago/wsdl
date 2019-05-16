@@ -62,6 +62,7 @@ namespace WebApplication1.Services
         public DistribuicaoViewModel AssemblyEpcIsCracha(L_FUNCIONARIOS funcionario, L_ATRIBUICAOCRACHA cracha)
         {
             DistribuicaoViewModel viewModel = new DistribuicaoViewModel();
+            viewModel.Id = cracha.ID;
             viewModel.Titulo = $"{funcionario.NOME} {funcionario.SOBRENOME}";
             viewModel.Epc = cracha.CODIGO_CRACHA;
             viewModel.Observacoes = $"Matrícula: {funcionario.MATRICULA}";
@@ -74,6 +75,7 @@ namespace WebApplication1.Services
         public DistribuicaoViewModel AssemblyEpcIsEpi(L_PRODUTOS_ITENS item, L_ESTOQUE epi)
         {
             DistribuicaoViewModel distribuicaoViewModel = new DistribuicaoViewModel();
+            distribuicaoViewModel.Id = item.ID;
             distribuicaoViewModel.Titulo = item.PRODUTO;
             distribuicaoViewModel.Epc = item.EPC;
             distribuicaoViewModel.Disponivel = false;
