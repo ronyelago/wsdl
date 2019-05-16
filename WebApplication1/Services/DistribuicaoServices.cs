@@ -25,7 +25,6 @@ namespace WebApplication1.Services
             if (cracha != null)
             {
                 var funcionario = _context.L_FUNCIONARIOS.FirstOrDefault(f => f.ID == cracha.FK_FUNCIONARIO);
-
                 distribuicaoCrachaViewModel = AssemblyEpcIsCracha(funcionario, cracha);
 
                 return distribuicaoCrachaViewModel;
@@ -66,7 +65,7 @@ namespace WebApplication1.Services
             viewModel.Titulo = $"{funcionario.NOME} {funcionario.SOBRENOME}";
             viewModel.Epc = cracha.CODIGO_CRACHA;
             viewModel.Observacoes = $"Matrícula: {funcionario.MATRICULA}";
-            viewModel.Disponivel = true;
+            viewModel.Disponivel = cracha.ATIVO == "S" ? true : false;
             viewModel.Tipo = 2; // Tipo crachá
 
             return viewModel;
@@ -77,7 +76,6 @@ namespace WebApplication1.Services
             DistribuicaoViewModel distribuicaoViewModel = new DistribuicaoViewModel();
             distribuicaoViewModel.Titulo = item.PRODUTO;
             distribuicaoViewModel.Epc = item.EPC;
-            distribuicaoViewModel.Icone = "epiicon";
             distribuicaoViewModel.Disponivel = false;
             distribuicaoViewModel.Tipo = 1; // tipo Epi
 
@@ -142,7 +140,6 @@ namespace WebApplication1.Services
 
             distribuicaoViewModel.Titulo = "Crachá/EPI não encontrado";
             distribuicaoViewModel.Epc = epc;
-            distribuicaoViewModel.Icone = "epcnotfoundicon";
             distribuicaoViewModel.Observacoes = "Item não cadastrado na base de dados";
             distribuicaoViewModel.Disponivel = false;
             distribuicaoViewModel.Tipo = 0; // não encontrado
