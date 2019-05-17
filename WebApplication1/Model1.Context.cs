@@ -41,7 +41,7 @@ namespace WebApplication1
         public virtual DbSet<L_PRODUTOS_ITENS> L_PRODUTOS_ITENS { get; set; }
         public virtual DbSet<L_TELAS> L_TELAS { get; set; }
         public virtual DbSet<L_TELAS_PERFIL> L_TELAS_PERFIL { get; set; }
-        public virtual DbSet<L_USUARIO_COALBORADOR> L_USUARIO_COALBORADOR { get; set; }
+        public virtual DbSet<L_USUARIO_COLABORADOR> L_USUARIO_COLABORADOR { get; set; }
         public virtual DbSet<L_USUARIOS> L_USUARIOS { get; set; }
         public virtual DbSet<L_ENVIO_PARA_TESTE> L_ENVIO_PARA_TESTE { get; set; }
         public virtual DbSet<L_ATRIBUICAOCRACHA> L_ATRIBUICAOCRACHA { get; set; }

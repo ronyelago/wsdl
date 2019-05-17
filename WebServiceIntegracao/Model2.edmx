@@ -353,7 +353,7 @@
           <Property Name="FK_TELAS" Type="int" />
           <Property Name="FK_PERFIL" Type="int" />
         </EntityType>
-        <EntityType Name="L_USUARIO_COALBORADOR">
+        <EntityType Name="L_USUARIO_COLABORADOR">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -896,7 +896,7 @@ warning 6002: The table/view 'EasyEPI.dbo.ITENS_COM_VALIDADE_DE_TESTE_A_VENCER' 
           <EntitySet Name="L_STATUSOCORRENCIA" EntityType="Self.L_STATUSOCORRENCIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_TELAS" EntityType="Self.L_TELAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_TELAS_PERFIL" EntityType="Self.L_TELAS_PERFIL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="L_USUARIO_COALBORADOR" EntityType="Self.L_USUARIO_COALBORADOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="L_USUARIO_COLABORADOR" EntityType="Self.L_USUARIO_COLABORADOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_USUARIOS" EntityType="Self.L_USUARIOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AggregatedCounter" EntityType="Self.AggregatedCounter" Schema="HangFire" store:Type="Tables" />
           <EntitySet Name="Counter" EntityType="Self.Counter" Schema="HangFire" store:Type="Tables" />
@@ -1502,7 +1502,7 @@ warning 6002: The table/view 'EasyEPI.dbo.ITENS_COM_VALIDADE_DE_TESTE_A_VENCER' 
           <Property Name="FK_TELAS" Type="Int32" />
           <Property Name="FK_PERFIL" Type="Int32" />
         </EntityType>
-        <EntityType Name="L_USUARIO_COALBORADOR">
+        <EntityType Name="L_USUARIO_COLABORADOR">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -2012,7 +2012,7 @@ warning 6002: The table/view 'EasyEPI.dbo.ITENS_COM_VALIDADE_DE_TESTE_A_VENCER' 
           <EntitySet Name="L_STATUSOCORRENCIA" EntityType="Self.L_STATUSOCORRENCIA" />
           <EntitySet Name="L_TELAS" EntityType="Self.L_TELAS" />
           <EntitySet Name="L_TELAS_PERFIL" EntityType="Self.L_TELAS_PERFIL" />
-          <EntitySet Name="L_USUARIO_COALBORADOR" EntityType="Self.L_USUARIO_COALBORADOR" />
+          <EntitySet Name="L_USUARIO_COLABORADOR" EntityType="Self.L_USUARIO_COLABORADOR" />
           <EntitySet Name="L_USUARIOS" EntityType="Self.L_USUARIOS" />
           <EntitySet Name="AggregatedCounter" EntityType="Self.AggregatedCounter" />
           <EntitySet Name="Counter" EntityType="Self.Counter" />
@@ -2430,9 +2430,9 @@ warning 6002: The table/view 'EasyEPI.dbo.ITENS_COM_VALIDADE_DE_TESTE_A_VENCER' 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="L_USUARIO_COALBORADOR">
-            <EntityTypeMapping TypeName="webservicetwos3Model.L_USUARIO_COALBORADOR">
-              <MappingFragment StoreEntitySet="L_USUARIO_COALBORADOR">
+          <EntitySetMapping Name="L_USUARIO_COLABORADOR">
+            <EntityTypeMapping TypeName="webservicetwos3Model.L_USUARIO_COLABORADOR">
+              <MappingFragment StoreEntitySet="L_USUARIO_COLABORADOR">
                 <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nome" ColumnName="nome" />

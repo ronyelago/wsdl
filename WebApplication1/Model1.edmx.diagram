@@ -21,7 +21,7 @@
         <EntityTypeShape EntityType="webservicetwos3Model.L_PRODUTOS_ITENS" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_TELAS" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_TELAS_PERFIL" Width="1.5" PointX="4.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="webservicetwos3Model.L_USUARIO_COALBORADOR" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_USUARIO_COLABORADOR" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_USUARIOS" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_ENVIO_PARA_TESTE" Width="1.5" PointX="12.75" PointY="10.75" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_ATRIBUICAOCRACHA" Width="1.5" PointX="6.75" PointY="13.75" />

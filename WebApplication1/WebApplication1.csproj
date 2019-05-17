@@ -357,11 +357,13 @@
     <Compile Include="RESULTADOMOV.cs" />
     <Compile Include="RESULTADO_IMPORTACAO.cs" />
     <Compile Include="Services\DistribuicaoServices.cs" />
+    <Compile Include="Services\DistribuiEpiService.cs" />
     <Compile Include="Sessao.cs" />
     <Compile Include="SessaoUsuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="StdTools.cs" />
+    <Compile Include="ViewModels\DistribuicaoSuccessViewModel.cs" />
     <Compile Include="ViewModels\DistribuicaoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -27,7 +27,7 @@
         <EntityTypeShape EntityType="webservicetwos3Model.L_STATUSOCORRENCIA" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_TELAS" Width="1.5" PointX="6.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_TELAS_PERFIL" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="webservicetwos3Model.L_USUARIO_COALBORADOR" Width="1.5" PointX="14.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webservicetwos3Model.L_USUARIO_COLABORADOR" Width="1.5" PointX="14.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.L_USUARIOS" Width="1.5" PointX="8.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.AggregatedCounter" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="webservicetwos3Model.Counter" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />

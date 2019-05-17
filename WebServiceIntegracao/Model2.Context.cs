@@ -47,7 +47,7 @@ namespace WebServiceIntegracao
         public virtual DbSet<L_STATUSOCORRENCIA> L_STATUSOCORRENCIA { get; set; }
         public virtual DbSet<L_TELAS> L_TELAS { get; set; }
         public virtual DbSet<L_TELAS_PERFIL> L_TELAS_PERFIL { get; set; }
-        public virtual DbSet<L_USUARIO_COALBORADOR> L_USUARIO_COALBORADOR { get; set; }
+        public virtual DbSet<L_USUARIO_COLABORADOR> L_USUARIO_COLABORADOR { get; set; }
         public virtual DbSet<L_USUARIOS> L_USUARIOS { get; set; }
         public virtual DbSet<AggregatedCounter> AggregatedCounter { get; set; }
         public virtual DbSet<Counter> Counter { get; set; }

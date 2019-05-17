@@ -429,7 +429,7 @@
           <Property Name="FK_TELAS" Type="int" />
           <Property Name="FK_PERFIL" Type="int" />
         </EntityType>
-        <EntityType Name="L_USUARIO_COALBORADOR">
+        <EntityType Name="L_USUARIO_COLABORADOR">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -512,7 +512,7 @@
           <EntitySet Name="L_STATUSOCORRENCIA" EntityType="Self.L_STATUSOCORRENCIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_TELAS" EntityType="Self.L_TELAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_TELAS_PERFIL" EntityType="Self.L_TELAS_PERFIL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="L_USUARIO_COALBORADOR" EntityType="Self.L_USUARIO_COALBORADOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="L_USUARIO_COLABORADOR" EntityType="Self.L_USUARIO_COLABORADOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="L_USUARIOS" EntityType="Self.L_USUARIOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SessaoUsuario" EntityType="Self.SessaoUsuario" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -775,7 +775,7 @@
           <Property Name="FK_TELAS" Type="Int32" />
           <Property Name="FK_PERFIL" Type="Int32" />
         </EntityType>
-        <EntityType Name="L_USUARIO_COALBORADOR">
+        <EntityType Name="L_USUARIO_COLABORADOR">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -827,7 +827,7 @@
           <EntitySet Name="L_PRODUTOS_ITENS" EntityType="Self.L_PRODUTOS_ITENS" />
           <EntitySet Name="L_TELAS" EntityType="Self.L_TELAS" />
           <EntitySet Name="L_TELAS_PERFIL" EntityType="Self.L_TELAS_PERFIL" />
-          <EntitySet Name="L_USUARIO_COALBORADOR" EntityType="Self.L_USUARIO_COALBORADOR" />
+          <EntitySet Name="L_USUARIO_COLABORADOR" EntityType="Self.L_USUARIO_COLABORADOR" />
           <EntitySet Name="L_USUARIOS" EntityType="Self.L_USUARIOS" />
           <EntitySet Name="L_ENVIO_PARA_TESTE" EntityType="webservicetwos3Model.L_ENVIO_PARA_TESTE" />
           <EntitySet Name="L_ATRIBUICAOCRACHA" EntityType="webservicetwos3Model.L_ATRIBUICAOCRACHA" />
@@ -1308,9 +1308,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="L_USUARIO_COALBORADOR">
-            <EntityTypeMapping TypeName="webservicetwos3Model.L_USUARIO_COALBORADOR">
-              <MappingFragment StoreEntitySet="L_USUARIO_COALBORADOR">
+          <EntitySetMapping Name="L_USUARIO_COLABORADOR">
+            <EntityTypeMapping TypeName="webservicetwos3Model.L_USUARIO_COLABORADOR">
+              <MappingFragment StoreEntitySet="L_USUARIO_COLABORADOR">
                 <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
                 <ScalarProperty Name="receberEmail" ColumnName="receberEmail" />
                 <ScalarProperty Name="local_estoque" ColumnName="local_estoque" />

@@ -12,7 +12,7 @@ namespace WebApplication1
     using System;
     using System.Collections.Generic;
     
-    public partial class L_USUARIO_COALBORADOR
+    public partial class L_USUARIO_COLABORADOR
     {
         public int id { get; set; }
         public string nome { get; set; }

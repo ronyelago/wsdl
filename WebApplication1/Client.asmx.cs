@@ -24,7 +24,8 @@ namespace WebApplication1
         webservicetwos3Entities dbo = new webservicetwos3Entities();
         ControleSessao controleSessao = new ControleSessao();
         HttpClient client;
-        readonly DistribuicaoServices distribuicaoServices = new DistribuicaoServices();
+        private readonly DistribuicaoServices distribuicaoServices = new DistribuicaoServices();
+        DistribuiEpiService distribuiEpiService = new DistribuiEpiService();
 
         [WebMethod]
         public List<L_LOCALESTOQUE> retornaLocalEstoque()
@@ -1936,7 +1937,7 @@ namespace WebApplication1
                     var usuario = listaUsuarios[0];
 
                     int fkFuncionario = Convert.ToInt32(usuario.FK_USUARIO.ToString());
-                    var dadosUsuario = dbo.L_USUARIO_COALBORADOR.First(x => x.id == fkFuncionario);
+                    var dadosUsuario = dbo.L_USUARIO_COLABORADOR.First(x => x.id == fkFuncionario);
                     int fkCliente = Convert.ToInt32(dadosUsuario.FK_CLIENTE.ToString());
                     var dadosEmpresa = dbo.L_CLIENTE.First(x => x.ID == fkCliente);
 
@@ -2536,7 +2537,7 @@ namespace WebApplication1
         [WebMethod]
         public DistribuicaoSuccessViewModel DistribuiEpi(int crachaId, string epiIdListString)
         {
-
+            return distribuiEpiService.DistribuiEpi(crachaId, epiIdListString);
         }
 
         [WebMethod]
