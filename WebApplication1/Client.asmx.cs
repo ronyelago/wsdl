@@ -1990,7 +1990,7 @@ namespace WebApplication1
                     return mov;
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 DADOSLOGIN mv = new DADOSLOGIN();
                 List<DADOSLOGIN> mov = new List<DADOSLOGIN>();
