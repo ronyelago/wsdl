@@ -48,7 +48,15 @@ namespace WebApplication1.Services
                 if (epiEstoque == null)
                 {
                     _context.L_ESTOQUE.Add(assemblyRegistroEstoque(epi, funcionario));
-                    _context.SaveChanges();
+
+                    try
+                    {
+                        _context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        viewModel.Success = false;
+                    }
                 }
 
                 else
@@ -58,10 +66,19 @@ namespace WebApplication1.Services
                     epiEstoque.NOME_FUNC_SAIDA = $"{funcionario.NOME} {funcionario.SOBRENOME}";
                     epiEstoque.ENTRADA_SAIDA = "S";
                     epiEstoque.MATRICULA = funcionario.MATRICULA;
-                    epiEstoque.STATUS = "Aguardando Assinatura";
+                    epiEstoque.STATUS = "D";
+                    epiEstoque.STATUS = "Distribuição de EPI";
 
                     _context.Entry(epiEstoque).State = EntityState.Modified;
-                    _context.SaveChanges();
+
+                    try
+                    {
+                        _context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        viewModel.Success = false;
+                    }
                 }
             }
 
@@ -88,8 +105,8 @@ namespace WebApplication1.Services
             novoEpiEstoque.ENTRADA_SAIDA = "S";
             novoEpiEstoque.COD_PRODUTO = epi.COD_PRODUTO;
             novoEpiEstoque.MATRICULA = funcionario.MATRICULA;
-            novoEpiEstoque.STATUS = "O";
-            novoEpiEstoque.DESC_STATUS = "Aguardando Assinatura";
+            novoEpiEstoque.STATUS = "D";
+            novoEpiEstoque.DESC_STATUS = "Distribuição de EPI";
 
             return novoEpiEstoque;
         }
@@ -109,8 +126,8 @@ namespace WebApplication1.Services
             //movimentacaoEstoque.COD_FUNCIONARIO =
             movimentacaoEstoque.COD_DISTRIBUICAO = new Guid();
             movimentacaoEstoque.EPC = epi.EPC;
-            movimentacaoEstoque.STATUS = "O";
-            movimentacaoEstoque.DESC_STATUS = "Aguardando Assinatura";
+            movimentacaoEstoque.STATUS = "D";
+            movimentacaoEstoque.DESC_STATUS = "Distribuição de EPI";
 
             return movimentacaoEstoque;
         }
