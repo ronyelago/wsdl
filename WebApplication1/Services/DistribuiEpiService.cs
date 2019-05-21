@@ -9,10 +9,12 @@ namespace WebApplication1.Services
     public class DistribuiEpiService
     {
         private readonly webservicetwos3Entities _context;
+        private readonly DocumentService _documentService;
 
         public DistribuiEpiService()
         {
             _context = new webservicetwos3Entities();
+            _documentService = new DocumentService();
         }
 
         public DistribuicaoSuccessViewModel DistribuiEpi(int crachaId, string epiIdListString)
@@ -41,13 +43,20 @@ namespace WebApplication1.Services
             foreach (var epi in listaEpis)
             {
                 var epiEstoque = _context.L_ESTOQUE.FirstOrDefault(x => x.FK_PRODUTO == epi.ID);
+                var movimentacaoEstoque = assemblyMovimentacaoEstoque(epi, funcionario);
 
-                _context.L_MOVIMENTACAO_ESTOQUE.Add(assemblyMovimentacaoEstoque(epi, funcionario));
+                _context.L_MOVIMENTACAO_ESTOQUE.Add(movimentacaoEstoque);
+                _context.SaveChanges();
+
+                _context.L_FICHACADASTRAL.Add(assemblyFichaCadastral(cracha));
                 _context.SaveChanges();
 
                 if (epiEstoque == null)
                 {
-                    _context.L_ESTOQUE.Add(assemblyRegistroEstoque(epi, funcionario));
+                    var registroEstoque = assemblyRegistroEstoque(epi, funcionario);
+
+                    _context.L_ESTOQUE.Add(registroEstoque);
+                    _documentService.convertHtmlDocx(funcionario.ID, movimentacaoEstoque.COD_DISTRIBUICAO.ToString());                    
 
                     try
                     {
@@ -99,7 +108,7 @@ namespace WebApplication1.Services
             novoEpiEstoque.FK_FUNCIONARIO_SAIDA = funcionario.ID;
             //novoEpiEstoque.NOME_FUNC_SAIDA = 
             //novoEpiEstoque.ULT_INSPECAO = 
-            novoEpiEstoque.COD_RECEBIMENTO = new Guid();
+            novoEpiEstoque.COD_RECEBIMENTO = Guid.NewGuid();
             //novoEpiEstoque.COD_ESTOQUE = 
             //novoEpiEstoque.ESTOQUE = 
             novoEpiEstoque.ENTRADA_SAIDA = "S";
@@ -124,7 +133,7 @@ namespace WebApplication1.Services
             movimentacaoEstoque.QUANTIDADE = 1;
             movimentacaoEstoque.COD_PRODUTO = epi.COD_PRODUTO;
             //movimentacaoEstoque.COD_FUNCIONARIO =
-            movimentacaoEstoque.COD_DISTRIBUICAO = new Guid();
+            movimentacaoEstoque.COD_DISTRIBUICAO = Guid.NewGuid();
             movimentacaoEstoque.EPC = epi.EPC;
             movimentacaoEstoque.STATUS = "D";
             movimentacaoEstoque.DESC_STATUS = "Distribuição de EPI";
@@ -132,9 +141,14 @@ namespace WebApplication1.Services
             return movimentacaoEstoque;
         }
 
-        private L_FICHACADASTRAL assemblyFichaCadastral()
+        private L_FICHACADASTRAL assemblyFichaCadastral(L_ATRIBUICAOCRACHA cracha)
         {
+            var fichaCadastral = new L_FICHACADASTRAL();
+            fichaCadastral.DATA = DateTime.Now;
+            fichaCadastral.FK_FUNCIONARIO = cracha.FK_FUNCIONARIO;
+            fichaCadastral.IMPRESSO = "N";
 
+            return fichaCadastral;
         }
     }
 }

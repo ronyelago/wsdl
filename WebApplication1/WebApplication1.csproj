@@ -358,6 +358,7 @@
     <Compile Include="RESULTADO_IMPORTACAO.cs" />
     <Compile Include="Services\DistribuicaoServices.cs" />
     <Compile Include="Services\DistribuiEpiService.cs" />
+    <Compile Include="Services\DocumentService.cs" />
     <Compile Include="Sessao.cs" />
     <Compile Include="SessaoUsuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
