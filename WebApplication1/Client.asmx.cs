@@ -646,7 +646,7 @@ namespace WebApplication1
 
                                                                 L_FICHACADASTRAL lfc = new L_FICHACADASTRAL();
                                                                 lfc.DATA = DateTime.Now;
-                                                                lfc.FK_FUNCIONARIO = cracha[0].FK_FUNCIONARIO;
+                                                                lfc.FK_FUNCIONARIO = listaCracha[0].FK_FUNCIONARIO;
                                                                 lfc.IMPRESSO = "N";
                                                                 dbo.L_FICHACADASTRAL.Add(lfc);
                                                                 dbo.SaveChanges();
@@ -746,7 +746,7 @@ namespace WebApplication1
 
                                                 L_FICHACADASTRAL lfc = new L_FICHACADASTRAL();
                                                 lfc.DATA = DateTime.Now;
-                                                lfc.FK_FUNCIONARIO = cracha[0].FK_FUNCIONARIO;
+                                                lfc.FK_FUNCIONARIO = listaCracha[0].FK_FUNCIONARIO;
                                                 lfc.IMPRESSO = "N";
                                                 dbo.L_FICHACADASTRAL.Add(lfc);
                                                 dbo.SaveChanges();
@@ -801,8 +801,8 @@ namespace WebApplication1
                 {
                     if (lme.COD_DISTRIBUICAO.ToString() != "")
                     {
-                        var docKey = convertHtmlDocx(cracha[0].FK_FUNCIONARIO, gdi.ToString());
-                        string matriculas = cracha[0].MATRICULA;
+                        var docKey = convertHtmlDocx(listaCracha[0].FK_FUNCIONARIO, codigoRecebimento.ToString());
+                        string matriculas = listaCracha[0].MATRICULA;
                         var lfunc = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matriculas).ToList();
                         criarHookArquivo(docKey);
                         resultadoMovimentacao.Produto = "chave";
@@ -2834,6 +2834,7 @@ namespace WebApplication1
             {
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
                 var l = dbo.L_FICHACADASTRAL.Where(x => x.FK_FUNCIONARIO == FK_FUNCIONARIO).ToList();
+
                 if (l.Count > 0)
                 {
                     var matri = dbo.L_FUNCIONARIOS.Where(x => x.ID == FK_FUNCIONARIO).ToList();
@@ -2857,9 +2858,12 @@ namespace WebApplication1
             {
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
 
-                var result = dbo.L_MOVIMENTACAO_ESTOQUE.Where(x => x.FK_FUNCIONARIO == FK_FUNCIONARIO && x.COD_DISTRIBUICAO == codDistribuicao).ToList();
+                var result = dbo.L_MOVIMENTACAO_ESTOQUE.Where(x => x.FK_FUNCIONARIO == FK_FUNCIONARIO 
+                    && x.COD_DISTRIBUICAO == codDistribuicao).ToList();
+
                 RESULTADO mv = new RESULTADO();
                 List<RESULTADO> mov = new List<RESULTADO>();
+
                 if (result.Count > 0)
                 {
                     foreach (var rst in result)
@@ -2900,7 +2904,10 @@ namespace WebApplication1
 
                 var dadosFicha = retornarDadosFicha(FK_FUNCIONARIO);
 
-                var nomeArquivo = FK_FUNCIONARIO + "_" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+                var nomeArquivo = FK_FUNCIONARIO + "_" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + 
+                    DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + 
+                    DateTime.Now.Second.ToString();
+
                 string path = Server.MapPath("Doc_FichaCadastral");
                 string fileName = path + "\\" + nomeArquivo + ".docx";
                 var doc = DocX.Create(fileName);
@@ -2913,13 +2920,20 @@ namespace WebApplication1
                 Color _color2 = System.Drawing.ColorTranslator.FromHtml("#000000");
                 titleFormat.FontColor = _color2;
                 titleFormat.Position = 0;
-                doc.InsertParagraph("CONTROLE DE ENTREGA DE EPI'S\nEQUIPAMENTOS DE PROTEÇÃO INDIVIDUAL", false, titleFormat).Alignment = Alignment.center;
+                doc.InsertParagraph("CONTROLE DE ENTREGA DE EPI'S\nEQUIPAMENTOS DE PROTEÇÃO INDIVIDUAL", false, titleFormat)
+                    .Alignment = Alignment.center;
                 doc.InsertParagraph("", false, titleFormat).Position(20);
-                doc.InsertParagraph("Eu " + dadosFicha.Split('|')[0] + " Registro No " + dadosFicha.Split('|')[1] + " Função " + dadosFicha.Split('|')[2] + " declaro para  todos  os  efeitos  legais  que  recebi  da Leal Equipamentos de Proteção , os equipamentos de proteção individual (EPI) relacionados abaixo, bem como as instruções para sua correta utilização, obrigando-me:");
+                doc.InsertParagraph("Eu " + dadosFicha.Split('|')[0] + " Registro No " + 
+                    dadosFicha.Split('|')[1] + " Função " + dadosFicha.Split('|')[2] + 
+                    " declaro para  todos  os  efeitos  legais  que  recebi  da Leal Equipamentos de Proteção , " +
+                    "os equipamentos de proteção individual (EPI) relacionados abaixo, bem como as instruções para " +
+                    "sua correta utilização, obrigando-me:");
 
                 doc.InsertParagraph("1) usar o EPI e uniforme indicado, apenas às finalidades a que se destina;");
-                doc.InsertParagraph("2) comunicar o setor de obras /segurança do trabalho, qualquer alteração no EPI que o torne parcialmente ou totalmente danificado;");
-                doc.InsertParagraph("3) responsabilizar-me pelos danos do EPI, quando usados de modo inadequado ou fora das atividades a que se destina, bem como pelo seu extravio;");
+                doc.InsertParagraph("2) comunicar o setor de obras /segurança do trabalho, " +
+                    "qualquer alteração no EPI que o torne parcialmente ou totalmente danificado;");
+                doc.InsertParagraph("3) responsabilizar-me pelos danos do EPI, quando usados " +
+                    "de modo inadequado ou fora das atividades a que se destina, bem como pelo seu extravio;");
                 doc.InsertParagraph("4) devolvê-lo quando da troca por outro ou no meu desligamento da empresa.").Position(20);
 
                 int count = 0;
@@ -2956,19 +2970,23 @@ namespace WebApplication1
                     t.Rows[count].Cells[6].Paragraphs[0].Append("").FontSize(8d).Alignment = Alignment.center;
                 }
 
-                //t.SetWidths(new float[] { 1, 1, 1, 1, 1, 1, 1 });
                 doc.InsertTable(t);
 
 
                 doc.InsertParagraph("", false, titleFormat).Position(20);
-                doc.InsertParagraph("Declaro para todos os efeitos legais que recebi todos os Equipamentos de Proteção Individual constantes da lista acima, novos e em perfeitas condições de uso, e que estou ciente das obrigações descritas na NR 06, baixada pela Portaria MTB 3214 / 78, sub - item 6.7.1, a saber: ");
+                doc.InsertParagraph("Declaro para todos os efeitos legais que recebi todos os Equipamentos de " +
+                    "Proteção Individual constantes da lista acima, novos e em perfeitas condições de uso, e que estou " +
+                    "ciente das obrigações descritas na NR 06, baixada pela Portaria MTB 3214 / 78, sub - item 6.7.1, a saber: ");
                 doc.InsertParagraph("a) usar, utilizando-o apenas para a finalidade a que se destina;");
                 doc.InsertParagraph("b) responsabilizar-se pela guarda e conservação; ");
                 doc.InsertParagraph("c) comunicar ao empregador qualquer alteração que o torne impróprio para uso; e ");
                 doc.InsertParagraph("d) cumprir as determinações do empregador sobre o uso adequado.");
-                doc.InsertParagraph("Declaro, também, que estou ciente das disposições do Art. 462 e § 1º da CLT, e autorizo o desconto salarial proporcional ao custo de reparação do dano que os EPI’s aos meus cuidados venham apresentar.");
-                doc.InsertParagraph("Declaro, ainda estar ciente de que o uso é obrigatório, sob pena de ser punido conforme Lei nº 6.514, de 27/12/77, artigo 158. ");
-                doc.InsertParagraph("Declaro, ainda, que recebi treinamento referente ao uso do E.P.I. e as Normas de Segurança do Trabalho.");
+                doc.InsertParagraph("Declaro, também, que estou ciente das disposições do Art. 462 e § 1º da CLT, e autorizo " +
+                    "o desconto salarial proporcional ao custo de reparação do dano que os EPI’s aos meus cuidados venham apresentar.");
+                doc.InsertParagraph("Declaro, ainda estar ciente de que o uso é obrigatório, sob pena " +
+                    "de ser punido conforme Lei nº 6.514, de 27/12/77, artigo 158. ");
+                doc.InsertParagraph("Declaro, ainda, que recebi treinamento referente ao uso do E.P.I. " +
+                    "e as Normas de Segurança do Trabalho.");
                 doc.InsertParagraph("", false, titleFormat).Position(20);
                 titleFormat.FontColor = System.Drawing.Color.Red;
                 titleFormat.Size = 11;
