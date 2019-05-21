@@ -65,12 +65,7 @@ namespace WebApplication1.Services
                 var listaEpis = retornarLista(FK_FUNCIONARIO, Guid.Parse(codDistribuicao));
                 Table t = doc.AddTable((listaEpis.Count + 1), 7);
                 t.Alignment = Alignment.center;
-
-
-
-                //t.SetColumnWidth(1, 100);
-
-                //Fill cells by adding text.  
+ 
                 Formatting column = new Formatting();
                 column.Bold = true;
                 column.Size = 8d;
@@ -82,7 +77,7 @@ namespace WebApplication1.Services
                 t.Rows[count].Cells[4].Paragraphs[0].Append("Data de Devolução", column).Alignment = Alignment.center;
                 t.Rows[count].Cells[5].Paragraphs[0].Append("Assinatura de Devolução Colaborador", column).Alignment = Alignment.center;
                 t.Rows[count].Cells[6].Paragraphs[0].Append("Assinatura de Devolução Responsável", column).Alignment = Alignment.center;
-                //t.ColumnWidths[1] = 100;
+                
                 foreach (var epi in listaEpis)
                 {
                     count++;
@@ -96,7 +91,6 @@ namespace WebApplication1.Services
                 }
 
                 doc.InsertTable(t);
-
 
                 doc.InsertParagraph("", false, titleFormat).Position(20);
                 doc.InsertParagraph("Declaro para todos os efeitos legais que recebi todos os Equipamentos de " +
@@ -113,14 +107,13 @@ namespace WebApplication1.Services
                 doc.InsertParagraph("Declaro, ainda, que recebi treinamento referente ao uso do E.P.I. " +
                     "e as Normas de Segurança do Trabalho.");
                 doc.InsertParagraph("", false, titleFormat).Position(20);
-                titleFormat.FontColor = System.Drawing.Color.Red;
+                titleFormat.FontColor = Color.Red;
                 titleFormat.Size = 11;
                 titleFormat.Bold = false;
                 doc.InsertParagraph("Data: " + dadosFicha.Split('|')[3], false, titleFormat).Position(10);
                 doc.InsertParagraph("Local: _______________________________", false, titleFormat).Position(10);
                 doc.InsertParagraph("ASSINATURA: _______________________________").Position(10);
                 doc.Save();
-
             }
             catch (Exception E)
             {
