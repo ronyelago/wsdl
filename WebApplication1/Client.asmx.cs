@@ -2836,6 +2836,7 @@ namespace WebApplication1
             {
                 webservicetwos3Entities dbo = new webservicetwos3Entities();
                 var l = dbo.L_FICHACADASTRAL.Where(x => x.MATRICULA == matricula).ToList();
+
                 if (l.Count > 0)
                 {
                     var matri = dbo.L_FUNCIONARIOS.Where(x => x.MATRICULA == matricula).ToList();
