@@ -131,5 +131,10 @@ namespace WebApplication1.Services
 
             return movimentacaoEstoque;
         }
+
+        private L_FICHACADASTRAL assemblyFichaCadastral()
+        {
+
+        }
     }
 }
