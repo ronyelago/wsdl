@@ -9,7 +9,7 @@ namespace WebApplication1.Services
 {
     public class DocumentService
     {
-        public void convertHtmlDocx(int? FK_FUNCIONARIO, string codDistribuicao)
+        public void convertHtmlDocx(int? FK_FUNCIONARIO, string codDistribuicao, string nomeArquivo)
         {
             try
             {
@@ -28,9 +28,9 @@ namespace WebApplication1.Services
 
                 var dadosFicha = retornarDadosFicha(FK_FUNCIONARIO);
 
-                var nomeArquivo = FK_FUNCIONARIO + "_" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() +
-                    DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() +
-                    DateTime.Now.Second.ToString();
+                //var nomeArquivo = FK_FUNCIONARIO + "_" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() +
+                //    DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() +
+                //    DateTime.Now.Second.ToString();
 
                 string path = HttpContext.Current.Server.MapPath("Doc_FichaCadastral");
 
